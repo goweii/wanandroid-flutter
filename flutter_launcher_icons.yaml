@@ -1,0 +1,6 @@
+# flutter pub run flutter_launcher_icons:main -f <your config file name here>
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/ic_launcher.png"
