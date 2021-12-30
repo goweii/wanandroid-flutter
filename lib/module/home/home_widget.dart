@@ -8,7 +8,10 @@ class BannerView extends StatefulWidget {
   const BannerView({
     Key? key,
     required this.banners,
+    this.scrollDirection = Axis.horizontal,
   }) : super(key: key);
+
+  final Axis scrollDirection;
 
   final List<BannerBean> banners;
 
@@ -19,28 +22,25 @@ class BannerView extends StatefulWidget {
 class _BannerViewState extends State<BannerView> {
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16.0 / 9.0,
-      child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
-          return Image.network(
-            widget.banners[index].imagePath,
-            fit: BoxFit.cover,
-          );
-        },
-        itemCount: widget.banners.length,
-        pagination: const SwiperPagination(
-          alignment: Alignment.bottomCenter,
-          builder: DotSwiperPaginationBuilder(
-            size: 6.0,
-            activeSize: 6.0,
-          ),
+    return Swiper(
+      scrollDirection: widget.scrollDirection,
+      itemBuilder: (BuildContext context, int index) {
+        return Image.network(
+          widget.banners[index].imagePath,
+          fit: BoxFit.cover,
+        );
+      },
+      itemCount: widget.banners.length,
+      pagination: const SwiperPagination(
+        builder: DotSwiperPaginationBuilder(
+          size: 6.0,
+          activeSize: 6.0,
         ),
-        autoplay: true,
-        autoplayDelay: 5000,
-        autoplayDisableOnInteraction: true,
-        onTap: _handleTap,
       ),
+      autoplay: true,
+      autoplayDelay: 5000,
+      autoplayDisableOnInteraction: true,
+      onTap: _handleTap,
     );
   }
 

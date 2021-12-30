@@ -84,38 +84,72 @@ class _HomePageState extends State<HomePage>
         elevation: 0.0,
         title: Text(Strings.of(context).home_title),
       ),
-      body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollBehavior: ScrollConfiguration.of(context).copyWith(
-          overscroll: false,
-          scrollbars: false,
-        ),
-        controller: _scrollController,
-        slivers: [
-          ..._buildSlivers(),
-        ],
+      body: OrientationBuilder(
+        builder: (BuildContext context, Orientation orientation) {
+          if (!_hasBanners && !_hasTopArticles && !_hasHomeArticles) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (orientation == Orientation.portrait) {
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
+              scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                overscroll: false,
+                scrollbars: false,
+              ),
+              controller: _scrollController,
+              slivers: [
+                ..._buildSlivers(true),
+              ],
+            );
+          } else {
+            return SizedBox.expand(
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: _banners == null
+                        ? Container()
+                        : BannerView(
+                            scrollDirection: Axis.vertical,
+                            banners: _banners!,
+                          ),
+                  ),
+                  Expanded(
+                    child: CustomScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                        overscroll: false,
+                        scrollbars: false,
+                      ),
+                      controller: _scrollController,
+                      slivers: [
+                        ..._buildSlivers(false),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
       ),
     );
   }
 
-  List<Widget> _buildSlivers() {
-    if (!_hasBanners && !_hasTopArticles && !_hasHomeArticles) {
-      return [
-        const SliverFillRemaining(
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        )
-      ];
-    }
+  List<Widget> _buildSlivers(bool needBanner) {
     return [
       ShiciRefreshHeader(
         onRefresh: _refreshData,
       ),
-      if (_banners != null)
+      if (needBanner && _banners != null)
         SliverToBoxAdapter(
-          child: BannerView(
-            banners: _banners!,
+          child: AspectRatio(
+            aspectRatio: 16.0 / 9.0,
+            child: BannerView(
+              banners: _banners!,
+            ),
           ),
         ),
       if (_topArticles != null)
