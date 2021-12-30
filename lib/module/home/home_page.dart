@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
+import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 import 'package:wanandroid/module/home/home_repo.dart';
 import 'package:wanandroid/module/home/home_widget.dart';
-import 'package:wanandroid/widget/article_item.dart';
+import 'package:wanandroid/module/article/article_item.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
 import 'package:wanandroid/widget/shici_refresh_header.dart';
 
@@ -62,7 +63,8 @@ class _HomePageState extends State<HomePage>
         }
       });
     _refreshData();
-    Bus().on<LoginEvent>().listen(_onLoginStateChanged);
+    Bus().on<LoginEvent>().listen(_onLoginEvent);
+    Bus().on<CollectEvent>().listen(_onCollectEvent);
   }
 
   @override
@@ -72,8 +74,34 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  _onLoginStateChanged(LoginEvent event) {
-    _refreshData();
+  _onLoginEvent(LoginEvent event) {
+    if (event.login) {
+      _refreshData();
+    } else {
+      setState(() {
+        _topArticles?.forEach((element) => element.collect = false);
+        for (var element in _homeArticles) {
+          element.collect = false;
+        }
+      });
+    }
+  }
+
+  _onCollectEvent(CollectEvent event) {
+    _topArticles
+        ?.where((value) => value.id == event.articleId)
+        .forEach((element) {
+      setState(() {
+        element.collect = event.collect;
+      });
+    });
+    _homeArticles
+        .where((value) => value.id == event.articleId)
+        .forEach((element) {
+      setState(() {
+        element.collect = event.collect;
+      });
+    });
   }
 
   @override

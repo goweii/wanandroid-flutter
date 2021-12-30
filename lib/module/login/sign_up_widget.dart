@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wanandroid/bus/bus.dart';
+import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/module/login/sign_in_repo.dart';
+import 'package:wanandroid/module/login/sign_up_repo.dart';
 import 'package:wanandroid/widget/input_edit.dart';
 import 'package:wanandroid/widget/main_button.dart';
 
 class SignUpWidget extends StatefulWidget {
-  final PageController? pageController;
+  final VoidCallback? onSignInPressed;
 
   const SignUpWidget({
     Key? key,
-    this.pageController,
+    this.onSignInPressed,
   }) : super(key: key);
 
   @override
@@ -18,6 +24,9 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
+  final SignUpRepo _signUpRepp = SignUpRepo();
+  final SignInRepo _signInRepo = SignInRepo();
+
   String? _account;
   String? _password1;
   String? _password2;
@@ -38,12 +47,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       children: [
         const SizedBox(height: AppDimens.appBarHeight),
         GestureDetector(
-          onTap: () {
-            widget.pageController?.previousPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.fastOutSlowIn,
-            );
-          },
+          onTap: widget.onSignInPressed,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -107,17 +111,53 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             onChanged: (value) => setState(() => _password2 = value),
           ),
         ),
-        const SizedBox(height: AppDimens.marginNormal),
+        const SizedBox(height: AppDimens.marginLarge),
         Container(
           margin: const EdgeInsets.symmetric(
             horizontal: AppDimens.marginNormal * 3,
           ),
           child: MainButton(
-            child: Text(Strings.of(context).login),
-            onPressed: !btnEnable ? null : () {},
+            child: Text(Strings.of(context).register),
+            onPressed: btnEnable ? _register : null,
+            state: _loading ? BtnState.loading : BtnState.text,
           ),
         ),
       ],
     );
+  }
+
+  bool _loading = false;
+
+  _register() async {
+    setState(() {
+      _loading = true;
+    });
+    try {
+      await _signUpRepp.register(
+        username: _account!,
+        password1: _password1!,
+        password2: _password2!,
+      );
+      _login();
+    } on ApiException catch (e) {
+      Fluttertoast.showToast(msg: e.msg ?? Strings.of(context).unknown_error);
+    } catch (_) {
+      Fluttertoast.showToast(msg: Strings.of(context).unknown_error);
+    } finally {
+      setState(() {
+        _loading = false;
+      });
+    }
+  }
+
+  _login() async {
+    try {
+      await _signInRepo.login(
+        username: _account!,
+        password: _password1!,
+      );
+      Bus().send(LoginEvent(true));
+      Navigator.of(context).pop();
+    } catch (_) {}
   }
 }

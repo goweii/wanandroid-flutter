@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/api/wan_api.dart';
+import 'package:wanandroid/bus/bus.dart';
+import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/module/article/article_repo.dart';
 import 'package:wanandroid/utils/string_utils.dart';
 
-class ArticleItem extends StatelessWidget {
+class ArticleItem extends StatefulWidget {
   const ArticleItem({
     Key? key,
     required this.article,
@@ -18,6 +21,13 @@ class ArticleItem extends StatelessWidget {
   final bool top;
 
   @override
+  State<ArticleItem> createState() => _ArticleItemState();
+}
+
+class _ArticleItemState extends State<ArticleItem> {
+  final ArticleRepo _articleRepo = ArticleRepo();
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       color: Theme.of(context).colorScheme.surface,
@@ -25,15 +35,71 @@ class ArticleItem extends StatelessWidget {
         onTap: () {
           Navigator.of(context).pushNamed(
             RouteMap.articlePage,
-            arguments: ArticleInfo.fromArticleBean(article),
+            arguments: ArticleInfo.fromArticleBean(widget.article),
           );
         },
         child: _ArticleCard(
-          article: article,
-          top: top,
+          article: widget.article,
+          top: widget.top,
+          onCollectPressed: _onCollectPressed,
         ),
       ),
     );
+  }
+
+  /// originId == null 说明是在文章列表
+  /// originId != null 说明是在收藏列表，这个时候id为收藏id
+  _onCollectPressed() async {
+    var isLogin = await WanApi.isLogin;
+    if (!isLogin) {
+      Navigator.of(context).pushNamed(RouteMap.loginPage);
+      return;
+    }
+    var article = widget.article;
+    try {
+      if (!article.collect) {
+        if (article.originId == null) {
+          await _articleRepo.collectArticle(
+            articleId: article.id,
+          );
+          Bus().send(CollectEvent(
+            collect: true,
+            articleId: article.id,
+          ));
+        } else {
+          await _articleRepo.collectArticle(
+            articleId: article.originId!,
+          );
+          Bus().send(CollectEvent(
+            collect: true,
+            articleId: article.originId!,
+            collectId: article.id,
+          ));
+        }
+      } else {
+        if (article.originId == null) {
+          await _articleRepo.uncollectByArticleId(
+            articleId: article.id,
+          );
+          Bus().send(CollectEvent(
+            collect: false,
+            articleId: article.id,
+          ));
+        } else {
+          await _articleRepo.uncollectByCollectId(
+            collectId: article.id,
+          );
+          Bus().send(CollectEvent(
+            collect: false,
+            articleId: article.originId!,
+            collectId: article.id,
+          ));
+        }
+      }
+      setState(() {
+        article.collect = !article.collect;
+      });
+    } catch (_) {}
   }
 }
 
@@ -42,10 +108,12 @@ class _ArticleCard extends StatelessWidget {
     Key? key,
     required this.article,
     required this.top,
+    required this.onCollectPressed,
   }) : super(key: key);
 
   final ArticleBean article;
   final bool top;
+  final VoidCallback onCollectPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +125,12 @@ class _ArticleCard extends StatelessWidget {
           _ItemTopBar(article: article),
           const SizedBox(height: AppDimens.marginHalf),
           _ItemContentBar(article: article),
-          const SizedBox(height: AppDimens.marginSmall),
-          _ItemBottomBar(article: article, top: top),
+          const SizedBox(height: AppDimens.marginHalf),
+          _ItemBottomBar(
+            article: article,
+            top: top,
+            onCollectPressed: onCollectPressed,
+          ),
         ],
       ),
     );
@@ -174,15 +246,17 @@ class _ItemBottomBar extends StatelessWidget {
     Key? key,
     required this.article,
     required this.top,
+    required this.onCollectPressed,
   }) : super(key: key);
 
   final ArticleBean article;
   final bool top;
+  final VoidCallback onCollectPressed;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         if (top) ...[
           Text(
@@ -201,23 +275,15 @@ class _ItemBottomBar extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-          onPressed: () async {
-            var isLogin = await WanApi.isLogin;
-            if (isLogin) {
-            } else {
-              Navigator.of(context).pushNamed(RouteMap.loginPage);
-            }
-          },
+          onPressed: onCollectPressed,
           constraints: const BoxConstraints.tightForFinite(),
           padding: EdgeInsets.zero,
           splashRadius: 12 + AppDimens.marginSmall,
           iconSize: 24,
           icon: Icon(
-            article.collect
-                ? Icons.favorite_rounded
-                : Icons.favorite_outline_rounded,
-            color: article.collect
-                ? Theme.of(context).colorScheme.error
+            article.collect ? Icons.favorite_rounded : Icons.favorite_rounded,
+            color: !article.collect
+                ? Theme.of(context).textTheme.caption?.color
                 : Theme.of(context).colorScheme.error,
           ),
         )

@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("注册"),
         "settings_title": MessageLookupByLibrary.simpleMessage("设置"),
         "top_tag": MessageLookupByLibrary.simpleMessage("置顶"),
+        "unknown_error": MessageLookupByLibrary.simpleMessage("未知错误"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("佚名"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("玩安卓"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("欢迎使用")

@@ -11,7 +11,7 @@ class ArticleBean {
   final bool canEdit;
   final int chapterId;
   final String? chapterName;
-  final bool collect;
+  bool collect;
   final int courseId;
   final String? desc;
   final String? descMd;
@@ -38,6 +38,7 @@ class ArticleBean {
   final int userId;
   final int visible;
   final int zan;
+  final int? originId;
 
   ArticleBean({
     required this.apkLink,
@@ -73,6 +74,7 @@ class ArticleBean {
     required this.userId,
     required this.visible,
     required this.zan,
+    required this.originId,
   });
 
   factory ArticleBean.fromJson(Map<String, dynamic> json) =>

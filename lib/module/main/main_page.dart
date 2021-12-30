@@ -1,7 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/module/bookmark/bookmark_page.dart';
-import 'package:wanandroid/module/publish/publish_page.dart';
 import 'package:wanandroid/module/main/main_home_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -20,7 +18,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: 1);
+    _pageController = PageController(initialPage: 0);
     super.initState();
   }
 
@@ -43,9 +41,9 @@ class _MainPageState extends State<MainPage>
       ),
       controller: _pageController,
       children: const [
-        PublishPage(),
+        //PublishPage(),
         MainHomePage(),
-        BookmarkPage(),
+        //BookmarkPage(),
       ],
     );
   }

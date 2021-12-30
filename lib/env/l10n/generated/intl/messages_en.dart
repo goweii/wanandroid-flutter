@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
         "top_tag": MessageLookupByLibrary.simpleMessage("TOP"),
+        "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("Unknown"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("WanAndroid"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("Welcome to use")

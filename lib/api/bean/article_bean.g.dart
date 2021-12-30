@@ -42,6 +42,7 @@ ArticleBean _$ArticleBeanFromJson(Map<String, dynamic> json) => ArticleBean(
       userId: json['userId'] as int,
       visible: json['visible'] as int,
       zan: json['zan'] as int,
+      originId: json['originId'] as int?,
     );
 
 Map<String, dynamic> _$ArticleBeanToJson(ArticleBean instance) =>
@@ -79,4 +80,5 @@ Map<String, dynamic> _$ArticleBeanToJson(ArticleBean instance) =>
       'userId': instance.userId,
       'visible': instance.visible,
       'zan': instance.zan,
+      'originId': instance.originId,
     };

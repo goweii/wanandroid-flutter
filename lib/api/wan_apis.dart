@@ -44,6 +44,53 @@ class WanApis {
     ).request();
   }
 
+  static Future<dynamic> collectArticle({
+    required int articleId,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/collect/$articleId/json',
+      fromJsonT: (json) => json,
+    ).request();
+  }
+
+  static Future<dynamic> collectArticleByLink({
+    required String title,
+    required String author,
+    required String link,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/collect/add/json',
+      body: {
+        "title": title,
+        "author": author,
+        "link": link,
+      },
+      fromJsonT: (json) => json,
+    ).request();
+  }
+
+  static Future<dynamic> uncollectByArticleId({
+    required int articleId,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/uncollect_originId/$articleId/json',
+      fromJsonT: (json) => json,
+    ).request();
+  }
+
+  static Future<dynamic> uncollectByCollectId({
+    required int collectId,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/uncollect/$collectId/json',
+      fromJsonT: (json) => json,
+    ).request();
+  }
+
   static Future<dynamic> register({
     required String username,
     required String password,

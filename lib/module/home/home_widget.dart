@@ -49,6 +49,8 @@ class _BannerViewState extends State<BannerView> {
     Navigator.of(context).pushNamed(
       RouteMap.articlePage,
       arguments: ArticleInfo(
+        id: data.id,
+        cover: data.imagePath,
         link: data.url,
         title: data.title,
         author: null,

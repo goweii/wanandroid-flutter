@@ -26,5 +26,6 @@
     "register": "注册",
     "input_account_hint": "请输入你的账号",
     "input_password_hint": "请输入你的密码",
-    "input_password_again_hint": "请再次输入你的密码"
+    "input_password_again_hint": "请再次输入你的密码",
+    "unknown_error": "未知错误"
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
@@ -63,17 +62,17 @@ class _MainHomePageState extends State<MainHomePage>
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      child: Icon(
-                        CupertinoIcons.chart_pie_fill,
-                        size: 18,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withAlpha(100),
-                      ),
-                      padding: const EdgeInsets.all(8),
-                    ),
+                    // Container(
+                    //   child: Icon(
+                    //     CupertinoIcons.chart_pie_fill,
+                    //     size: 18,
+                    //     color: Theme.of(context)
+                    //         .colorScheme
+                    //         .primary
+                    //         .withAlpha(100),
+                    //   ),
+                    //   padding: const EdgeInsets.all(8),
+                    // ),
                     Expanded(
                       child: TabBar(
                         unselectedLabelColor: Theme.of(context)
@@ -92,17 +91,17 @@ class _MainHomePageState extends State<MainHomePage>
                         ],
                       ),
                     ),
-                    Container(
-                      child: Icon(
-                        CupertinoIcons.bookmark_fill,
-                        size: 18,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .primary
-                            .withAlpha(100),
-                      ),
-                      padding: const EdgeInsets.all(8),
-                    ),
+                    // Container(
+                    //   child: Icon(
+                    //     CupertinoIcons.bookmark_fill,
+                    //     size: 18,
+                    //     color: Theme.of(context)
+                    //         .colorScheme
+                    //         .primary
+                    //         .withAlpha(100),
+                    //   ),
+                    //   padding: const EdgeInsets.all(8),
+                    // ),
                   ],
                 ),
               ],

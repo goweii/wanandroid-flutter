@@ -95,10 +95,7 @@ class Api<Resp> {
       Resp resp = converter!.convert(json);
       return resp;
     } catch (e) {
-      throw ApiException(
-        code: null,
-        msg: e.toString(),
-      );
+      rethrow;
     }
   }
 

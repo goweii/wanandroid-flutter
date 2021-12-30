@@ -329,6 +329,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Unknown error`
+  String get unknown_error {
+    return Intl.message(
+      'Unknown error',
+      name: 'unknown_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

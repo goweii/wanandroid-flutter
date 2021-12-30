@@ -26,5 +26,6 @@
     "register": "Register",
     "input_account_hint": "Input your account",
     "input_password_hint": "Input your password",
-    "input_password_again_hint": "Input your password again"
+    "input_password_again_hint": "Input your password again",
+    "unknown_error": "Unknown error"
 }

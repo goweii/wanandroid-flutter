@@ -94,8 +94,14 @@ class _LoginPageState extends State<LoginPage> {
                   PageView(
                     controller: _pageController,
                     children: [
-                      SignInWidget(pageController: _pageController),
-                      SignUpWidget(pageController: _pageController),
+                      SignInWidget(
+                        account: "12",
+                        password: "23123",
+                        onSignUpPressed: () => _animateToPage(1),
+                      ),
+                      SignUpWidget(
+                        onSignInPressed: () => _animateToPage(0),
+                      ),
                     ],
                   ),
                 ],
@@ -104,6 +110,14 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  _animateToPage(int page) {
+    _pageController?.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.fastOutSlowIn,
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/module/login/sign_in_repo.dart';
@@ -9,11 +11,15 @@ import 'package:wanandroid/widget/input_edit.dart';
 import 'package:wanandroid/widget/main_button.dart';
 
 class SignInWidget extends StatefulWidget {
-  final PageController? pageController;
+  final VoidCallback? onSignUpPressed;
+  final String? account;
+  final String? password;
 
   const SignInWidget({
     Key? key,
-    this.pageController,
+    this.account,
+    this.password,
+    this.onSignUpPressed,
   }) : super(key: key);
 
   @override
@@ -45,12 +51,7 @@ class _SignInWidgetState extends State<SignInWidget> {
       children: [
         const SizedBox(height: AppDimens.appBarHeight),
         GestureDetector(
-          onTap: () {
-            widget.pageController?.nextPage(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.fastOutSlowIn,
-            );
-          },
+          onTap: widget.onSignUpPressed,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -116,22 +117,25 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   bool _loading = false;
 
-  _login() {
+  _login() async {
     setState(() {
       _loading = true;
     });
-    _repo.login(
-      username: _account!,
-      password: _password!,
-    )
-      ..then((value) {
-        Bus().send(LoginEvent(true));
-        Navigator.of(context).pop();
-      }, onError: (e) {})
-      ..whenComplete(() {
-        setState(() {
-          _loading = false;
-        });
+    try {
+      await _repo.login(
+        username: _account!,
+        password: _password!,
+      );
+      Bus().send(LoginEvent(true));
+      Navigator.of(context).pop();
+    } on ApiException catch (e) {
+      Fluttertoast.showToast(msg: e.msg ?? Strings.of(context).unknown_error);
+    } catch (_) {
+      Fluttertoast.showToast(msg: Strings.of(context).unknown_error);
+    } finally {
+      setState(() {
+        _loading = false;
       });
+    }
   }
 }

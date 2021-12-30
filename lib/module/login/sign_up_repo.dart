@@ -1,7 +1,7 @@
 import 'package:wanandroid/api/wan_apis.dart';
 
-class SignInRepo {
-  Future<void> login({
+class SignUpRepo {
+  Future<void> register({
     required String username,
     required String password1,
     required String password2,
