@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
+import 'package:wanandroid/entity/article_info.dart';
+import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 
 class BannerView extends StatefulWidget {
@@ -37,6 +39,19 @@ class _BannerViewState extends State<BannerView> {
         autoplay: true,
         autoplayDelay: 5000,
         autoplayDisableOnInteraction: true,
+        onTap: _handleTap,
+      ),
+    );
+  }
+
+  _handleTap(int index) {
+    var data = widget.banners[index];
+    Navigator.of(context).pushNamed(
+      RouteMap.articlePage,
+      arguments: ArticleInfo(
+        link: data.url,
+        title: data.title,
+        author: null,
       ),
     );
   }

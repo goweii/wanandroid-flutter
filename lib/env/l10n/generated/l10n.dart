@@ -299,6 +299,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Input your account`
+  String get input_account_hint {
+    return Intl.message(
+      'Input your account',
+      name: 'input_account_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input your password`
+  String get input_password_hint {
+    return Intl.message(
+      'Input your password',
+      name: 'input_password_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input your password again`
+  String get input_password_again_hint {
+    return Intl.message(
+      'Input your password again',
+      name: 'input_password_again_hint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

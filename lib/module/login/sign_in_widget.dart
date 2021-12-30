@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/module/login/sign_in_repo.dart';
 import 'package:wanandroid/widget/input_edit.dart';
 import 'package:wanandroid/widget/main_button.dart';
@@ -78,6 +80,7 @@ class _SignInWidgetState extends State<SignInWidget> {
               CupertinoIcons.person_solid,
               size: 20,
             ),
+            hintText: Strings.of(context).input_account_hint,
             onChanged: (value) => setState(() => _account = value),
           ),
         ),
@@ -92,10 +95,11 @@ class _SignInWidgetState extends State<SignInWidget> {
               CupertinoIcons.lock_fill,
               size: 20,
             ),
+            hintText: Strings.of(context).input_password_hint,
             onChanged: (value) => setState(() => _password = value),
           ),
         ),
-        const SizedBox(height: AppDimens.marginNormal),
+        const SizedBox(height: AppDimens.marginLarge),
         Container(
           margin: const EdgeInsets.symmetric(
             horizontal: AppDimens.marginNormal * 3,
@@ -103,17 +107,31 @@ class _SignInWidgetState extends State<SignInWidget> {
           child: MainButton(
             child: Text(Strings.of(context).login),
             onPressed: btnEnable ? _login : null,
+            state: _loading ? BtnState.loading : BtnState.text,
           ),
         ),
       ],
     );
   }
 
+  bool _loading = false;
+
   _login() {
-    _repo.login(username: _account!, password: _password!).then((value) {
-      setState(() {});
-    }, onError: (e) {
-      setState(() {});
+    setState(() {
+      _loading = true;
     });
+    _repo.login(
+      username: _account!,
+      password: _password!,
+    )
+      ..then((value) {
+        Bus().send(LoginEvent(true));
+        Navigator.of(context).pop();
+      }, onError: (e) {})
+      ..whenComplete(() {
+        setState(() {
+          _loading = false;
+        });
+      });
   }
 }

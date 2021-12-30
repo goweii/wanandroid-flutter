@@ -23,5 +23,8 @@
     "go_login": "Go lgoin",
     "go_register": "Go register",
     "login": "Login",
-    "register": "Register"
+    "register": "Register",
+    "input_account_hint": "Input your account",
+    "input_password_hint": "Input your password",
+    "input_password_again_hint": "Input your password again"
 }

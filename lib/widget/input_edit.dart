@@ -8,11 +8,13 @@ class InputEdit extends StatefulWidget {
     required this.prefix,
     required this.securty,
     required this.onChanged,
+    this.hintText,
   }) : super(key: key);
 
   final Widget? prefix;
   final bool securty;
   final ValueChanged? onChanged;
+  final String? hintText;
 
   @override
   State<InputEdit> createState() => _InputEditState();
@@ -70,7 +72,12 @@ class _InputEditState extends State<InputEdit> {
         obscureText: widget.securty && _hidden,
         obscuringCharacter: '･',
         textAlignVertical: TextAlignVertical.center,
+        style: Theme.of(context).textTheme.bodyText1,
         decoration: InputDecoration(
+          hintText: widget.hintText,
+          hintStyle: Theme.of(context).textTheme.bodyText2?.copyWith(
+              color:
+                  Theme.of(context).textTheme.bodyText2?.color?.withAlpha(80)),
           constraints: const BoxConstraints(
             maxWidth: double.infinity,
             minWidth: double.infinity,

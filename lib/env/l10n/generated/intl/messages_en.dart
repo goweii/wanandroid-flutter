@@ -28,6 +28,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
         "go_register": MessageLookupByLibrary.simpleMessage("Go register"),
         "home_title": MessageLookupByLibrary.simpleMessage("Home"),
+        "input_account_hint":
+            MessageLookupByLibrary.simpleMessage("Input your account"),
+        "input_password_again_hint":
+            MessageLookupByLibrary.simpleMessage("Input your password again"),
+        "input_password_hint":
+            MessageLookupByLibrary.simpleMessage("Input your password"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),

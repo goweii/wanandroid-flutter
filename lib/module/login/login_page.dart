@@ -13,9 +13,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-PageController? _pageController;
+  PageController? _pageController;
 
-@override
+  @override
   void initState() {
     _pageController = PageController();
     super.initState();
@@ -32,7 +32,7 @@ PageController? _pageController;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      //resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -41,7 +41,10 @@ PageController? _pageController;
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.close_rounded),
+          icon: Icon(
+            Icons.close_rounded,
+            color: Theme.of(context).colorScheme.onPrimary,
+          ),
         ),
       ),
       body: SizedBox(
@@ -52,6 +55,7 @@ PageController? _pageController;
           children: [
             Image.asset(
               AppImages.logo,
+              color: Theme.of(context).colorScheme.surface,
               width: 100,
               height: 100,
             ),
@@ -81,7 +85,7 @@ PageController? _pageController;
                       alignment: Alignment.topCenter,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.surface,
                           borderRadius: BorderRadius.circular(900),
                         ),
                       ),
@@ -90,8 +94,8 @@ PageController? _pageController;
                   PageView(
                     controller: _pageController,
                     children: [
-                       SignInWidget(pageController: _pageController),
-                       SignUpWidget(pageController: _pageController),
+                      SignInWidget(pageController: _pageController),
+                      SignUpWidget(pageController: _pageController),
                     ],
                   ),
                 ],

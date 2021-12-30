@@ -28,6 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
         "go_register": MessageLookupByLibrary.simpleMessage("去注册"),
         "home_title": MessageLookupByLibrary.simpleMessage("首页"),
+        "input_account_hint": MessageLookupByLibrary.simpleMessage("请输入你的账号"),
+        "input_password_again_hint":
+            MessageLookupByLibrary.simpleMessage("请再次输入你的密码"),
+        "input_password_hint": MessageLookupByLibrary.simpleMessage("请输入你的密码"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),

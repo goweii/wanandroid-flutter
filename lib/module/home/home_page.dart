@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
+import 'package:wanandroid/bus/bus.dart';
+import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 import 'package:wanandroid/module/home/home_repo.dart';
@@ -60,6 +62,7 @@ class _HomePageState extends State<HomePage>
         }
       });
     _refreshData();
+    Bus().on<LoginEvent>().listen(_onLoginStateChanged);
   }
 
   @override
@@ -67,6 +70,10 @@ class _HomePageState extends State<HomePage>
     _scrollController?.dispose();
     _scrollController = null;
     super.dispose();
+  }
+
+  _onLoginStateChanged(LoginEvent event) {
+    _refreshData();
   }
 
   @override

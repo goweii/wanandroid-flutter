@@ -57,8 +57,7 @@ class WanApis {
         "password": password,
         "repassword": repassword,
       },
-      fromJsonT: (json) =>
-          PagedBean.fromJson(json, (json) => ArticleBean.fromJson(json)),
+      fromJsonT: (json) => json,
     ).request();
   }
 
@@ -73,7 +72,7 @@ class WanApis {
         "username": username,
         "password": password,
       },
-      fromJsonT: null,
+      fromJsonT: (json) => json,
     ).request();
   }
 

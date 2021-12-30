@@ -71,6 +71,6 @@ class WanApi<T> extends Api<T> {
           path: path,
           body: body,
           bodyType: bodyType,
-          converter: WanRespConverter(fromJsonT: fromJsonT),
+          converter: WanRespConverter<T>(fromJsonT: fromJsonT),
         );
 }
