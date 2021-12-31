@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage>
   bool get _hasBanners => _banners != null && _banners!.isNotEmpty;
   bool get _hasTopArticles => _topArticles != null && _topArticles!.isNotEmpty;
   bool get _hasHomeArticles => _homeArticles.isNotEmpty;
+  bool get _hasArticles => _hasTopArticles || _hasHomeArticles;
 
   ScrollController? _scrollController;
 
@@ -127,9 +128,7 @@ class _HomePageState extends State<HomePage>
                 scrollbars: false,
               ),
               controller: _scrollController,
-              slivers: [
-                ..._buildSlivers(true),
-              ],
+              slivers: _buildSlivers(true),
             );
           } else {
             return SizedBox.expand(
@@ -137,7 +136,7 @@ class _HomePageState extends State<HomePage>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
-                    child: _banners == null
+                    child: !_hasBanners
                         ? Container()
                         : BannerView(
                             scrollDirection: Axis.vertical,
@@ -152,9 +151,7 @@ class _HomePageState extends State<HomePage>
                         scrollbars: false,
                       ),
                       controller: _scrollController,
-                      slivers: [
-                        ..._buildSlivers(false),
-                      ],
+                      slivers: _buildSlivers(false),
                     ),
                   ),
                 ],
@@ -171,7 +168,7 @@ class _HomePageState extends State<HomePage>
       ShiciRefreshHeader(
         onRefresh: _refreshData,
       ),
-      if (needBanner && _banners != null)
+      if (needBanner && _hasBanners)
         SliverToBoxAdapter(
           child: AspectRatio(
             aspectRatio: 16.0 / 9.0,
@@ -180,7 +177,7 @@ class _HomePageState extends State<HomePage>
             ),
           ),
         ),
-      if (_topArticles != null)
+      if (_hasTopArticles)
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
@@ -200,12 +197,13 @@ class _HomePageState extends State<HomePage>
           childCount: _homeArticles.length,
         ),
       ),
-      SliverToBoxAdapter(
-        child: PagedListFooter(
-          loading: _loadingArticles,
-          ended: _endedArticles,
+      if (_hasArticles)
+        SliverToBoxAdapter(
+          child: PagedListFooter(
+            loading: _loadingArticles,
+            ended: _endedArticles,
+          ),
         ),
-      ),
     ];
   }
 
