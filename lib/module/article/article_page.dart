@@ -38,6 +38,7 @@ class _ArticlePageState extends State<ArticlePage>
         ? Brightness.dark
         : Brightness.light;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.surface,
         systemOverlayStyle:
@@ -48,8 +49,9 @@ class _ArticlePageState extends State<ArticlePage>
         toolbarHeight: 0,
       ),
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          Center(
+          SizedBox.expand(
             child: Web(
               url: widget.articleInfo.link,
               onProgress: (value) => setState(() => _pageProgress = value),

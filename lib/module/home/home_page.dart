@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
-import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 import 'package:wanandroid/module/home/home_repo.dart';
 import 'package:wanandroid/module/home/home_widget.dart';
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
         }
       });
     _refreshData();
-    Bus().on<LoginEvent>().listen(_onLoginEvent);
+    LoginState.stream().listen(_onLoginStateChanged);
     Bus().on<CollectEvent>().listen(_onCollectEvent);
   }
 
@@ -75,8 +75,8 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  _onLoginEvent(LoginEvent event) {
-    if (event.login) {
+  _onLoginStateChanged(LoginState loginState) {
+    if (loginState.isLogin) {
       _refreshData();
     } else {
       setState(() {

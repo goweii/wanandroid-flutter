@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/widget/action_item.dart';
 
@@ -97,7 +98,7 @@ class _MinePageState extends State<MinePage> {
                 children: [
                   ActionItem(
                     leading: const Icon(Icons.settings),
-                    title: const Text("Settings"),
+                    title: Text(Strings.of(context).settings_title),
                     onPressed: () {
                       Navigator.of(context).pushNamed(RouteMap.settingsPage);
                     },

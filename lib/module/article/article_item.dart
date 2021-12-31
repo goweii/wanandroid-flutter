@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
-import 'package:wanandroid/api/wan_api.dart';
+import 'package:wanandroid/api/wan_store.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/entity/article_info.dart';
@@ -50,7 +50,7 @@ class _ArticleItemState extends State<ArticleItem> {
   /// originId == null 说明是在文章列表
   /// originId != null 说明是在收藏列表，这个时候id为收藏id
   _onCollectPressed() async {
-    var isLogin = await WanApi.isLogin;
+    var isLogin = await WanStore().isLogin;
     if (!isLogin) {
       Navigator.of(context).pushNamed(RouteMap.loginPage);
       return;

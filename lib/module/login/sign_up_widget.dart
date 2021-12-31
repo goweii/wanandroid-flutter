@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:wanandroid/bus/bus.dart';
-import 'package:wanandroid/bus/events/login_event.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
@@ -156,7 +154,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         username: _account!,
         password: _password1!,
       );
-      Bus().send(LoginEvent(true));
       Navigator.of(context).pop();
     } catch (_) {}
   }

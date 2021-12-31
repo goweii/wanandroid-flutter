@@ -1,21 +1,22 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:wanandroid/api/wan_api.dart';
+import 'package:wanandroid/api/wan_store.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebController {
-  WebViewController? _controller;
+  InAppWebViewController? _controller;
 
-  attachController(WebViewController controller) {
+  attachController(InAppWebViewController controller) {
     _controller = controller;
   }
 
-  detachController(WebViewController controller) {
-    _controller = controller;
+  detachController() {
+    _controller = null;
   }
 
   Future<bool> canGoBack() async {
@@ -58,13 +59,15 @@ class Web extends StatefulWidget {
 }
 
 class _WebState extends State<Web> {
+  final GlobalKey _globalKey = GlobalKey();
+
   final List<WebViewCookie> _webViewCookies = [];
 
   @override
   void initState() {
     super.initState();
     if (Platform.isAndroid) {
-      WebView.platform = SurfaceAndroidWebView();
+      //WebView.platform = SurfaceAndroidWebView();
     }
     _loadWebCookies().then((value) {
       setState(() {
@@ -81,37 +84,51 @@ class _WebState extends State<Web> {
 
   @override
   Widget build(BuildContext context) {
-    return WebView(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      gestureNavigationEnabled: true,
-      allowsInlineMediaPlayback: true,
-      initialUrl: widget.url,
-      initialCookies: _webViewCookies,
-      javascriptMode: JavascriptMode.unrestricted,
-      onWebViewCreated: (WebViewController webViewController) {
-        widget.controller.attachController(webViewController);
+    ThemeMode themeMode = ThemeModel.listen(context).themeMode;
+    return InAppWebView(
+      key: _globalKey,
+      initialUrlRequest: URLRequest(url: Uri.parse(widget.url!)),
+      initialOptions: InAppWebViewGroupOptions(
+        crossPlatform: InAppWebViewOptions(
+          transparentBackground: true,
+        ),
+        android: AndroidInAppWebViewOptions(
+          useHybridComposition: true,
+          forceDark: themeMode == ThemeMode.system
+              ? AndroidForceDark.FORCE_DARK_AUTO
+              : themeMode == ThemeMode.light
+                  ? AndroidForceDark.FORCE_DARK_OFF
+                  : AndroidForceDark.FORCE_DARK_ON,
+          overScrollMode: AndroidOverScrollMode.OVER_SCROLL_ALWAYS,
+        ),
+        ios: IOSInAppWebViewOptions(),
+      ),
+      //initialCookies: _webViewCookies,
+      onWebViewCreated: (InAppWebViewController controller) {
+        widget.controller.attachController(controller);
       },
-      onPageStarted: (String url) {
-        widget.onProgress(0.0);
-      },
-      onPageFinished: (String url) {
-        widget.onProgress(null);
-      },
-      onProgress: (int progress) {
+      onProgressChanged: (controller, progress) {
         widget.onProgress((progress / 100.0).clamp(0.0, 1.0));
       },
-      navigationDelegate: (NavigationRequest request) {
-        var uri = Uri.parse(request.url);
-        if (uri.scheme == 'http' || uri.scheme == 'https') {
-          return NavigationDecision.navigate;
-        }
-        return NavigationDecision.prevent;
+      onLoadStart: (controller, url) {
+        widget.onProgress(0.0);
       },
+      onLoadStop: (controller, url) {
+        widget.onProgress(null);
+      },
+      shouldOverrideUrlLoading: (controller, navigationAction) async {
+        var scheme = navigationAction.request.url?.scheme;
+        if (scheme == 'http' || scheme == 'https') {
+          return NavigationActionPolicy.ALLOW;
+        }
+        return NavigationActionPolicy.CANCEL;
+      },
+      
     );
   }
 
   Future<List<WebViewCookie>> _loadWebCookies() async {
-    var cookies = await WanApi.cookies;
+    var cookies = await WanStore().cookies;
     List<WebViewCookie> webCookies = [];
     for (var cookie in cookies) {
       if (cookie.domain == null || cookie.domain!.isEmpty) {

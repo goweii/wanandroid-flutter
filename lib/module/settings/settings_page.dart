@@ -1,11 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/wan_api.dart';
-import 'package:wanandroid/bus/bus.dart';
-import 'package:wanandroid/bus/events/login_event.dart';
+import 'package:wanandroid/api/wan_store.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/module/settings/settings_widgets.dart';
 import 'package:wanandroid/widget/action_item.dart';
@@ -19,17 +16,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  bool _isLogin = false;
-
   @override
   void initState() {
     super.initState();
-    WanApi.isLogin.then((value) => setState(() => _isLogin = value));
-    Bus().on<LoginEvent>().listen((event) {
-      setState(() {
-        _isLogin = event.login;
-      });
-    });
   }
 
   @override
@@ -43,9 +32,9 @@ class _SettingsPageState extends State<SettingsPage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             ActionItem(
-              leading: _themeIcon(),
+              leading: _themeIcon(context),
               title: Text(Strings.of(context).choice_theme_mode),
-              tip: _themeName(),
+              tip: _themeName(context),
               children: const [
                 ThemeModeChoiceItem(
                   themeMode: ThemeMode.system,
@@ -58,14 +47,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            if (_isLogin) ...[
+            if (LoginState.listen(context).isLogin) ...[
               const SizedBox(height: AppDimens.marginLarge),
               MainButton(
                 child: Text(Strings.of(context).logout),
                 onPressed: () {
-                  WanApi.clearLogin().then((value) {
-                    Bus().send(LoginEvent(false));
-                  });
+                  WanStore().logout();
                 },
               ),
             ],
@@ -75,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Text _themeName() {
+  Text _themeName(BuildContext context) {
     var mode = ThemeModel.listen(context).themeMode;
     switch (mode) {
       case ThemeMode.system:
@@ -87,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  Icon _themeIcon() {
+  Icon _themeIcon(BuildContext context) {
     var mode = ThemeModel.listen(context).themeMode;
     switch (mode) {
       case ThemeMode.system:
