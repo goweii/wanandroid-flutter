@@ -300,6 +300,16 @@ class Strings {
     );
   }
 
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Input your account`
   String get input_account_hint {
     return Intl.message(
@@ -335,6 +345,46 @@ class Strings {
     return Intl.message(
       'Unknown error',
       name: 'unknown_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choice theme mode`
+  String get choice_theme_mode {
+    return Intl.message(
+      'Choice theme mode',
+      name: 'choice_theme_mode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow system`
+  String get theme_mode_system {
+    return Intl.message(
+      'Follow system',
+      name: 'theme_mode_system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get theme_mode_dark {
+    return Intl.message(
+      'Dark',
+      name: 'theme_mode_dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get theme_mode_light {
+    return Intl.message(
+      'Light',
+      name: 'theme_mode_light',
       desc: '',
       args: [],
     );

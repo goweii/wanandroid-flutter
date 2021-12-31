@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
+        "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
@@ -33,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请再次输入你的密码"),
         "input_password_hint": MessageLookupByLibrary.simpleMessage("请输入你的密码"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
+        "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),
         "new_tag": MessageLookupByLibrary.simpleMessage("新"),
@@ -56,6 +58,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("释放刷新"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
         "settings_title": MessageLookupByLibrary.simpleMessage("设置"),
+        "theme_mode_dark": MessageLookupByLibrary.simpleMessage("暗色"),
+        "theme_mode_light": MessageLookupByLibrary.simpleMessage("亮色"),
+        "theme_mode_system": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "top_tag": MessageLookupByLibrary.simpleMessage("置顶"),
         "unknown_error": MessageLookupByLibrary.simpleMessage("未知错误"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("佚名"),

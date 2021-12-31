@@ -24,8 +24,13 @@
     "go_register": "Go register",
     "login": "Login",
     "register": "Register",
+    "logout": "Logout",
     "input_account_hint": "Input your account",
     "input_password_hint": "Input your password",
     "input_password_again_hint": "Input your password again",
-    "unknown_error": "Unknown error"
+    "unknown_error": "Unknown error",
+    "choice_theme_mode": "Choice theme mode",
+    "theme_mode_system": "Follow system",
+    "theme_mode_dark": "Dark",
+    "theme_mode_light": "Light"
 }

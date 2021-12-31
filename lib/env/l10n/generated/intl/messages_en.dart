@@ -23,6 +23,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
+        "choice_theme_mode":
+            MessageLookupByLibrary.simpleMessage("Choice theme mode"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
         "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
@@ -35,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_password_hint":
             MessageLookupByLibrary.simpleMessage("Input your password"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),
         "new_tag": MessageLookupByLibrary.simpleMessage("NEW"),
@@ -58,6 +61,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Release to refresh"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
+        "theme_mode_dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "theme_mode_light": MessageLookupByLibrary.simpleMessage("Light"),
+        "theme_mode_system":
+            MessageLookupByLibrary.simpleMessage("Follow system"),
         "top_tag": MessageLookupByLibrary.simpleMessage("TOP"),
         "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("Unknown"),
