@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
+        "article_fab_tip_collect":
+            MessageLookupByLibrary.simpleMessage("Collect"),
+        "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("Shart"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),

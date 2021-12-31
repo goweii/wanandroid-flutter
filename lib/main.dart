@@ -10,7 +10,7 @@ import 'package:wanandroid/env/theme/theme_model_manager.dart';
 import 'package:wanandroid/env/theme/theme_model_provider.dart';
 import 'package:wanandroid/env/route/app_router.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -39,6 +39,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

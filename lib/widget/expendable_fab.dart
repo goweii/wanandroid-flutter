@@ -251,7 +251,11 @@ class _ExpendableFabState extends State<ExpendableFab>
     return AnimatedRotation(
       duration: widget.duration,
       curve: Curves.easeOut,
-      turns: _open ? 1.0 : 0.0,
+      turns: fab != null
+          ? 0.0
+          : _open
+              ? 1.0
+              : 0.0,
       child: ActionButton(
         key: _mainKey,
         onPressed: () {
@@ -259,12 +263,7 @@ class _ExpendableFabState extends State<ExpendableFab>
         },
         onLongPressed: () => toggle(),
         elevation: widget.elevation,
-        icon: fab?.icon ??
-            Icon(
-              _f == 0.0
-                  ? Icons.arrow_back_ios_new_rounded
-                  : Icons.close_rounded,
-            ),
+        icon: fab?.icon ?? const Icon(Icons.arrow_back_ios_new_rounded),
       ),
     );
   }

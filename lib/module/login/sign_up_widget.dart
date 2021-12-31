@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:wanandroid/api/wan_toast.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
@@ -138,9 +138,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
       );
       _login();
     } on ApiException catch (e) {
-      Fluttertoast.showToast(msg: e.msg ?? Strings.of(context).unknown_error);
+      WanToast(context, msg: e.msg ?? Strings.of(context).unknown_error).show();
     } catch (_) {
-      Fluttertoast.showToast(msg: Strings.of(context).unknown_error);
+      WanToast(context, msg: Strings.of(context).unknown_error).show();
     } finally {
       setState(() {
         _loading = false;

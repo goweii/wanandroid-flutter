@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid/api/wan_toast.dart';
 import 'package:wanandroid/entity/article_info.dart';
+import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/module/article/article_widget.dart';
+import 'package:wanandroid/widget/expendable_fab.dart';
 
 class ArticlePage extends StatefulWidget {
   const ArticlePage({
@@ -61,6 +64,40 @@ class _ArticlePageState extends State<ArticlePage>
           FabMenu(
             progress: _pageProgress,
             onBackPress: _handleBackPress,
+            actions: [
+              Fab(
+                icon: const Icon(Icons.power_settings_new_rounded),
+                tip: Strings.of(context).article_fab_tip_close,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              Fab(
+                icon: widget.articleInfo.collected
+                    ? Icon(
+                        Icons.favorite_rounded,
+                        color: Theme.of(context).colorScheme.error,
+                      )
+                    : const Icon(
+                        Icons.favorite_outline_rounded,
+                        // color: Theme.of(context).colorScheme.primary,
+                      ),
+                tip: Strings.of(context).article_fab_tip_collect,
+                onPressed: () {},
+              ),
+              Fab(
+                icon: const Icon(Icons.share),
+                tip: Strings.of(context).article_fab_tip_share,
+                onPressed: () {
+                  WanToast(
+                    context,
+                    msg: "Not supported!",
+                    type: WanToastType.error,
+                  ).show();
+                  //Fluttertoast.showToast(msg: "Not supported!");
+                },
+              ),
+            ],
           ),
         ],
       ),

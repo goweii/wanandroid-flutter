@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -123,7 +124,6 @@ class _WebState extends State<Web> {
         }
         return NavigationActionPolicy.CANCEL;
       },
-      
     );
   }
 
@@ -149,10 +149,12 @@ class FabMenu extends StatelessWidget {
     Key? key,
     required this.onBackPress,
     required this.progress,
+    required this.actions,
   }) : super(key: key);
 
   final VoidCallback onBackPress;
   final double? progress;
+  final List<Fab> actions;
 
   @override
   Widget build(BuildContext context) {
@@ -169,8 +171,9 @@ class FabMenu extends StatelessWidget {
             lineWidth: 3.0,
             backgroundColor: Colors.transparent,
             circularStrokeCap: CircularStrokeCap.round,
-            center: Icon(
-              f == 0.0 ? Icons.arrow_back_ios_new_rounded : Icons.close_rounded,
+            center: Transform.rotate(
+              angle: f * math.pi * 0.5,
+              child: const Icon(Icons.arrow_back_ios_new_rounded),
             ),
             progressColor: progress != null
                 ? Theme.of(context).colorScheme.primary
@@ -180,23 +183,7 @@ class FabMenu extends StatelessWidget {
           onPressed: onBackPress,
         );
       },
-      actionFabs: [
-        Fab(
-          icon: const Icon(Icons.favorite_rounded),
-          tip: 'Collect',
-          onPressed: () {},
-        ),
-        Fab(
-          icon: const Icon(Icons.share),
-          tip: 'Shard',
-          onPressed: () {},
-        ),
-        Fab(
-          icon: const Icon(Icons.open_in_browser_rounded),
-          tip: 'Browser',
-          onPressed: () {},
-        ),
-      ],
+      actionFabs: actions,
     );
   }
 }

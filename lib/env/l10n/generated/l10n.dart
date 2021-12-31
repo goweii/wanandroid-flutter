@@ -389,6 +389,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Close`
+  String get article_fab_tip_close {
+    return Intl.message(
+      'Close',
+      name: 'article_fab_tip_close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collect`
+  String get article_fab_tip_collect {
+    return Intl.message(
+      'Collect',
+      name: 'article_fab_tip_collect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shart`
+  String get article_fab_tip_share {
+    return Intl.message(
+      'Shart',
+      name: 'article_fab_tip_share',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {
