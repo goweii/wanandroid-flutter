@@ -31,13 +31,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
         "go_register": MessageLookupByLibrary.simpleMessage("去注册"),
+        "guest_name": MessageLookupByLibrary.simpleMessage("游客"),
         "home_title": MessageLookupByLibrary.simpleMessage("首页"),
         "input_account_hint": MessageLookupByLibrary.simpleMessage("请输入你的账号"),
         "input_password_again_hint":
             MessageLookupByLibrary.simpleMessage("请再次输入你的密码"),
         "input_password_hint": MessageLookupByLibrary.simpleMessage("请输入你的密码"),
+        "level_prefix": MessageLookupByLibrary.simpleMessage("等级:"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
+        "mine_coin": MessageLookupByLibrary.simpleMessage("积分"),
+        "mine_collection": MessageLookupByLibrary.simpleMessage("收藏"),
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),
         "new_tag": MessageLookupByLibrary.simpleMessage("新"),
@@ -49,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
         "publish_title": MessageLookupByLibrary.simpleMessage("广场"),
         "question_title": MessageLookupByLibrary.simpleMessage("问答"),
+        "rank_prefix": MessageLookupByLibrary.simpleMessage("排名:"),
         "refresh_header_state_pull_to_refresh":
             MessageLookupByLibrary.simpleMessage("下拉刷新"),
         "refresh_header_state_refresh_failed":

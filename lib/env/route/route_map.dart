@@ -21,13 +21,13 @@ class RouteMap {
           settings: settings,
           builder: (context, settings) => const LoginPage(),
         ),
-    articlePage: (settings) => BottomPageRoute(
+    articlePage: (settings) => RightPageRoute(
           settings: settings,
           builder: (context, settings) => ArticlePage(
             articleInfo: settings.arguments as ArticleInfo,
           ),
         ),
-    settingsPage: (settings) => BottomPageRoute(
+    settingsPage: (settings) => RightPageRoute(
           settings: settings,
           builder: (context, settings) => const SettingsPage(),
         ),

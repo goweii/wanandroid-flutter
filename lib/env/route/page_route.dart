@@ -13,6 +13,30 @@ class NonePageRoute<T> extends PageRouteBuilder<T> {
         );
 }
 
+class RightPageRoute<T> extends PageRouteBuilder<T> {
+  RightPageRoute({
+    required RouteSettings settings,
+    required PageBuilder builder,
+  }) : super(
+          transitionDuration: const Duration(milliseconds: 400),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return SlideTransition(
+              position: Tween<Offset>(
+                begin: const Offset(1.0, 0.0),
+                end: const Offset(0.0, 0.0),
+              ).animate(CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              )),
+              child: child,
+            );
+          },
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return builder(context, settings);
+          },
+        );
+}
+
 class BottomPageRoute<T> extends PageRouteBuilder<T> {
   BottomPageRoute({
     required RouteSettings settings,

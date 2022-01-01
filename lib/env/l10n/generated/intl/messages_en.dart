@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
         "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
         "go_register": MessageLookupByLibrary.simpleMessage("Go register"),
+        "guest_name": MessageLookupByLibrary.simpleMessage("Guest"),
         "home_title": MessageLookupByLibrary.simpleMessage("Home"),
         "input_account_hint":
             MessageLookupByLibrary.simpleMessage("Input your account"),
@@ -40,8 +41,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input your password again"),
         "input_password_hint":
             MessageLookupByLibrary.simpleMessage("Input your password"),
+        "level_prefix": MessageLookupByLibrary.simpleMessage("Level:"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "mine_coin": MessageLookupByLibrary.simpleMessage("Coin"),
+        "mine_collection": MessageLookupByLibrary.simpleMessage("Collection"),
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),
         "new_tag": MessageLookupByLibrary.simpleMessage("NEW"),
@@ -53,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loading data"),
         "publish_title": MessageLookupByLibrary.simpleMessage("Publish"),
         "question_title": MessageLookupByLibrary.simpleMessage("Question"),
+        "rank_prefix": MessageLookupByLibrary.simpleMessage("Rank:"),
         "refresh_header_state_pull_to_refresh":
             MessageLookupByLibrary.simpleMessage("Pull to refresh"),
         "refresh_header_state_refresh_failed":

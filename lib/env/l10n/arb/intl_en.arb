@@ -35,5 +35,10 @@
     "theme_mode_light": "Light",
     "article_fab_tip_close": "Close",
     "article_fab_tip_collect": "Collect",
-    "article_fab_tip_share": "Shart"
+    "article_fab_tip_share": "Shart",
+    "guest_name": "Guest",
+    "level_prefix": "Level:",
+    "rank_prefix": "Rank:",
+    "mine_coin": "Coin",
+    "mine_collection": "Collection"
 }

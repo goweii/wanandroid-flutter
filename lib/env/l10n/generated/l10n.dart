@@ -419,6 +419,56 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Guest`
+  String get guest_name {
+    return Intl.message(
+      'Guest',
+      name: 'guest_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level:`
+  String get level_prefix {
+    return Intl.message(
+      'Level:',
+      name: 'level_prefix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rank:`
+  String get rank_prefix {
+    return Intl.message(
+      'Rank:',
+      name: 'rank_prefix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coin`
+  String get mine_coin {
+    return Intl.message(
+      'Coin',
+      name: 'mine_coin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collection`
+  String get mine_collection {
+    return Intl.message(
+      'Collection',
+      name: 'mine_collection',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

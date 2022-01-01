@@ -35,5 +35,10 @@
     "theme_mode_light": "亮色",
     "article_fab_tip_close": "关闭",
     "article_fab_tip_collect": "收藏",
-    "article_fab_tip_share": "分享"
+    "article_fab_tip_share": "分享",
+    "guest_name": "游客",
+    "level_prefix": "等级:",
+    "rank_prefix": "排名:",
+    "mine_coin": "积分",
+    "mine_collection": "收藏"
 }

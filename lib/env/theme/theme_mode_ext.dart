@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 
 extension ThemeModeExt on ThemeMode {
-
   Text getName(BuildContext context) {
     switch (this) {
       case ThemeMode.system:
@@ -18,7 +17,7 @@ extension ThemeModeExt on ThemeMode {
     switch (this) {
       case ThemeMode.system:
         return Icon(
-          Icons.phone_android_rounded,
+          Icons.phone_iphone_rounded,
           color: Theme.of(context).colorScheme.primary,
         );
       case ThemeMode.light:
