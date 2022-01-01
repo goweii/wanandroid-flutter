@@ -82,11 +82,51 @@ class _WanToastView extends StatelessWidget {
     required this.type,
   }) : super(key: key);
 
+  Color _backgroundColor(BuildContext context) {
+    switch (type) {
+      case WanToastType.tip:
+        return Theme.of(context).colorScheme.background.withOpacity(0.96);
+      case WanToastType.success:
+        return Theme.of(context).colorScheme.secondary.withOpacity(0.96);
+      case WanToastType.error:
+        return Theme.of(context).colorScheme.error.withOpacity(0.96);
+    }
+  }
+
+  Color _foregroundColor(BuildContext context) {
+    switch (type) {
+      case WanToastType.tip:
+        return Theme.of(context).colorScheme.onBackground.withOpacity(0.96);
+      case WanToastType.success:
+        return Theme.of(context).colorScheme.onSecondary.withOpacity(0.96);
+      case WanToastType.error:
+        return Theme.of(context).colorScheme.onError.withOpacity(0.96);
+    }
+  }
+
+  Icon? _icon(BuildContext context) {
+    switch (type) {
+      case WanToastType.tip:
+        return null;
+      case WanToastType.success:
+        return Icon(
+          Icons.check_circle_rounded,
+          color: Theme.of(context).colorScheme.onSecondary.withOpacity(0.96),
+        );
+      case WanToastType.error:
+        return Icon(
+          Icons.error_rounded,
+          color: Theme.of(context).colorScheme.onError.withOpacity(0.96),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    Icon? icon = _icon(context);
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface.withOpacity(0.9),
+        color: _backgroundColor(context),
         borderRadius:
             const BorderRadius.all(Radius.circular(AppDimens.radiusNormal)),
       ),
@@ -101,24 +141,14 @@ class _WanToastView extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (type == WanToastType.success) ...[
-            Icon(
-              Icons.check_circle_rounded,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(width: AppDimens.marginHalf),
-          ],
-          if (type == WanToastType.error) ...[
-            Icon(
-              Icons.error_rounded,
-              color: Theme.of(context).colorScheme.error,
-            ),
+          if (icon != null) ...[
+            icon,
             const SizedBox(width: AppDimens.marginHalf),
           ],
           Text(
             msg,
             style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: _foregroundColor(context),
                 ),
           ),
         ],

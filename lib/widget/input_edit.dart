@@ -34,7 +34,10 @@ class _InputEditState extends State<InputEdit> {
 
   @override
   void initState() {
-    _controller = TextEditingController();
+    _controller = TextEditingController()
+      ..addListener(() {
+        setState(() {});
+      });
     _focusNode = FocusNode()
       ..addListener(() {
         setState(() {});
@@ -63,9 +66,7 @@ class _InputEditState extends State<InputEdit> {
       child: TextField(
         controller: _controller,
         onChanged: (text) {
-          setState(() {
-            widget.onChanged?.call(text);
-          });
+          widget.onChanged?.call(text);
         },
         focusNode: _focusNode,
         maxLines: 1,

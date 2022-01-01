@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/wan_toast.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
@@ -116,45 +115,40 @@ class _SignUpWidgetState extends State<SignUpWidget> {
           ),
           child: MainButton(
             child: Text(Strings.of(context).register),
-            onPressed: btnEnable ? _register : null,
-            state: _loading ? BtnState.loading : BtnState.text,
+            disable: !btnEnable,
+            onPressed: _register,
           ),
         ),
       ],
     );
   }
 
-  bool _loading = false;
-
-  _register() async {
-    setState(() {
-      _loading = true;
-    });
+  Future<dynamic> _register() async {
     try {
       await _signUpRepp.register(
         username: _account!,
         password1: _password1!,
         password2: _password2!,
       );
-      _login();
+      return await _login();
     } on ApiException catch (e) {
-      WanToast(context, msg: e.msg ?? Strings.of(context).unknown_error).show();
-    } catch (_) {
-      WanToast(context, msg: Strings.of(context).unknown_error).show();
-    } finally {
-      setState(() {
-        _loading = false;
-      });
+      return e.msg ?? Strings.of(context).unknown_error;
+    } catch (e) {
+      return Strings.of(context).unknown_error;
     }
   }
 
-  _login() async {
+  Future<dynamic> _login() async {
     try {
       await _signInRepo.login(
         username: _account!,
         password: _password1!,
       );
       Navigator.of(context).pop();
-    } catch (_) {}
+    } on ApiException catch (e) {
+      return e.msg ?? Strings.of(context).unknown_error;
+    } catch (e) {
+      return Strings.of(context).unknown_error;
+    }
   }
 }

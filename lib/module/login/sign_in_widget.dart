@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/wan_toast.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
@@ -105,20 +104,15 @@ class _SignInWidgetState extends State<SignInWidget> {
           ),
           child: MainButton(
             child: Text(Strings.of(context).login),
-            onPressed: btnEnable ? _login : null,
-            state: _loading ? BtnState.loading : BtnState.text,
+            disable: !btnEnable,
+            onPressed: _login,
           ),
         ),
       ],
     );
   }
 
-  bool _loading = false;
-
-  _login() async {
-    setState(() {
-      _loading = true;
-    });
+  Future<dynamic> _login() async {
     try {
       await _repo.login(
         username: _account!,
@@ -126,13 +120,9 @@ class _SignInWidgetState extends State<SignInWidget> {
       );
       Navigator.of(context).pop();
     } on ApiException catch (e) {
-      WanToast(context, msg: e.msg ?? Strings.of(context).unknown_error).show();
-    } catch (_) {
-      WanToast(context, msg: Strings.of(context).unknown_error).show();
-    } finally {
-      setState(() {
-        _loading = false;
-      });
+      return e.msg ?? Strings.of(context).unknown_error;
+    } catch (e) {
+      return Strings.of(context).unknown_error;
     }
   }
 }
