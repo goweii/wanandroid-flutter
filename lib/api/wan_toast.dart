@@ -9,55 +9,32 @@ enum WanToastType {
 }
 
 class WanToast extends Toast {
-  late final AnimationController _controller;
-  late final Animation<double> _animation;
   WanToast(
     BuildContext context, {
     required String msg,
     WanToastType type = WanToastType.tip,
   }) : super(
           context,
-          widget: _WanToastView(
-            msg: msg,
-            type: type,
-          ),
+          builder: (context, animation) {
+            return _AnimatedWanToastView(
+              animation: animation,
+              child: _WanToastView(
+                msg: msg,
+                type: type,
+              ),
+            );
+          },
         );
-
-  @override
-  Future<Widget> onCreate(OverlayState overlayState) async {
-    Widget child = await super.onCreate(overlayState);
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: Overlay.of(context)!,
-    );
-    _animation = CurvedAnimation(
-      curve: Curves.fastOutSlowIn,
-      reverseCurve: Curves.easeOutQuad,
-      parent: _controller,
-    );
-    _controller.forward();
-    return _AnimatedWanToastView(
-      child: child,
-      animation: _animation,
-    );
-  }
-
-  @override
-  Future<void> onDispose(OverlayState overlayState) async {
-    await super.onDispose(overlayState);
-    await _controller.reverse();
-    _controller.dispose();
-  }
 }
 
 class _AnimatedWanToastView extends StatefulWidget {
-  final Animation<double> animation;
   final Widget child;
+  final Animation<double> animation;
 
   const _AnimatedWanToastView({
     Key? key,
-    required this.animation,
     required this.child,
+    required this.animation,
   }) : super(key: key);
 
   @override
@@ -65,16 +42,28 @@ class _AnimatedWanToastView extends StatefulWidget {
 }
 
 class _AnimatedWanToastViewState extends State<_AnimatedWanToastView> {
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    _animation = CurvedAnimation(
+      curve: Curves.fastOutSlowIn,
+      reverseCurve: Curves.easeOutQuad,
+      parent: widget.animation,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: AnimatedBuilder(
-        animation: widget.animation,
+        animation: _animation,
         builder: (context, child) {
           return Opacity(
-            opacity: widget.animation.value,
+            opacity: _animation.value,
             child: Transform.scale(
-              scale: 0.8 + (0.2 * widget.animation.value),
+              scale: 0.8 + (0.2 * _animation.value),
               child: widget.child,
             ),
           );
