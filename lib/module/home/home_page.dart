@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage>
       ..addListener(() {
         if (_scrollController == null) return;
         if (_loadingArticles) return;
+        if (_endedArticles) return;
         if (_scrollController!.position.pixels >=
             _scrollController!.position.maxScrollExtent) {
           setState(() {

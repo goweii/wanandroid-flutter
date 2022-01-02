@@ -30,7 +30,7 @@ ArticleBean _$ArticleBeanFromJson(Map<String, dynamic> json) => ArticleBean(
       publishTime: json['publishTime'] as int,
       realSuperChapterId: json['realSuperChapterId'] as int,
       selfVisible: json['selfVisible'] as int,
-      shareDate: json['shareDate'] as int,
+      shareDate: json['shareDate'] as int?,
       shareUser: json['shareUser'] as String?,
       superChapterId: json['superChapterId'] as int,
       superChapterName: json['superChapterName'] as String?,

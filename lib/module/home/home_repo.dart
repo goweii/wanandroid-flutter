@@ -12,7 +12,7 @@ class HomeRepo {
     return WanApis.getTopArticles();
   }
 
-  final PagingRepo<ArticleBean> _homeArticleRepo = PagingRepo<ArticleBean>(
+  final Paging<ArticleBean> _homeArticleRepo = Paging<ArticleBean>(
     initialPage: 0,
     requester: (page) async {
       var resp = await WanApis.getHomeArticles(page);

@@ -10,8 +10,8 @@ class PagingData<T> {
 
 typedef PagingRequester<T> = Future<PagingData<T>> Function(int page);
 
-class PagingRepo<T> {
-  PagingRepo({
+class Paging<T> {
+  Paging({
     required int initialPage,
     required PagingRequester<T> requester,
   })  : _initialPage = initialPage,

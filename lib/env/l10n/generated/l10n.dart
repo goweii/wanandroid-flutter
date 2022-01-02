@@ -469,6 +469,16 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Answers`
+  String get answers {
+    return Intl.message(
+      'Answers',
+      name: 'answers',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

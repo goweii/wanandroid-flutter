@@ -16,10 +16,12 @@ class ArticleItem extends StatefulWidget {
     Key? key,
     required this.article,
     this.top = false,
+    this.onPressed,
   }) : super(key: key);
 
   final ArticleBean article;
   final bool top;
+  final ValueChanged<ArticleBean>? onPressed;
 
   @override
   State<ArticleItem> createState() => _ArticleItemState();
@@ -33,18 +35,22 @@ class _ArticleItemState extends State<ArticleItem> {
     return Material(
       color: Theme.of(context).colorScheme.surface,
       child: InkWell(
-        onTap: () {
-          AppRouter.of(context).pushNamed(
-            RouteMap.articlePage,
-            arguments: ArticleInfo.fromArticleBean(widget.article),
-          );
-        },
+        onTap: widget.onPressed != null
+            ? () => widget.onPressed?.call(widget.article)
+            : _onPressed,
         child: _ArticleCard(
           article: widget.article,
           top: widget.top,
           onCollectPressed: _onCollectPressed,
         ),
       ),
+    );
+  }
+
+  _onPressed() {
+    AppRouter.of(context).pushNamed(
+      RouteMap.articlePage,
+      arguments: ArticleInfo.fromArticleBean(widget.article),
     );
   }
 

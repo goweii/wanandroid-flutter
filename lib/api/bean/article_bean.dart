@@ -28,7 +28,7 @@ class ArticleBean {
   final int publishTime;
   final int realSuperChapterId;
   final int selfVisible;
-  final int shareDate;
+  final int? shareDate;
   final String? shareUser;
   final int superChapterId;
   final String? superChapterName;

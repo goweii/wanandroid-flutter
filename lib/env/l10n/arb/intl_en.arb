@@ -40,5 +40,6 @@
     "level_prefix": "Level:",
     "rank_prefix": "Rank:",
     "mine_coin": "Coin",
-    "mine_collection": "Collection"
+    "mine_collection": "Collection",
+    "answers": "Answers"
 }
