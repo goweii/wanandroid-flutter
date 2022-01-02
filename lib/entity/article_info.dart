@@ -27,4 +27,14 @@ class ArticleInfo {
       collected: articleBean.collect,
     );
   }
+
+  factory ArticleInfo.fromUrl(String url) {
+    return ArticleInfo(
+      id: null,
+      link: url,
+      title: null,
+      author: null,
+      cover: null,
+    );
+  }
 }

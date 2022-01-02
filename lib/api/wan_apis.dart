@@ -1,4 +1,5 @@
 import 'package:wanandroid/api/bean/article_bean.dart';
+import 'package:wanandroid/api/bean/navi_bean.dart';
 import 'package:wanandroid/api/bean/paged_bean.dart';
 import 'package:wanandroid/api/bean/question_commen_bean.dart';
 import 'package:wanandroid/api/bean/user_bean.dart';
@@ -159,6 +160,21 @@ class WanApis {
       path: '/wenda/comments/$questionId/json',
       fromJsonT: (json) => PagedBean.fromJson(
           json, (json) => QuestionCommentBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<List<NaviBean>> getNavi() async {
+    return await WanApi(
+      method: HttpMethod.get,
+      path: '/navi/json',
+      fromJsonT: (json) {
+        var data = <NaviBean>[];
+        json as List;
+        for (var v in json) {
+          data.add(NaviBean.fromJson(v));
+        }
+        return data;
+      },
     ).request();
   }
 }
