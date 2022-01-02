@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/login/sign_in_repo.dart';
 import 'package:wanandroid/widget/input_edit.dart';
 import 'package:wanandroid/widget/main_button.dart';
@@ -118,7 +119,7 @@ class _SignInWidgetState extends State<SignInWidget> {
         username: _account!,
         password: _password!,
       );
-      Navigator.of(context).pop();
+      AppRouter.of(context).pop();
     } on ApiException catch (e) {
       return e.msg ?? Strings.of(context).unknown_error;
     } catch (e) {

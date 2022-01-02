@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/env/asset/app_images.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/login/sign_in_widget.dart';
 import 'package:wanandroid/module/login/sign_up_widget.dart';
 
@@ -39,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+            AppRouter.of(context).pop();
           },
           icon: Icon(
             Icons.close_rounded,

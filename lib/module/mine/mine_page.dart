@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
-import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
-import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/module/mine/min_repo.dart';
 import 'package:wanandroid/module/mine/mine_widgets.dart';
-import 'package:wanandroid/widget/action_item.dart';
 
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
@@ -31,7 +28,6 @@ class _MinePageState extends State<MinePage> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginState loginState = LoginState.listen(context);
     return Scaffold(
       body: Column(
         mainAxisSize: MainAxisSize.max,

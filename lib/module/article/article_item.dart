@@ -7,6 +7,7 @@ import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_repo.dart';
 import 'package:wanandroid/utils/string_utils.dart';
 
@@ -33,7 +34,7 @@ class _ArticleItemState extends State<ArticleItem> {
       color: Theme.of(context).colorScheme.surface,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushNamed(
+          AppRouter.of(context).pushNamed(
             RouteMap.articlePage,
             arguments: ArticleInfo.fromArticleBean(widget.article),
           );
@@ -52,7 +53,7 @@ class _ArticleItemState extends State<ArticleItem> {
   _onCollectPressed() async {
     var isLogin = await WanStore().isLogin;
     if (!isLogin) {
-      Navigator.of(context).pushNamed(RouteMap.loginPage);
+      AppRouter.of(context).pushNamed(RouteMap.loginPage);
       return;
     }
     var article = widget.article;

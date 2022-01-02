@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/wan_toast.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_widget.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
 
@@ -69,7 +70,7 @@ class _ArticlePageState extends State<ArticlePage>
                 icon: const Icon(Icons.power_settings_new_rounded),
                 tip: Strings.of(context).article_fab_tip_close,
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  AppRouter.of(context).pop();
                 },
               ),
               Fab(
@@ -94,7 +95,6 @@ class _ArticlePageState extends State<ArticlePage>
                     msg: "Not supported!",
                     type: WanToastType.error,
                   ).show();
-                  //Fluttertoast.showToast(msg: "Not supported!");
                 },
               ),
             ],
@@ -109,6 +109,6 @@ class _ArticlePageState extends State<ArticlePage>
       await controller.goBack();
       return;
     }
-    Navigator.of(context).pop();
+    AppRouter.of(context).pop();
   }
 }

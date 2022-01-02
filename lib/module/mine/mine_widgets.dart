@@ -5,6 +5,7 @@ import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/widget/action_item.dart';
 
 class MineToolbar extends StatelessWidget {
@@ -95,7 +96,7 @@ class MineHeader extends StatelessWidget {
     LoginState loginState = LoginState.value(context);
     if (loginState.isLogin) {
     } else {
-      Navigator.of(context).pushNamed(RouteMap.loginPage);
+      AppRouter.of(context).pushNamed(RouteMap.loginPage);
     }
   }
 }
@@ -127,7 +128,7 @@ class MineMenus extends StatelessWidget {
           leading: const Icon(CupertinoIcons.settings),
           title: Text(Strings.of(context).settings_title),
           onPressed: () {
-            Navigator.of(context).pushNamed(RouteMap.settingsPage);
+            AppRouter.of(context).pushNamed(RouteMap.settingsPage);
           },
         ),
       ],

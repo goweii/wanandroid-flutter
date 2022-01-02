@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 
 class BannerView extends StatefulWidget {
@@ -46,7 +47,7 @@ class _BannerViewState extends State<BannerView> {
 
   _handleTap(int index) {
     var data = widget.banners[index];
-    Navigator.of(context).pushNamed(
+    AppRouter.of(context).pushNamed(
       RouteMap.articlePage,
       arguments: ArticleInfo(
         id: data.id,

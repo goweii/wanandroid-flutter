@@ -5,10 +5,11 @@ import 'package:wanandroid/api/wan_store.dart';
 import 'package:wanandroid/env/l10n/localization.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/route/route_delegate.dart';
+import 'package:wanandroid/env/route/route_parser.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/env/theme/theme_model_manager.dart';
 import 'package:wanandroid/env/theme/theme_model_provider.dart';
-import 'package:wanandroid/env/route/app_router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,14 +40,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  final AppRouteDelegate _appRouteDelegate = AppRouteDelegate();
+  final AppRouteParser _appRouteParser = AppRouteParser();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => Strings.of(context).wanandroid,
       theme: ThemeModel.listen(context).lightTheme,
@@ -55,9 +54,8 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: Localization.localizationsDelegates,
       supportedLocales: Localization.supportedLocales,
       localeResolutionCallback: Localization.localeResolutionCallback,
-      onGenerateRoute: AppRouter.generateRoute,
-      onUnknownRoute: AppRouter.unknownRoute,
-      initialRoute: AppRouter.initialRoute,
+      routerDelegate: _appRouteDelegate,
+      routeInformationParser: _appRouteParser,
     );
   }
 }

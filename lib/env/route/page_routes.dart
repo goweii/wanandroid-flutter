@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/env/route/page_builder.dart';
+
+typedef PageWidgetBuilder = Widget Function(
+    BuildContext context, dynamic arguments);
 
 class NonePageRoute<T> extends PageRouteBuilder<T> {
   NonePageRoute({
-    required RouteSettings settings,
-    required PageBuilder builder,
+    required Page<dynamic> page,
+    required PageWidgetBuilder builder,
   }) : super(
+          settings: page,
           transitionDuration: const Duration(milliseconds: 0),
           pageBuilder: (context, animation, secondaryAnimation) {
-            return builder(context, settings);
+            return builder(context, page.arguments);
           },
         );
 }
 
 class RightPageRoute<T> extends PageRouteBuilder<T> {
   RightPageRoute({
-    required RouteSettings settings,
-    required PageBuilder builder,
+    required Page<dynamic> page,
+    required PageWidgetBuilder builder,
   }) : super(
+          settings: page,
           transitionDuration: const Duration(milliseconds: 400),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
@@ -32,16 +36,17 @@ class RightPageRoute<T> extends PageRouteBuilder<T> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return builder(context, settings);
+            return builder(context, page.arguments);
           },
         );
 }
 
 class BottomPageRoute<T> extends PageRouteBuilder<T> {
   BottomPageRoute({
-    required RouteSettings settings,
-    required PageBuilder builder,
+    required Page<dynamic> page,
+    required PageWidgetBuilder builder,
   }) : super(
+          settings: page,
           transitionDuration: const Duration(milliseconds: 400),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return SlideTransition(
@@ -56,7 +61,7 @@ class BottomPageRoute<T> extends PageRouteBuilder<T> {
             );
           },
           pageBuilder: (context, animation, secondaryAnimation) {
-            return builder(context, settings);
+            return builder(context, page.arguments);
           },
         );
 }

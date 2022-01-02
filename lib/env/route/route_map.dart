@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/entity/article_info.dart';
-import 'package:wanandroid/env/route/page_route.dart';
+import 'package:wanandroid/env/route/app_page.dart';
+import 'package:wanandroid/env/route/page_routes.dart';
+import 'package:wanandroid/env/route/route_path.dart';
 import 'package:wanandroid/module/article/article_page.dart';
 import 'package:wanandroid/module/login/login_page.dart';
 import 'package:wanandroid/module/main/main_page.dart';
@@ -12,24 +14,41 @@ class RouteMap {
   static const String articlePage = "/article";
   static const String settingsPage = "/settings";
 
-  static Map<String, RouteFactory> routes = {
-    mainPage: (settings) => NonePageRoute(
-          settings: settings,
-          builder: (context, settings) => const MainPage(),
+  static final Map<String, RouteBuilder> map = {
+    mainPage: (context, page) => NonePageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const MainPage();
+          },
         ),
-    loginPage: (settings) => BottomPageRoute(
-          settings: settings,
-          builder: (context, settings) => const LoginPage(),
+    loginPage: (context, page) => BottomPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const LoginPage();
+          },
         ),
-    articlePage: (settings) => RightPageRoute(
-          settings: settings,
-          builder: (context, settings) => ArticlePage(
-            articleInfo: settings.arguments as ArticleInfo,
-          ),
+    articlePage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return ArticlePage(
+              articleInfo: arguments as ArticleInfo,
+            );
+          },
         ),
-    settingsPage: (settings) => RightPageRoute(
-          settings: settings,
-          builder: (context, settings) => const SettingsPage(),
+    settingsPage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const SettingsPage();
+          },
         ),
   };
+
+  static Page<dynamic>? buildPage(BuildContext context, RoutePath<dynamic> routePath) {
+    var builder = map[routePath.location];
+    if (builder == null) return null;
+    return AppPage(
+      routePath: routePath,
+      builder: builder,
+    );
+  }
 }
