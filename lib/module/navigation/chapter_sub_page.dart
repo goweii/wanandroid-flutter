@@ -60,17 +60,20 @@ class _ChapterSubPageState extends State<ChapterSubPage>
         return DataProvider<StatablePagingData<ArticleBean>>(
           create: (context) => viewModel.pagingData,
           builder: (context, data) {
-            return LayoutBuilder(builder: (context, constraints) {
-              return CustomScrollView(
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                scrollBehavior: ScrollConfiguration.of(context).copyWith(
-                  overscroll: false,
-                  scrollbars: false,
-                ),
-                slivers: _buildSlivers(viewModel, data),
+            if (data.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            });
+            }
+            return CustomScrollView(
+              controller: _scrollController,
+              physics: const BouncingScrollPhysics(),
+              scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                overscroll: false,
+                scrollbars: false,
+              ),
+              slivers: _buildSlivers(viewModel, data),
+            );
           },
         );
       },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/navigation_bean.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/observable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/route/route_map.dart';
@@ -25,17 +26,22 @@ class _NavigationSubPageState extends State<NavigationSubPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ViewModelProvider<NavigationViewModel>(
-      create: (context) => NavigationViewModel()..getNavi(),
+      create: (context) => NavigationViewModel()..getData(),
       builder: (context, viewModel) {
-        return DataProvider<ObservableData<List<NavigationBean>>>(
+        return DataProvider<StatablePagingData<NavigationBean>>(
           create: (context) => viewModel.data,
           builder: (context, data) {
+            if (data.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return ListView.builder(
-              itemCount: data.value.length,
+              itemCount: data.datas.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final ThemeData themeData = Theme.of(context);
-                var e = data.value[index];
+                var e = data.datas[index];
                 return Container(
                   color: themeData.colorScheme.surface,
                   child: Column(

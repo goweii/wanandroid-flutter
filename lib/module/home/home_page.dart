@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
+import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
-import 'package:wanandroid/module/home/home_repo.dart';
+import 'package:wanandroid/module/home/home_view_model.dart';
 import 'package:wanandroid/module/home/home_widget.dart';
 import 'package:wanandroid/module/article/article_item.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
@@ -20,18 +22,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  final HomeRepo _repo = HomeRepo();
-
-  List<BannerBean>? _banners;
-  List<ArticleBean>? _topArticles;
-  final List<ArticleBean> _homeArticles = [];
-  bool _endedArticles = false;
-  bool _loadingArticles = false;
-
-  bool get _hasBanners => _banners != null && _banners!.isNotEmpty;
-  bool get _hasTopArticles => _topArticles != null && _topArticles!.isNotEmpty;
-  bool get _hasHomeArticles => _homeArticles.isNotEmpty;
-  bool get _hasArticles => _hasTopArticles || _hasHomeArticles;
+  final HomeViewModel _viewModel = HomeViewModel();
 
   ScrollController? _scrollController;
 
@@ -44,27 +35,11 @@ class _HomePageState extends State<HomePage>
     _scrollController = ScrollController()
       ..addListener(() {
         if (_scrollController == null) return;
-        if (_loadingArticles) return;
-        if (_endedArticles) return;
         if (_scrollController!.position.pixels >=
             _scrollController!.position.maxScrollExtent) {
-          setState(() {
-            _loadingArticles = true;
-          });
-          _repo.getNextHomeArticles().then((value) {
-            setState(() {
-              _loadingArticles = false;
-              _endedArticles = value.ended;
-              _homeArticles.addAll(value.datas);
-            });
-          }, onError: (error) {
-            setState(() {
-              _loadingArticles = false;
-            });
-          });
+          _viewModel.getNextHomeArticles();
         }
       });
-    _refreshData();
     LoginState.stream().listen(_onLoginStateChanged);
     Bus().on<CollectEvent>().listen(_onCollectEvent);
   }
@@ -76,172 +51,164 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-  _onLoginStateChanged(LoginState loginState) {
-    if (loginState.isLogin) {
-      _refreshData();
-    } else {
-      setState(() {
-        _topArticles?.forEach((element) => element.collect = false);
-        for (var element in _homeArticles) {
-          element.collect = false;
-        }
-      });
-    }
-  }
-
-  _onCollectEvent(CollectEvent event) {
-    _topArticles
-        ?.where((value) => value.id == event.articleId)
-        .forEach((element) {
-      setState(() {
-        element.collect = event.collect;
-      });
-    });
-    _homeArticles
-        .where((value) => value.id == event.articleId)
-        .forEach((element) {
-      setState(() {
-        element.collect = event.collect;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        title: Text(Strings.of(context).home_title),
-      ),
-      body: OrientationBuilder(
-        builder: (BuildContext context, Orientation orientation) {
-          if (!_hasBanners && !_hasTopArticles && !_hasHomeArticles) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (orientation == Orientation.portrait) {
-            return CustomScrollView(
-              physics: const BouncingScrollPhysics(),
-              scrollBehavior: ScrollConfiguration.of(context).copyWith(
-                overscroll: false,
-                scrollbars: false,
-              ),
-              controller: _scrollController,
-              slivers: _buildSlivers(true),
-            );
-          } else {
-            return SizedBox.expand(
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: !_hasBanners
-                        ? Container()
-                        : BannerView(
-                            scrollDirection: Axis.vertical,
-                            banners: _banners!,
-                          ),
-                  ),
-                  Expanded(
-                    child: CustomScrollView(
+    return ViewModelProvider<HomeViewModel>(
+      create: (context) {
+        _refreshData();
+        return _viewModel;
+      },
+      builder: (context, viewModel) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(Strings.of(context).home_title)
+          ),
+          body: DataProvider3<BannerPagingData, TopArticlePagingData,
+              HomeArticlePagingData>(
+            create1: (context) => viewModel.banners,
+            create2: (context) => viewModel.topArticles,
+            create3: (context) => viewModel.homeArticles,
+            builder: (context, banners, topArticles, homeArticles) {
+              return OrientationBuilder(
+                builder: (BuildContext context, Orientation orientation) {
+                  if (banners.datas.isEmpty &&
+                      topArticles.datas.isEmpty &&
+                      homeArticles.datas.isEmpty) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (orientation == Orientation.portrait) {
+                    return CustomScrollView(
                       physics: const BouncingScrollPhysics(),
                       scrollBehavior: ScrollConfiguration.of(context).copyWith(
                         overscroll: false,
                         scrollbars: false,
                       ),
                       controller: _scrollController,
-                      slivers: _buildSlivers(false),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+                      slivers:
+                          _buildSlivers(banners, topArticles, homeArticles),
+                    );
+                  } else {
+                    return SizedBox.expand(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            child: banners.datas.isEmpty
+                                ? Container()
+                                : BannerView(
+                                    scrollDirection: Axis.vertical,
+                                    banners: banners.datas,
+                                  ),
+                          ),
+                          Expanded(
+                            child: CustomScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollBehavior:
+                                  ScrollConfiguration.of(context).copyWith(
+                                overscroll: false,
+                                scrollbars: false,
+                              ),
+                              controller: _scrollController,
+                              slivers: _buildSlivers(
+                                  null, topArticles, homeArticles),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
-  List<Widget> _buildSlivers(bool needBanner) {
+  List<Widget> _buildSlivers(
+    BannerPagingData? banners,
+    TopArticlePagingData topArticles,
+    HomeArticlePagingData homeArticles,
+  ) {
     return [
       ShiciRefreshHeader(
         onRefresh: _refreshData,
       ),
-      if (needBanner && _hasBanners)
+      if (banners != null && banners.datas.isNotEmpty)
         SliverToBoxAdapter(
           child: AspectRatio(
             aspectRatio: 16.0 / 9.0,
             child: BannerView(
-              banners: _banners!,
+              banners: banners.datas,
             ),
           ),
         ),
-      if (_hasTopArticles)
+      if (topArticles.datas.isNotEmpty)
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
               return ArticleItem(
-                article: _topArticles![index],
+                article: topArticles.datas[index],
                 top: true,
               );
             },
-            childCount: _topArticles?.length ?? 0,
+            childCount: topArticles.datas.length,
           ),
         ),
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return ArticleItem(article: _homeArticles[index]);
+            return ArticleItem(article: homeArticles.datas[index]);
           },
-          childCount: _homeArticles.length,
+          childCount: homeArticles.datas.length,
         ),
       ),
-      if (_hasArticles)
+      if (topArticles.datas.isNotEmpty || homeArticles.datas.isNotEmpty)
         SliverToBoxAdapter(
           child: PagedListFooter(
-            loading: _loadingArticles,
-            ended: _endedArticles,
+            loading: homeArticles.isLoading,
+            ended: homeArticles.ended,
           ),
         ),
     ];
   }
 
   Future<bool> _refreshData() async {
-    bool result = true;
-    try {
-      var value = await _repo.getBanners();
-      setState(() {
-        _banners = value;
-      });
-    } catch (_) {
-      result = false;
+    bool getBannersSuccess = await _viewModel.getBanners();
+    bool getTopArticlesSuccess = await _viewModel.getTopArticles();
+    bool getHomeArticlesSuccess = await _viewModel.getInitialHomeArticles();
+    return getBannersSuccess && getTopArticlesSuccess && getHomeArticlesSuccess;
+  }
+
+  _onLoginStateChanged(LoginState loginState) {
+    if (loginState.isLogin) {
+      _refreshData();
+    } else {
+      _viewModel.topArticles
+        // ignore: avoid_function_literals_in_foreach_calls
+        ..datas.forEach((element) => element.collect = false)
+        ..notify();
+      _viewModel.homeArticles
+        // ignore: avoid_function_literals_in_foreach_calls
+        ..datas.forEach((element) => element.collect = false)
+        ..notify();
     }
-    try {
-      var value = await _repo.getTopArticles();
-      setState(() {
-        _topArticles = value;
-      });
-    } catch (_) {
-      result = false;
-    }
-    setState(() {
-      _loadingArticles = true;
-    });
-    try {
-      var value = await _repo.getInitialHomeArticles();
-      setState(() {
-        _endedArticles = value.ended;
-        _homeArticles.clear();
-        _homeArticles.addAll(value.datas);
-      });
-    } catch (_) {
-      result = false;
-    }
-    setState(() {
-      _loadingArticles = false;
-    });
-    return result;
+  }
+
+  _onCollectEvent(CollectEvent event) {
+    _viewModel.topArticles
+      ..datas
+          .where((value) => value.id == event.articleId)
+          .forEach((element) => element.collect = event.collect)
+      ..notify();
+    _viewModel.homeArticles
+      ..datas
+          .where((value) => value.id == event.articleId)
+          .forEach((element) => element.collect = event.collect)
+      ..notify();
   }
 }

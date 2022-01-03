@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/knowledge_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/observable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/route/route_map.dart';
@@ -25,17 +26,22 @@ class _KnowledgeSubPageState extends State<KnowledgeSubPage>
   Widget build(BuildContext context) {
     super.build(context);
     return ViewModelProvider<KnowledgeViewModel>(
-      create: (context) => KnowledgeViewModel()..getNavi(),
+      create: (context) => KnowledgeViewModel()..getData(),
       builder: (context, viewModel) {
-        return DataProvider<ObservableData<List<KnowledgeBean>>>(
+        return DataProvider<StatablePagingData<KnowledgeBean>>(
           create: (context) => viewModel.data,
           builder: (context, data) {
+            if (data.isLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
             return ListView.builder(
-              itemCount: data.value.length,
+              itemCount: data.datas.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final ThemeData themeData = Theme.of(context);
-                var knowledgeBean = data.value[index];
+                var knowledgeBean = data.datas[index];
                 return Container(
                   color: themeData.colorScheme.surface,
                   child: Column(
