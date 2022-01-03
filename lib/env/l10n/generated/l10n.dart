@@ -90,6 +90,16 @@ class Strings {
     );
   }
 
+  /// `Knowledge`
+  String get knowledge_title {
+    return Intl.message(
+      'Knowledge',
+      name: 'knowledge_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Publish`
   String get publish_title {
     return Intl.message(

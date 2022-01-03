@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input your password again"),
         "input_password_hint":
             MessageLookupByLibrary.simpleMessage("Input your password"),
+        "knowledge_title": MessageLookupByLibrary.simpleMessage("Knowledge"),
         "level_prefix": MessageLookupByLibrary.simpleMessage("Level:"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),

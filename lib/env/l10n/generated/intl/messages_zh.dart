@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_password_again_hint":
             MessageLookupByLibrary.simpleMessage("请再次输入你的密码"),
         "input_password_hint": MessageLookupByLibrary.simpleMessage("请输入你的密码"),
+        "knowledge_title": MessageLookupByLibrary.simpleMessage("体系"),
         "level_prefix": MessageLookupByLibrary.simpleMessage("等级:"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
