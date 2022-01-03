@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 
@@ -21,7 +23,8 @@ class ExpendableFab extends StatefulWidget {
     Key? key,
     this.mainFabBuilder,
     required this.actionFabs,
-    this.duration = const Duration(milliseconds: 350),
+    this.expendDuration = const Duration(milliseconds: 350),
+    this.idleDelay = const Duration(milliseconds: 2000),
     this.elevation = 8.0,
     this.padding = EdgeInsets.zero,
     this.idleOpacity = 0.8,
@@ -29,10 +32,11 @@ class ExpendableFab extends StatefulWidget {
 
   final FabBuilder? mainFabBuilder;
   final List<Fab> actionFabs;
-  final Duration duration;
+  final Duration expendDuration;
   final double elevation;
   final EdgeInsets padding;
   final double idleOpacity;
+  final Duration idleDelay;
 
   @override
   _ExpendableFabState createState() => _ExpendableFabState();
@@ -51,13 +55,17 @@ class _ExpendableFabState extends State<ExpendableFab>
   int _downIndex = -1;
   int _touchIndex = -1;
 
+  bool _idle = false;
+
+  Timer? _idleTimer;
+
   double get _f => _controller.value;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: widget.duration,
+      duration: widget.expendDuration,
       vsync: this,
     )
       ..addStatusListener(_onStatusListener)
@@ -67,6 +75,7 @@ class _ExpendableFabState extends State<ExpendableFab>
       reverseCurve: Curves.easeOutQuad,
       parent: _controller,
     );
+    _toIdle();
   }
 
   @override
@@ -87,8 +96,8 @@ class _ExpendableFabState extends State<ExpendableFab>
       onPointerUp: _handlePointerUp,
       onPointerCancel: _handlePointerCancel,
       child: AnimatedOpacity(
-        duration: widget.duration,
-        opacity: _downIndex >= 0 ? 1.0 : widget.idleOpacity,
+        duration: widget.expendDuration,
+        opacity: !_idle ? 1.0 : widget.idleOpacity,
         child: Container(
           constraints: const BoxConstraints.expand(),
           padding: widget.padding,
@@ -145,6 +154,7 @@ class _ExpendableFabState extends State<ExpendableFab>
       setState(() {
         _downIndex = 0;
       });
+      _exitIdle();
       return;
     }
     for (var i = 0; i < _actionKeys.length; i++) {
@@ -153,6 +163,7 @@ class _ExpendableFabState extends State<ExpendableFab>
         setState(() {
           _downIndex = i;
         });
+        _exitIdle();
         return;
       }
     }
@@ -201,6 +212,7 @@ class _ExpendableFabState extends State<ExpendableFab>
         _touchIndex = -1;
       });
     }
+    _toIdle();
   }
 
   void _handlePointerCancel(PointerCancelEvent event) {
@@ -210,6 +222,29 @@ class _ExpendableFabState extends State<ExpendableFab>
     if (_touchIndex != -1) {
       setState(() {
         _touchIndex = -1;
+      });
+    }
+    _toIdle();
+  }
+
+  _toIdle() {
+    if (!_idle && _idleTimer == null) {
+      _idleTimer = Timer(widget.idleDelay, () {
+        _idleTimer = null;
+        if (_downIndex < 0) {
+          setState(() {
+            _idle = true;
+          });
+        }
+      });
+    }
+  }
+
+  _exitIdle() {
+    _idleTimer?.cancel();
+    if (_idle) {
+      setState(() {
+        _idle = false;
       });
     }
   }
@@ -236,7 +271,7 @@ class _ExpendableFabState extends State<ExpendableFab>
             icon: fab.icon,
             onPressed: fab.onPressed,
             elevation: _f * widget.elevation,
-            duration: _f == 1.0 ? widget.duration : Duration.zero,
+            duration: _f == 1.0 ? widget.expendDuration : Duration.zero,
           ),
           tip: fab.tip,
           showTip: _f == 1.0 && _touchIndex == i + 1,
@@ -249,7 +284,7 @@ class _ExpendableFabState extends State<ExpendableFab>
   Widget _buildMainFab() {
     var fab = widget.mainFabBuilder?.call(context, _f);
     return AnimatedRotation(
-      duration: widget.duration,
+      duration: widget.expendDuration,
       curve: Curves.easeOut,
       turns: fab != null
           ? 0.0
@@ -387,15 +422,15 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return GestureDetector(
-      onTap: () => onPressed?.call(),
-      onLongPress: () => onLongPressed?.call(),
-      child: Material(
-        shape: const CircleBorder(),
-        clipBehavior: Clip.antiAlias,
-        color: theme.colorScheme.surface,
-        animationDuration: duration,
-        elevation: elevation,
+    return Material(
+      shape: const CircleBorder(),
+      clipBehavior: Clip.antiAlias,
+      color: theme.colorScheme.surface,
+      animationDuration: duration,
+      elevation: elevation,
+      child: InkWell(
+        onTap: onPressed,
+        onLongPress: onLongPressed,
         child: SizedBox(
           width: AppDimens.iconButtonSize,
           height: AppDimens.iconButtonSize,
