@@ -27,15 +27,15 @@ class _NavigationSubPageState extends State<NavigationSubPage>
     return ViewModelProvider<NavigationViewModel>(
       create: (context) => NavigationViewModel()..getNavi(),
       builder: (context, viewModel) {
-        return DataProvider<List<NavigationBean>>(
+        return DataProvider<ObservableData<List<NavigationBean>>>(
           create: (context) => viewModel.data,
-          builder: (context, datas) {
+          builder: (context, data) {
             return ListView.builder(
-              itemCount: datas.length,
+              itemCount: data.value.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 final ThemeData themeData = Theme.of(context);
-                var data = datas[index];
+                var e = data.value[index];
                 return Container(
                   color: themeData.colorScheme.surface,
                   child: Column(
@@ -50,7 +50,7 @@ class _NavigationSubPageState extends State<NavigationSubPage>
                           AppDimens.marginHalf,
                         ),
                         child: Text(
-                          data.name,
+                          e.name,
                           style: themeData.textTheme.subtitle1,
                         ),
                       ),
@@ -67,7 +67,7 @@ class _NavigationSubPageState extends State<NavigationSubPage>
                           crossAxisAlignment: WrapCrossAlignment.center,
                           spacing: AppDimens.marginHalf,
                           runSpacing: AppDimens.marginHalf,
-                          children: data.articles
+                          children: e.articles
                               .map((e) => WrapItem(
                                     data: e.title ?? '',
                                     onPressed: () {

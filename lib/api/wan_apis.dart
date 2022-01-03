@@ -193,4 +193,17 @@ class WanApis {
       },
     ).request();
   }
+
+  static Future<PagedBean<ArticleBean>> getChapterArticles({
+    required int chapterId,
+    required int page,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.get,
+      path: '/article/list/$page/json',
+      queries: {"cid": chapterId},
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => ArticleBean.fromJson(json)),
+    ).request();
+  }
 }

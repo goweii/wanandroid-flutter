@@ -1,4 +1,89 @@
-class PagingData<T> {
+import 'package:flutter/material.dart';
+
+enum PagingState {
+  idle,
+  loading,
+  succeed,
+  error,
+}
+
+class StatablePagingData<T> extends ChangeNotifier {
+  StatablePagingData({
+    List<T>? datas,
+    bool ended = false,
+    PagingState state = PagingState.idle,
+  }) {
+    if (datas != null) {
+      _datas.addAll(datas);
+    }
+    _ended = ended;
+    _state = state;
+  }
+
+  final List<T> _datas = [];
+  bool _ended = false;
+  PagingState _state = PagingState.idle;
+
+  bool get ended => _ended;
+  set ended(bool ended) {
+    _ended = ended;
+    notifyListeners();
+  }
+
+  bool get isIdle => _state == PagingState.idle;
+  bool get isLoading => _state == PagingState.loading;
+  bool get isFailed => _state == PagingState.error;
+  bool get isSuccess => _state == PagingState.succeed;
+  PagingState get state => _state;
+  set state(PagingState state) {
+    _state = state;
+    notifyListeners();
+  }
+
+  List<T> get datas => _datas;
+
+  toLoading() {
+    if (_state == PagingState.loading) return;
+    _state = PagingState.loading;
+    notifyListeners();
+  }
+
+  toError() {
+    if (_state == PagingState.error) return;
+    _state = PagingState.error;
+    notifyListeners();
+  }
+
+  append(PagingData<T> pagingData) {
+    _datas.addAll(pagingData.datas);
+    _ended = pagingData.ended;
+    _state = PagingState.succeed;
+    notifyListeners();
+  }
+
+  reset() {
+    bool changed = false;
+    if (_datas.isNotEmpty) {
+      _datas.clear();
+      changed = true;
+    }
+    if (_ended) {
+      _ended = false;
+      changed = true;
+    }
+    if (!isIdle) {
+      _state = PagingState.idle;
+      changed = true;
+    }
+    if (changed) {
+      notifyListeners();
+    }
+  }
+
+  notify() => notifyListeners();
+}
+
+class PagingData<T> extends ChangeNotifier {
   PagingData({
     required this.ended,
     required this.datas,

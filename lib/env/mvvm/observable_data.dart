@@ -5,17 +5,17 @@ class ObservableData<T> extends ValueNotifier<T> {
   ObservableData(T value) : super(value);
 }
 
-class DataProvider<T> extends ChangeNotifierProvider<ObservableData<T>> {
+class DataProvider<T extends ChangeNotifier> extends ChangeNotifierProvider<T> {
   DataProvider({
     Key? key,
-    required Create<ObservableData<T>> create,
+    required Create<T> create,
     required Widget Function(BuildContext context, T data) builder,
   }) : super(
           key: key,
           create: create,
-          child: Consumer<ObservableData<T>>(
+          child: Consumer<T>(
             builder: (context, value, child) {
-              return builder(context, value.value);
+              return builder(context, value);
             },
           ),
         );

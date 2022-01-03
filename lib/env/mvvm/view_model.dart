@@ -3,6 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:wanandroid/env/mvvm/observable_data.dart';
 
 class ViewModel extends ChangeNotifier {
+  static VM of<VM extends ViewModel>(BuildContext context) {
+    return Provider.of<VM>(context, listen: false);
+  }
+
   final ObservableData<bool> loading = ObservableData(false);
 
   ViewModel();

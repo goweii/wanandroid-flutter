@@ -11,6 +11,7 @@ class AppDimens {
   static const double radiusNormal = 12.0;
 
   static const double appBarHeight = 50.0;
+  static const double tabBarHeight = 50.0;
   static const double bottomBarHeight = 50.0;
 
   static const double smallButtonHeight = 32.0;
