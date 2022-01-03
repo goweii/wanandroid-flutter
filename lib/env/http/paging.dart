@@ -83,7 +83,7 @@ class StatablePagingData<T> extends ChangeNotifier {
   notify() => notifyListeners();
 }
 
-class PagingData<T> extends ChangeNotifier {
+class PagingData<T> {
   PagingData({
     required this.ended,
     required this.datas,

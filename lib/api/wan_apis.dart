@@ -135,7 +135,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<UserBean> userinfo() async {
+  static Future<UserBean> getUserInfo() async {
     return await WanApi(
       method: HttpMethod.get,
       path: '/user/lg/userinfo/json',

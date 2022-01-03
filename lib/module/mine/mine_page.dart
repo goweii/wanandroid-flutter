@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
-import 'package:wanandroid/module/mine/min_repo.dart';
+import 'package:wanandroid/module/mine/mine_view_model.dart';
 import 'package:wanandroid/module/mine/mine_widgets.dart';
 
 class MinePage extends StatefulWidget {
@@ -14,9 +15,7 @@ class MinePage extends StatefulWidget {
 
 class _MinePageState extends State<MinePage>
     with AutomaticKeepAliveClientMixin {
-  final MineRepo _mineRepo = MineRepo();
-
-  UserBean? _userBean;
+  final MineViewModel _viewModel = MineViewModel();
 
   @override
   bool get wantKeepAlive => true;
@@ -33,52 +32,53 @@ class _MinePageState extends State<MinePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Container(
-            width: double.infinity,
-            color: Theme.of(context).colorScheme.primary,
-            child: Stack(
-              children: [
-                SafeArea(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+    return ViewModelProvider<MineViewModel>(
+        create: (context) => _viewModel,
+        builder: (context, viewModel) {
+          return DataProvider<UserBeanStatableData>(
+              create: (context) => viewModel.userBean,
+              builder: (context, userBean) {
+                return Scaffold(
+                  body: Column(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
-                      const MineToolbar(),
-                      MineHeader(userBean: _userBean),
-                      const SizedBox(height: AppDimens.marginLarge),
+                      Container(
+                        width: double.infinity,
+                        color: Theme.of(context).colorScheme.primary,
+                        child: Stack(
+                          children: [
+                            SafeArea(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const MineToolbar(),
+                                  MineHeader(userBean: userBean.value),
+                                  const SizedBox(height: AppDimens.marginLarge),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: MineMenus(userBean: userBean.value),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: MineMenus(userBean: _userBean),
-            ),
-          ),
-        ],
-      ),
-    );
+                );
+              });
+        });
   }
 
   _getUserInfo() async {
     LoginState loginState = LoginState.value(context);
     if (loginState.isLogin) {
-      try {
-        UserBean userBean = await _mineRepo.userinfo();
-        setState(() {
-          _userBean = userBean;
-        });
-      } catch (_) {}
+      await _viewModel.getUserInfo();
     } else {
-      setState(() {
-        _userBean = null;
-      });
+      _viewModel.clearUserInfo();
     }
   }
 }
