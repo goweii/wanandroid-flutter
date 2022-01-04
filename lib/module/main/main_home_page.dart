@@ -60,28 +60,44 @@ class _MainHomePageState extends State<MainHomePage>
                     color: Theme.of(context).dividerColor,
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: TabBar(
-                        unselectedLabelColor: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withAlpha(100),
-                        labelColor: Theme.of(context).colorScheme.onSurface,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorColor: Colors.transparent,
-                        controller: _tabController,
-                        tabs: [
-                          Tab(text: Strings.of(context).home_title),
-                          Tab(text: Strings.of(context).question_title),
-                          Tab(text: Strings.of(context).navigation_title),
-                          Tab(text: Strings.of(context).mine_title),
-                        ],
+                Expanded(
+                  child: TabBar(
+                    padding: EdgeInsets.zero,
+                    unselectedLabelColor:
+                        Theme.of(context).colorScheme.onSurface.withAlpha(100),
+                    labelColor: Theme.of(context).colorScheme.primary,
+                    labelPadding: EdgeInsets.zero,
+                    labelStyle: Theme.of(context).textTheme.caption?.copyWith(
+                          fontSize: 12.0,
+                        ),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorColor: Colors.transparent,
+                    indicatorWeight: 0.00001,
+                    controller: _tabController,
+                    tabs: [
+                      Tab(
+                        height: AppDimens.bottomBarHeight,
+                        icon: const Icon(Icons.home_rounded),
+                        iconMargin: const EdgeInsets.only(bottom: 0),
+                        text: Strings.of(context).home_title,
                       ),
-                    ),
-                  ],
+                      Tab(
+                        icon: const Icon(Icons.question_answer_rounded),
+                        iconMargin: const EdgeInsets.only(bottom: 0),
+                        text: Strings.of(context).question_title,
+                      ),
+                      Tab(
+                        icon: const Icon(Icons.navigation_rounded),
+                        iconMargin: const EdgeInsets.only(bottom: 0),
+                        text: Strings.of(context).navigation_title,
+                      ),
+                      Tab(
+                        icon: const Icon(Icons.person_rounded),
+                        iconMargin: const EdgeInsets.only(bottom: 0),
+                        text: Strings.of(context).mine_title,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

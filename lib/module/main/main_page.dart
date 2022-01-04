@@ -1,7 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/module/main/main_home_page.dart';
-import 'package:wanandroid/module/publish/publish_page.dart';
+import 'package:wanandroid/module/square/square_page.dart';
 import 'package:wanandroid/module/todo/todo_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -35,15 +34,15 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     super.build(context);
     return PageView(
-      dragStartBehavior: DragStartBehavior.start,
       allowImplicitScrolling: true,
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         overscroll: false,
         scrollbars: false,
       ),
+      physics: const ClampingScrollPhysics(),
       controller: _pageController,
       children: const [
-        PublishPage(),
+        SquarePage(),
         MainHomePage(),
         ToDoPage(),
       ],
