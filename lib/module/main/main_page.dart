@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/module/main/main_home_page.dart';
+import 'package:wanandroid/module/publish/publish_page.dart';
+import 'package:wanandroid/module/todo/todo_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class _MainPageState extends State<MainPage>
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController(initialPage: 1);
     super.initState();
   }
 
@@ -41,9 +43,9 @@ class _MainPageState extends State<MainPage>
       ),
       controller: _pageController,
       children: const [
-        //PublishPage(),
+        PublishPage(),
         MainHomePage(),
-        //BookmarkPage(),
+        ToDoPage(),
       ],
     );
   }

@@ -31,7 +31,7 @@ class _NavigationSubPageState extends State<NavigationSubPage>
         return DataProvider<StatablePagingData<NavigationBean>>(
           create: (context) => viewModel.data,
           builder: (context, data) {
-            if (data.isLoading) {
+            if (data.datas.isEmpty && data.isLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

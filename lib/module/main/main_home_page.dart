@@ -40,6 +40,7 @@ class _MainHomePageState extends State<MainHomePage>
             child: TabBarView(
               controller: _tabController,
               dragStartBehavior: DragStartBehavior.start,
+              physics: const NeverScrollableScrollPhysics(),
               children: const [
                 HomePage(),
                 QuestionPage(),
@@ -62,17 +63,6 @@ class _MainHomePageState extends State<MainHomePage>
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    // Container(
-                    //   child: Icon(
-                    //     CupertinoIcons.chart_pie_fill,
-                    //     size: 18,
-                    //     color: Theme.of(context)
-                    //         .colorScheme
-                    //         .primary
-                    //         .withAlpha(100),
-                    //   ),
-                    //   padding: const EdgeInsets.all(8),
-                    // ),
                     Expanded(
                       child: TabBar(
                         unselectedLabelColor: Theme.of(context)
@@ -91,17 +81,6 @@ class _MainHomePageState extends State<MainHomePage>
                         ],
                       ),
                     ),
-                    // Container(
-                    //   child: Icon(
-                    //     CupertinoIcons.bookmark_fill,
-                    //     size: 18,
-                    //     color: Theme.of(context)
-                    //         .colorScheme
-                    //         .primary
-                    //         .withAlpha(100),
-                    //   ),
-                    //   padding: const EdgeInsets.all(8),
-                    // ),
                   ],
                 ),
               ],

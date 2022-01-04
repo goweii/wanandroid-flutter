@@ -19,6 +19,7 @@ class HomeViewModel extends ViewModel {
     banners.toLoading();
     try {
       var data = await WanApis.getBanners();
+      banners.reset();
       banners.append(PagingData(ended: true, datas: data));
       return true;
     } catch (_) {
@@ -31,6 +32,7 @@ class HomeViewModel extends ViewModel {
     topArticles.toLoading();
     try {
       var data = await WanApis.getTopArticles();
+      topArticles.reset();
       topArticles.append(PagingData(ended: true, datas: data));
       return true;
     } catch (_) {

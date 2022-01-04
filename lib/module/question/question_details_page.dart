@@ -65,19 +65,19 @@ class _QuestionDetailsPageState extends State<QuestionDetailsPage> {
     if (loginState.isLogin) {
       _refreshData();
     } else {
-      setState(() {
-        for (var element in _comments) {
-          //element.collect = false;
-        }
-      });
+      //setState(() {
+      //  for (var element in _comments) {
+      //    //element.collect = false;
+      //  }
+      //});
     }
   }
 
   _onCollectEvent(CollectEvent event) {
     _comments.where((value) => value.id == event.articleId).forEach((element) {
-      setState(() {
-        //element.collect = event.collect;
-      });
+      //setState(() {
+      //  //element.collect = event.collect;
+      //});
     });
   }
 

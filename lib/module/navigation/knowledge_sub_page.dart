@@ -31,7 +31,7 @@ class _KnowledgeSubPageState extends State<KnowledgeSubPage>
         return DataProvider<StatablePagingData<KnowledgeBean>>(
           create: (context) => viewModel.data,
           builder: (context, data) {
-            if (data.isLoading) {
+            if (data.datas.isEmpty && data.isLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

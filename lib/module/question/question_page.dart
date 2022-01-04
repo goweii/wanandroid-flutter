@@ -65,7 +65,7 @@ class _QuestionPageState extends State<QuestionPage>
         body: DataProvider<StatablePagingData<ArticleBean>>(
           create: (context) => _viewModel.pagingData,
           builder: (context, data) {
-            if (data.isLoading) {
+            if (data.datas.isEmpty && data.isLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

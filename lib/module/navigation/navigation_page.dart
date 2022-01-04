@@ -33,9 +33,6 @@ class _NavigationPageState extends State<NavigationPage>
           child: TabBar(
             isScrollable: true,
             indicatorWeight: 0.0001,
-            unselectedLabelColor:
-                Theme.of(context).colorScheme.onPrimary.withAlpha(100),
-            labelColor: Theme.of(context).colorScheme.onPrimary,
             indicatorSize: TabBarIndicatorSize.tab,
             indicatorColor: Colors.transparent,
             controller: _tabController,

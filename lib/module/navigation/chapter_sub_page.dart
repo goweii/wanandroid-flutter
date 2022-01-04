@@ -8,8 +8,6 @@ import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/observable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
-import 'package:wanandroid/env/route/route_map.dart';
-import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_item.dart';
 import 'package:wanandroid/module/navigation/chapter_sub_view_model.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
@@ -60,7 +58,7 @@ class _ChapterSubPageState extends State<ChapterSubPage>
         return DataProvider<StatablePagingData<ArticleBean>>(
           create: (context) => viewModel.pagingData,
           builder: (context, data) {
-            if (data.isLoading) {
+            if (data.datas.isEmpty && data.isLoading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
@@ -97,12 +95,6 @@ class _ChapterSubPageState extends State<ChapterSubPage>
         itemBuilder: (BuildContext context, int index) {
           return ArticleItem(
             article: pagingData.datas[index],
-            onPressed: (value) {
-              AppRouter.of(context).pushNamed(
-                RouteMap.questionDetailsPage,
-                arguments: value,
-              );
-            },
           );
         },
       ),
