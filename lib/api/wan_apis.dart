@@ -215,4 +215,12 @@ class WanApis {
           PagedBean.fromJson(json, (json) => ArticleBean.fromJson(json)),
     ).request();
   }
+
+  static Future<int> getUnreadMessageCount() async {
+    return await WanApi(
+      method: HttpMethod.get,
+      path: '/message/lg/count_unread/json',
+      fromJsonT: null,
+    ).request();
+  }
 }

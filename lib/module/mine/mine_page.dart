@@ -23,9 +23,9 @@ class _MinePageState extends State<MinePage>
   @override
   void initState() {
     super.initState();
-    _getUserInfo();
+    _loadData();
     LoginState.stream().listen((event) {
-      _getUserInfo();
+      _loadData();
     });
   }
 
@@ -33,52 +33,56 @@ class _MinePageState extends State<MinePage>
   Widget build(BuildContext context) {
     super.build(context);
     return ViewModelProvider<MineViewModel>(
-        create: (context) => _viewModel,
-        builder: (context, viewModel) {
-          return DataProvider<UserBeanStatableData>(
-              create: (context) => viewModel.userBean,
-              builder: (context, userBean) {
-                return Scaffold(
-                  body: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        color: Theme.of(context).colorScheme.primary,
-                        child: Stack(
-                          children: [
-                            SafeArea(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const MineToolbar(),
-                                  MineHeader(userBean: userBean.value),
-                                  const SizedBox(height: AppDimens.marginLarge),
-                                ],
-                              ),
-                            ),
-                          ],
+      create: (context) => _viewModel,
+      builder: (context, viewModel) {
+        return DataProvider<UserBeanStatableData>(
+          create: (context) => viewModel.userBean,
+          builder: (context, userBean) {
+            return Scaffold(
+              body: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Theme.of(context).colorScheme.primary,
+                    child: Stack(
+                      children: [
+                        SafeArea(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const MineToolbar(),
+                              MineHeader(userBean: userBean.value),
+                              const SizedBox(height: AppDimens.marginLarge),
+                            ],
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: MineMenus(userBean: userBean.value),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                );
-              });
-        });
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: MineMenus(userBean: userBean.value),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
-  _getUserInfo() async {
+  _loadData() async {
     LoginState loginState = LoginState.value(context);
     if (loginState.isLogin) {
       await _viewModel.getUserInfo();
+      await _viewModel.getUnreadMessageCount();
     } else {
       _viewModel.clearUserInfo();
+      _viewModel.clearUnreadMessageCount();
     }
   }
 }

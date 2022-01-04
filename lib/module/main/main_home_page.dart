@@ -10,7 +10,10 @@ import 'package:wanandroid/module/question/question_page.dart';
 class MainHomePage extends StatefulWidget {
   const MainHomePage({
     Key? key,
+    required this.onPageChanged,
   }) : super(key: key);
+
+  final ValueChanged<int>? onPageChanged;
 
   @override
   State<MainHomePage> createState() => _MainHomePageState();
@@ -20,13 +23,21 @@ class _MainHomePageState extends State<MainHomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController? _tabController;
 
+  int _index = -1;
+
   @override
   bool get wantKeepAlive => true;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 4, vsync: this)
+      ..addListener(() {
+        if (_tabController != null && _index != _tabController?.index) {
+          _index = _tabController!.index;
+          widget.onPageChanged?.call(_index);
+        }
+      });
   }
 
   @override

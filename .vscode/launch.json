@@ -7,9 +7,6 @@
             "type": "dart",
             "program": "lib/main.dart",
             "flutterMode": "debug",
-            "args": [
-                "--flavor=debug"
-            ],
         },
         {
             "name": "Flutter profile",
@@ -17,9 +14,6 @@
             "type": "dart",
             "program": "lib/main.dart",
             "flutterMode": "profile",
-            "args": [
-                "--flavor=debug"
-            ],
         },
         {
             "name": "Flutter release",
@@ -27,9 +21,36 @@
             "type": "dart",
             "program": "lib/main.dart",
             "flutterMode": "release",
+        },
+        {
+            "name": "Flutter debug -ios",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "debug",
             "args": [
                 "--flavor=debug"
             ],
-        }
+        },
+        {
+            "name": "Flutter profile -ios",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "profile",
+            "args": [
+                "--flavor=profile"
+            ],
+        },
+        {
+            "name": "Flutter release -ios",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "flutterMode": "release",
+            "args": [
+                "--flavor=release"
+            ],
+        },
     ]
 }

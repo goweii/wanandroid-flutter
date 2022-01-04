@@ -182,7 +182,7 @@ class _ItemTopBar extends StatelessWidget {
                 article.tags!.first.name,
                 style: Theme.of(context).textTheme.overline?.copyWith(
                       color: Theme.of(context).colorScheme.primary,
-                      height: 1.0,
+                      height: 1.1,
                       fontSize: 11.0,
                     ),
               ),

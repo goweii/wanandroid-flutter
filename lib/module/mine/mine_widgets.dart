@@ -3,26 +3,89 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
+import 'package:wanandroid/module/mine/mine_view_model.dart';
 import 'package:wanandroid/widget/action_item.dart';
 
 class MineToolbar extends StatelessWidget {
-  const MineToolbar({Key? key}) : super(key: key);
+  const MineToolbar({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: AppDimens.appBarHeight,
       alignment: Alignment.centerRight,
-      child: IconButton(
-        onPressed: null,
-        icon: Icon(
-          Icons.notifications,
-          color: Theme.of(context).colorScheme.onPrimary,
-        ),
-      ),
+      child: const MineUnreadMessageCountIcon(),
+    );
+  }
+}
+
+class MineUnreadMessageCountIcon extends StatelessWidget {
+  const MineUnreadMessageCountIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+    return DataProvider<UnreadMessageCountStatableData>(
+      create: (context) =>
+          ViewModel.of<MineViewModel>(context).unreadMessageCount,
+      builder: (context, value) {
+        var count = value.value;
+        return Stack(
+          alignment: Alignment.topRight,
+          children: [
+            IconButton(
+              onPressed: null,
+              icon: DataProvider<UnreadMessageCountStatableData>(
+                create: (context) =>
+                    ViewModel.of<MineViewModel>(context).unreadMessageCount,
+                builder: (context, value) {
+                  return Icon(
+                    Icons.notifications,
+                    color: themeData.colorScheme.onPrimary,
+                  );
+                },
+              ),
+            ),
+            if (count > 0)
+              Container(
+                constraints: const BoxConstraints(
+                  minWidth: 12,
+                  minHeight: 12,
+                  maxHeight: 12,
+                ),
+                decoration: BoxDecoration(
+                  color: themeData.colorScheme.error,
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                margin: const EdgeInsets.only(
+                  right: 10,
+                  top: 10,
+                ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 1,
+                  horizontal: 3,
+                ),
+                child: Text(
+                  count < 100 ? '$count' : '99+',
+                  style: themeData.textTheme.caption?.copyWith(
+                    color: themeData.colorScheme.onError,
+                    fontSize: 10,
+                    height: 1,
+                  ),
+                ),
+              )
+          ],
+        );
+      },
     );
   }
 }
