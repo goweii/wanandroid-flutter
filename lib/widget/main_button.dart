@@ -153,6 +153,7 @@ class _MainButtonState extends State<MainButton> {
         ),
         child: Center(
           child: CircularProgressIndicator(
+            strokeWidth: AppDimens.circularProgressIndicatorStrokeWidth,
             color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),

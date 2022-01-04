@@ -17,4 +17,6 @@ class AppDimens {
   static const double smallButtonHeight = 32.0;
   static const double buttonHeight = 44.0;
   static const double iconButtonSize = 48.0;
+
+  static const double circularProgressIndicatorStrokeWidth = 3.0;
 }
