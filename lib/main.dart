@@ -17,7 +17,8 @@ Future<void> main() async {
     statusBarColor: Colors.transparent,
   ));
   await WanStore().init();
-  LoginState loginState = LoginState(isLogin: await WanStore().isLogin);
+  UserInfo userInfo = await WanStore().userInfo;
+  LoginState().update(userInfo);
   ThemeModel themeModel = await ThemeModelStore.load();
   runApp(MultiProvider(
     providers: [
@@ -25,7 +26,7 @@ Future<void> main() async {
         themeModel: themeModel,
       ),
       LoginStateProvider(
-        loginState: loginState,
+        loginState: LoginState(),
       ),
     ],
     child: const MyApp(),

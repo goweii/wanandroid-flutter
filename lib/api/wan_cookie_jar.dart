@@ -45,32 +45,41 @@ class WanCookieJar extends PersistCookieJar {
   }
 
   Future<void> _updateLoginState() async {
-    LoginState(isLogin: await isLogin).notify();
+    var _userInfo = await userInfo;
+    LoginState().update(_userInfo);
   }
 
   Future<List<Cookie>> get cookies async {
     return await loadForRequest(baseUri);
   }
 
-  Future<bool> get isLogin async {
+  Future<UserInfo> get userInfo async {
     var cookies = await loadForRequest(baseUri);
     if (cookies.isEmpty) {
-      return false;
+      return const UserInfo.guest();
     }
-    bool hasUserCookie = false;
-    bool hasPassCookie = false;
+    String userCookie = '';
+    String passCookie = '';
     for (var element in cookies) {
       if (element.name == 'loginUserName') {
-        hasUserCookie = element.value.isNotEmpty;
+        userCookie = element.value;
       } else if (element.name == 'token_pass') {
-        hasPassCookie = element.value.isNotEmpty;
+        passCookie = element.value;
       }
     }
-    return hasUserCookie && hasPassCookie;
+    return UserInfo(
+      userName: userCookie,
+      tokenPass: passCookie,
+    );
+  }
+
+  Future<bool> get isLogin async {
+    var _userInfo = await userInfo;
+    return !_userInfo.isGuest;
   }
 
   Future<void> logout() async {
     await delete(baseUri, true);
-    LoginState(isLogin: false).notify();
+    LoginState().logout();
   }
 }
