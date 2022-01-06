@@ -40,12 +40,14 @@ class Themes {
           fontSize: 18.0,
           fontWeight: FontWeight.w500,
         ),
+        iconTheme: IconThemeData(),
+        actionsIconTheme: IconThemeData(),
       ),
     );
   }
 
   static ThemeData light() {
-    return _common(
+    ThemeData themeData = _common(
       colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary: AppColors.blue,
@@ -63,10 +65,24 @@ class Themes {
       ),
       textTheme: Typography.blackMountainView,
     );
+    return themeData.copyWith(
+      appBarTheme: themeData.appBarTheme.copyWith(
+        backgroundColor: themeData.colorScheme.primary,
+        titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+          color: themeData.colorScheme.onPrimary,
+        ),
+        iconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
+          color: themeData.colorScheme.onPrimary,
+        ),
+        actionsIconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
+          color: themeData.colorScheme.onPrimary,
+        ),
+      ),
+    );
   }
 
   static ThemeData dark() {
-    return _common(
+    ThemeData themeData = _common(
       colorScheme: ColorScheme(
         brightness: Brightness.dark,
         primary: AppColors.blueLight,
@@ -83,6 +99,20 @@ class Themes {
         onError: Colors.black.withAlpha(230),
       ),
       textTheme: Typography.whiteMountainView,
+    );
+    return themeData.copyWith(
+      appBarTheme: themeData.appBarTheme.copyWith(
+        backgroundColor: themeData.colorScheme.surface,
+        titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+          color: themeData.colorScheme.onSurface,
+        ),
+        iconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
+          color: themeData.colorScheme.onSurface,
+        ),
+        actionsIconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
+          color: themeData.colorScheme.onSurface,
+        ),
+      ),
     );
   }
 }

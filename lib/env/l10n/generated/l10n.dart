@@ -460,16 +460,6 @@ class Strings {
     );
   }
 
-  /// `Coin`
-  String get mine_coin {
-    return Intl.message(
-      'Coin',
-      name: 'mine_coin',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Collection`
   String get mine_collection {
     return Intl.message(
@@ -485,6 +475,36 @@ class Strings {
     return Intl.message(
       'Answers',
       name: 'answers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coin`
+  String get coin_title {
+    return Intl.message(
+      'Coin',
+      name: 'coin_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `收藏文章`
+  String get collected_article {
+    return Intl.message(
+      '收藏文章',
+      name: 'collected_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `收藏网址`
+  String get collected_link {
+    return Intl.message(
+      '收藏网址',
+      name: 'collected_link',
       desc: '',
       args: [],
     );

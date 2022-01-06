@@ -30,6 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),
+        "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
+        "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
+        "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
         "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
@@ -46,7 +49,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "level_prefix": MessageLookupByLibrary.simpleMessage("Level:"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
-        "mine_coin": MessageLookupByLibrary.simpleMessage("Coin"),
         "mine_collection": MessageLookupByLibrary.simpleMessage("Collection"),
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),

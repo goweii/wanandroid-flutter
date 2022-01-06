@@ -40,7 +40,9 @@
     "guest_name": "Guest",
     "level_prefix": "Level:",
     "rank_prefix": "Rank:",
-    "mine_coin": "Coin",
     "mine_collection": "Collection",
-    "answers": "Answers"
+    "answers": "Answers",
+    "coin_title": "Coin",
+    "collected_article": "收藏文章",
+    "collected_link": "收藏网址"
 }

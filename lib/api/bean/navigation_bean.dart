@@ -16,7 +16,7 @@ class NavigationBean {
   });
 
   factory NavigationBean.fromJson(Map<String, dynamic> json) =>
-      _$NaviBeanFromJson(json);
+      _$NavigationBeanFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NaviBeanToJson(this);
+  Map<String, dynamic> toJson() => _$NavigationBeanToJson(this);
 }

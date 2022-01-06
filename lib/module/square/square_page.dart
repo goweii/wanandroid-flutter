@@ -5,7 +5,7 @@ import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
-import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/article/article_item.dart';

@@ -4,6 +4,8 @@ import 'package:wanandroid/api/bean/navigation_bean.dart';
 import 'package:wanandroid/api/bean/paged_bean.dart';
 import 'package:wanandroid/api/bean/question_commen_bean.dart';
 import 'package:wanandroid/api/bean/user_bean.dart';
+import 'package:wanandroid/api/bean/user_coin_bean.dart';
+import 'package:wanandroid/api/bean/user_coin_history_bean.dart';
 import 'package:wanandroid/api/wan_api.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
@@ -221,6 +223,23 @@ class WanApis {
       method: HttpMethod.get,
       path: '/message/lg/count_unread/json',
       fromJsonT: null,
+    ).request();
+  }
+
+  static Future<UserCoinBean> getUserCoin() async {
+    return await WanApi(
+      method: HttpMethod.get,
+      path: '/lg/coin/userinfo/json',
+      fromJsonT: (json) => UserCoinBean.fromJson(json),
+    ).request();
+  }
+
+  static Future<PagedBean<UserCoinHistoryBean>> getUserCoinHistory(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/lg/coin/list/$page/json',
+      fromJsonT: (json) => PagedBean.fromJson(
+          json, (json) => UserCoinHistoryBean.fromJson(json)),
     ).request();
   }
 }

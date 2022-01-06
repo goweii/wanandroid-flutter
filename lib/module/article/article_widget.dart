@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:wanandroid/api/wan_store.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class WebController {
   InAppWebViewController? _controller;
@@ -62,24 +59,13 @@ class Web extends StatefulWidget {
 class _WebState extends State<Web> {
   final GlobalKey _globalKey = GlobalKey();
 
-  final List<WebViewCookie> _webViewCookies = [];
-
   @override
   void initState() {
     super.initState();
-    if (Platform.isAndroid) {
-      //WebView.platform = SurfaceAndroidWebView();
-    }
-    _loadWebCookies().then((value) {
-      setState(() {
-        _webViewCookies.addAll(value);
-      });
-    });
   }
 
   @override
   void dispose() {
-    _webViewCookies.clear();
     super.dispose();
   }
 
@@ -104,12 +90,15 @@ class _WebState extends State<Web> {
         ),
         ios: IOSInAppWebViewOptions(),
       ),
-      //initialCookies: _webViewCookies,
       onWebViewCreated: (InAppWebViewController controller) {
         widget.controller.attachController(controller);
       },
       onProgressChanged: (controller, progress) {
-        widget.onProgress((progress / 100.0).clamp(0.0, 1.0));
+        if (progress > 95) {
+          widget.onProgress(null);
+        } else {
+          widget.onProgress((progress / 100.0).clamp(0.0, 1.0));
+        }
       },
       onLoadStart: (controller, url) {
         widget.onProgress(0.0);
@@ -125,22 +114,6 @@ class _WebState extends State<Web> {
         return NavigationActionPolicy.CANCEL;
       },
     );
-  }
-
-  Future<List<WebViewCookie>> _loadWebCookies() async {
-    var cookies = await WanStore().cookies;
-    List<WebViewCookie> webCookies = [];
-    for (var cookie in cookies) {
-      if (cookie.domain == null || cookie.domain!.isEmpty) {
-        continue;
-      }
-      webCookies.add(WebViewCookie(
-        name: cookie.name,
-        value: cookie.value,
-        domain: cookie.domain!,
-      ));
-    }
-    return webCookies;
   }
 }
 

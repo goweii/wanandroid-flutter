@@ -3,7 +3,7 @@ import 'package:wanandroid/api/bean/navigation_bean.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/paging.dart';
-import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';

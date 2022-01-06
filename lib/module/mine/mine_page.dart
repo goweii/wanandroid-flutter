@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
-import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/mine/mine_view_model.dart';
@@ -44,7 +44,7 @@ class _MinePageState extends State<MinePage>
                 children: [
                   Container(
                     width: double.infinity,
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).appBarTheme.backgroundColor,
                     child: Stack(
                       children: [
                         SafeArea(

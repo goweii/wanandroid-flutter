@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
-import 'package:wanandroid/env/mvvm/observable_data.dart';
+import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_map.dart';
@@ -50,7 +50,7 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
                 builder: (context, value) {
                   return Icon(
                     Icons.notifications,
-                    color: themeData.colorScheme.onPrimary,
+                    color: themeData.appBarTheme.iconTheme?.color,
                   );
                 },
               ),
@@ -112,7 +112,11 @@ class MineHeader extends StatelessWidget {
               width: 80,
               height: 80,
               child: Container(
-                color: Theme.of(context).colorScheme.onPrimary.withAlpha(60),
+                color: Theme.of(context)
+                    .appBarTheme
+                    .iconTheme
+                    ?.color
+                    ?.withAlpha(60),
               ),
             ),
           ),
@@ -124,8 +128,8 @@ class MineHeader extends StatelessWidget {
             loginState.isLogin
                 ? userBean?.userInfo.nickname ?? ''
                 : Strings.of(context).guest_name,
-            style: Theme.of(context).textTheme.headline6?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
+            style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                  fontSize: Theme.of(context).textTheme.headline6?.fontSize,
                 ),
           ),
         ),
@@ -137,16 +141,16 @@ class MineHeader extends StatelessWidget {
               Text(
                 Strings.of(context).level_prefix +
                     '${userBean?.coinInfo.level ?? 0}',
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                      fontSize: Theme.of(context).textTheme.bodyText2?.fontSize,
                     ),
               ),
               const SizedBox(width: AppDimens.marginNormal),
               Text(
                 Strings.of(context).rank_prefix +
                     (userBean?.coinInfo.rank ?? '0'),
-                style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
+                      fontSize: Theme.of(context).textTheme.bodyText2?.fontSize,
                     ),
               ),
             ],
@@ -178,14 +182,26 @@ class MineMenus extends StatelessWidget {
       children: [
         ActionItem(
           leading: const Icon(CupertinoIcons.money_dollar_circle),
-          title: Text(Strings.of(context).mine_coin),
+          title: Text(Strings.of(context).coin_title),
           tip: Text('${userBean?.coinInfo.coinCount ?? ''}'),
-          onPressed: () {},
+          onPressed: () {
+            if (LoginState.value(context).isLogin) {
+              AppRouter.of(context).pushNamed(RouteMap.coinPage);
+            } else {
+              AppRouter.of(context).pushNamed(RouteMap.loginPage);
+            }
+          },
         ),
         ActionItem(
           leading: const Icon(CupertinoIcons.heart),
           title: Text(Strings.of(context).mine_collection),
-          onPressed: () {},
+          onPressed: () {
+            if (LoginState.value(context).isLogin) {
+              AppRouter.of(context).pushNamed(RouteMap.collectionPage);
+            } else {
+              AppRouter.of(context).pushNamed(RouteMap.loginPage);
+            }
+          },
         ),
         ActionItem(
           leading: const Icon(CupertinoIcons.settings),

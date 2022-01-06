@@ -40,7 +40,9 @@
     "guest_name": "游客",
     "level_prefix": "等级:",
     "rank_prefix": "排名:",
-    "mine_coin": "积分",
     "mine_collection": "收藏",
-    "answers": "回答"
+    "answers": "回答",
+    "coin_title": "积分",
+    "collected_article": "收藏文章",
+    "collected_link": "收藏网址"
 }

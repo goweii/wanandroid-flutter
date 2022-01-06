@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("分享"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
         "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
+        "coin_title": MessageLookupByLibrary.simpleMessage("积分"),
+        "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
+        "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
@@ -42,7 +45,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "level_prefix": MessageLookupByLibrary.simpleMessage("等级:"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
-        "mine_coin": MessageLookupByLibrary.simpleMessage("积分"),
         "mine_collection": MessageLookupByLibrary.simpleMessage("收藏"),
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),

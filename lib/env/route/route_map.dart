@@ -5,6 +5,8 @@ import 'package:wanandroid/env/route/app_page.dart';
 import 'package:wanandroid/env/route/page_routes.dart';
 import 'package:wanandroid/env/route/route_path.dart';
 import 'package:wanandroid/module/article/article_page.dart';
+import 'package:wanandroid/module/coin/coin_page.dart';
+import 'package:wanandroid/module/collection/collection_page.dart';
 import 'package:wanandroid/module/login/login_page.dart';
 import 'package:wanandroid/module/main/main_page.dart';
 import 'package:wanandroid/module/navigation/chapter_info.dart';
@@ -19,6 +21,8 @@ class RouteMap {
   static const String settingsPage = "/settings";
   static const String questionDetailsPage = "/questionDetails";
   static const String chapterPage = "/chapter";
+  static const String coinPage = "/coin";
+  static const String collectionPage = "/collection";
 
   static final Map<String, RouteBuilder> map = {
     mainPage: (context, page) => NonePageRoute(
@@ -61,6 +65,18 @@ class RouteMap {
             return ChapterPage(
               chapterInfo: arguments as ChapterInfo,
             );
+          },
+        ),
+    coinPage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const CoinPage();
+          },
+        ),
+    collectionPage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const CollectionPage();
           },
         ),
   };
