@@ -84,6 +84,8 @@ class _ExpendableFabState extends State<ExpendableFab>
       ..removeStatusListener(_onStatusListener)
       ..removeListener(_onValueListener)
       ..dispose();
+    _idleTimer?.cancel();
+    _idleTimer = null;
     super.dispose();
   }
 

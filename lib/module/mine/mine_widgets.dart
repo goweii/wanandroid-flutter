@@ -34,9 +34,7 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return DataProvider<UnreadMessageCountStatableData>(
-      create: (context) =>
-          ViewModel.of<MineViewModel>(context).unreadMessageCount,
+    return DataConsumer<UnreadMessageCountStatableData>(
       builder: (context, value) {
         var count = value.value;
         return Stack(
@@ -44,15 +42,9 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
           children: [
             IconButton(
               onPressed: null,
-              icon: DataProvider<UnreadMessageCountStatableData>(
-                create: (context) =>
-                    ViewModel.of<MineViewModel>(context).unreadMessageCount,
-                builder: (context, value) {
-                  return Icon(
-                    Icons.notifications,
-                    color: themeData.appBarTheme.iconTheme?.color,
-                  );
-                },
+              icon: Icon(
+                Icons.notifications,
+                color: themeData.appBarTheme.iconTheme?.color,
               ),
             ),
             if (count > 0)

@@ -34,39 +34,83 @@ class _MinePageState extends State<MinePage>
     super.build(context);
     return ViewModelProvider<MineViewModel>(
       create: (context) => _viewModel,
+      provide: (viewModel) => [
+        DataProvider<UserBeanStatableData>(create: (_) => viewModel.userBean),
+        DataProvider<UnreadMessageCountStatableData>(
+            create: (_) => viewModel.unreadMessageCount),
+      ],
       builder: (context, viewModel) {
-        return DataProvider<UserBeanStatableData>(
-          create: (context) => viewModel.userBean,
+        return DataConsumer<UserBeanStatableData>(
           builder: (context, userBean) {
             return Scaffold(
-              body: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    color: Theme.of(context).appBarTheme.backgroundColor,
-                    child: Stack(
+              body: OrientationBuilder(
+                builder: (context, orientation) {
+                  bool isPortrait = orientation == Orientation.portrait;
+                  if (isPortrait) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
                       children: [
-                        SafeArea(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const MineToolbar(),
-                              MineHeader(userBean: userBean.value),
-                              const SizedBox(height: AppDimens.marginLarge),
-                            ],
+                        Container(
+                          width: double.infinity,
+                          color: Theme.of(context).appBarTheme.backgroundColor,
+                          child: SafeArea(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const MineToolbar(),
+                                MineHeader(userBean: userBean.value),
+                                const SizedBox(height: AppDimens.marginLarge),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: MineMenus(userBean: userBean.value),
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: MineMenus(userBean: userBean.value),
-                    ),
-                  ),
-                ],
+                    );
+                  } else {
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            color:
+                                Theme.of(context).appBarTheme.backgroundColor,
+                            child: SafeArea(
+                              child: Stack(
+                                children: [
+                                  Center(
+                                    child: MineHeader(userBean: userBean.value),
+                                  ),
+                                  const MineToolbar(),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            height: double.infinity,
+                            color:
+                                Theme.of(context).appBarTheme.backgroundColor,
+                            child: SafeArea(
+                              child: Center(
+                                child: SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  child: MineMenus(userBean: userBean.value),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
               ),
             );
           },

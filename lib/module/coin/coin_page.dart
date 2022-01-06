@@ -50,15 +50,17 @@ class _CoinPageState extends State<CoinPage> {
         return OrientationBuilder(builder: (context, orientation) {
           bool isPortrait = orientation == Orientation.portrait;
           return Scaffold(
-            appBar: AppBar(
-              title: Text(Strings.of(context).coin_title),
-              bottom: !isPortrait
-                  ? null
-                  : const AppBarBottomWrapper(
-                      height: 200,
-                      child: CoinWidget(height: 200),
-                    ),
-            ),
+            appBar: !isPortrait
+                ? null
+                : AppBar(
+                    title: Text(Strings.of(context).coin_title),
+                    bottom: !isPortrait
+                        ? null
+                        : const AppBarBottomWrapper(
+                            height: 200,
+                            child: CoinWidget(height: 200),
+                          ),
+                  ),
             body: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -66,30 +68,50 @@ class _CoinPageState extends State<CoinPage> {
                   Expanded(
                     child: Container(
                       color: Theme.of(context).appBarTheme.backgroundColor,
-                      child: const CoinWidget(
-                        height: double.infinity,
+                      child: Column(
+                        children: [
+                          AppBar(title: Text(Strings.of(context).coin_title)),
+                          const Expanded(
+                            child: CoinWidget(
+                              height: double.infinity,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 Expanded(
-                  child: DataConsumer<UserCoinHistoryPagingData>(
-                    builder: (context, data) {
-                      if (data.datas.isEmpty) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return CustomScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        scrollBehavior:
-                            ScrollConfiguration.of(context).copyWith(
-                          overscroll: false,
-                          scrollbars: false,
+                  child: Column(
+                    children: [
+                      if (!isPortrait)
+                        Container(
+                          color: Theme.of(context).appBarTheme.backgroundColor,
+                          child: SafeArea(
+                            child: Container(),
+                          ),
                         ),
-                        controller: _scrollController,
-                        slivers: _buildSlivers(data),
-                      );
-                    },
+                      Expanded(
+                        child: DataConsumer<UserCoinHistoryPagingData>(
+                          builder: (context, data) {
+                            if (data.datas.isEmpty) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return CustomScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollBehavior:
+                                  ScrollConfiguration.of(context).copyWith(
+                                overscroll: false,
+                                scrollbars: false,
+                              ),
+                              controller: _scrollController,
+                              slivers: _buildSlivers(data),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

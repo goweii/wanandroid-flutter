@@ -43,7 +43,8 @@ class CoinHistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Container(
-      margin: const EdgeInsets.all(AppDimens.marginNormal),
+      color: themeData.colorScheme.surface,
+      padding: const EdgeInsets.all(AppDimens.marginNormal),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
