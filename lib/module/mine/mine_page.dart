@@ -59,8 +59,13 @@ class _MinePageState extends State<MinePage>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const MineToolbar(),
-                                MineHeader(userBean: userBean.value),
-                                const SizedBox(height: AppDimens.marginLarge),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: AppDimens.appBarHeaderHeight,
+                                  child: Center(
+                                    child: MineHeader(userBean: userBean.value),
+                                  ),
+                                ),
                               ],
                             ),
                           ),

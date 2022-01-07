@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
@@ -57,8 +58,10 @@ class _CoinPageState extends State<CoinPage> {
                     bottom: !isPortrait
                         ? null
                         : const AppBarBottomWrapper(
-                            height: 200,
-                            child: CoinWidget(height: 200),
+                            height: AppDimens.appBarHeaderHeight,
+                            child: CoinWidget(
+                              height: AppDimens.appBarHeaderHeight,
+                            ),
                           ),
                   ),
             body: Row(

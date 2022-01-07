@@ -13,6 +13,7 @@ class AppDimens {
   static const double appBarHeight = 50.0;
   static const double tabBarHeight = 50.0;
   static const double bottomBarHeight = 50.0;
+  static const double appBarHeaderHeight = 200.0;
 
   static const double smallButtonHeight = 32.0;
   static const double buttonHeight = 44.0;
