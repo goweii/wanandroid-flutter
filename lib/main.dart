@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wanandroid/api/wan_store.dart';
+import 'package:wanandroid/env/l10n/locale_model.dart';
+import 'package:wanandroid/env/l10n/locale_model_provider.dart';
+import 'package:wanandroid/env/l10n/locale_model_store.dart';
 import 'package:wanandroid/env/l10n/localization.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_delegate.dart';
 import 'package:wanandroid/env/route/route_parser.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
-import 'package:wanandroid/env/theme/theme_model_manager.dart';
+import 'package:wanandroid/env/theme/theme_model_store.dart';
 import 'package:wanandroid/env/theme/theme_model_provider.dart';
 
 Future<void> main() async {
@@ -17,17 +20,15 @@ Future<void> main() async {
     statusBarColor: Colors.transparent,
   ));
   await WanStore().init();
-  UserInfo userInfo = await WanStore().userInfo;
-  LoginState().update(userInfo);
+  LoginState loginState = LoginState();
+  loginState.update(await WanStore().userInfo);
   ThemeModel themeModel = await ThemeModelStore.load();
+  LocaleModel localeModel = await LocaleModelStore.load();
   runApp(MultiProvider(
     providers: [
-      ThemeModelProvider(
-        themeModel: themeModel,
-      ),
-      LoginStateProvider(
-        loginState: LoginState(),
-      ),
+      ThemeModelProvider(themeModel: themeModel),
+      LocaleModelProvider(localeModel: localeModel),
+      LoginStateProvider(loginState: loginState),
     ],
     child: const MyApp(),
   ));
@@ -55,6 +56,7 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: Localization.localizationsDelegates,
       supportedLocales: Localization.supportedLocales,
       localeResolutionCallback: Localization.localeResolutionCallback,
+      locale: LocaleModel.listen(context).locale,
       routerDelegate: _appRouteDelegate,
       routeInformationParser: _appRouteParser,
     );

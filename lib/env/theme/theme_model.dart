@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wanandroid/env/theme/theme_model_manager.dart';
+import 'package:wanandroid/env/theme/theme_model_store.dart';
 import 'package:wanandroid/env/theme/themes.dart';
 
 class ThemeModel with ChangeNotifier {

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/l10n/locale_model.dart';
+import 'package:wanandroid/env/l10n/locale_ext.dart';
+import 'package:wanandroid/env/l10n/localization.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/theme/theme_mode_ext.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
@@ -36,6 +39,18 @@ class _SettingsPageState extends State<SettingsPage> {
               children: ThemeMode.values
                   .map((e) => ThemeModeChoiceItem(themeMode: e))
                   .toList(),
+            ),
+            ActionItem(
+              leading: const Icon(Icons.language_rounded),
+              title: Text(Strings.of(context).choice_language),
+              tip: Text(
+                LocaleModel.listen(context).locale?.localeInfo?.languageName ??
+                    Strings.of(context).language_system,
+              ),
+              children: <Locale?>[
+                null,
+                ...Localization.supportedLocales,
+              ].map((e) => LanguageChoiceItem(locale: e)).toList(),
             ),
             if (LoginState.listen(context).isLogin) ...[
               const SizedBox(height: AppDimens.marginLarge),

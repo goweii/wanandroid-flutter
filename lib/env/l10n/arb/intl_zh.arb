@@ -34,6 +34,8 @@
     "theme_mode_system": "跟随系统",
     "theme_mode_dark": "暗色",
     "theme_mode_light": "亮色",
+    "choice_language": "语言",
+    "language_system": "跟随系统",
     "article_fab_tip_close": "关闭",
     "article_fab_tip_collect": "收藏",
     "article_fab_tip_share": "分享",

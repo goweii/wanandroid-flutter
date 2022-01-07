@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Collect"),
         "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("Shart"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
+        "choice_language":
+            MessageLookupByLibrary.simpleMessage("Choice language"),
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),
         "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
@@ -49,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_password_hint":
             MessageLookupByLibrary.simpleMessage("Input your password"),
         "knowledge_title": MessageLookupByLibrary.simpleMessage("Knowledge"),
+        "language_system":
+            MessageLookupByLibrary.simpleMessage("Follow system"),
         "level_prefix": MessageLookupByLibrary.simpleMessage("Level:"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),

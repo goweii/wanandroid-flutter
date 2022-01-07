@@ -34,6 +34,8 @@
     "theme_mode_system": "Follow system",
     "theme_mode_dark": "Dark",
     "theme_mode_light": "Light",
+    "choice_language": "Choice language",
+    "language_system": "Follow system",
     "article_fab_tip_close": "Close",
     "article_fab_tip_collect": "Collect",
     "article_fab_tip_share": "Shart",

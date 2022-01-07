@@ -400,6 +400,26 @@ class Strings {
     );
   }
 
+  /// `Choice language`
+  String get choice_language {
+    return Intl.message(
+      'Choice language',
+      name: 'choice_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow system`
+  String get language_system {
+    return Intl.message(
+      'Follow system',
+      name: 'language_system',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Close`
   String get article_fab_tip_close {
     return Intl.message(
