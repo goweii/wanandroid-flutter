@@ -125,9 +125,10 @@ class Paging<T> {
   Future<PagingData<T>> next() async {
     await _loadingTask;
     try {
-      _loadingTask = _requester(currPage ?? _initialPage);
+      int page = currPage == null ? _initialPage : currPage! + 1;
+      _loadingTask = _requester(page);
       PagingData<T> pagingData = await _loadingTask!;
-      currPage = currPage == null ? _initialPage : currPage! + 1;
+      currPage = page;
       isEnded = pagingData.ended;
       return pagingData;
     } finally {

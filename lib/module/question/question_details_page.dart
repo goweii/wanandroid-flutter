@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/api/bean/question_commen_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
@@ -8,6 +7,7 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/question/question_comment_item.dart';
 import 'package:wanandroid/module/question/question_details_repo.dart';
+import 'package:wanandroid/module/question/question_args.dart';
 import 'package:wanandroid/widget/html_view.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
 import 'package:wanandroid/widget/shici_refresh_header.dart';
@@ -15,10 +15,10 @@ import 'package:wanandroid/widget/shici_refresh_header.dart';
 class QuestionDetailsPage extends StatefulWidget {
   const QuestionDetailsPage({
     Key? key,
-    required this.articleBean,
+    required this.args,
   }) : super(key: key);
 
-  final ArticleBean articleBean;
+  final QuestionArgs args;
 
   @override
   _QuestionDetailsPageState createState() => _QuestionDetailsPageState();
@@ -37,7 +37,7 @@ class _QuestionDetailsPageState extends State<QuestionDetailsPage> {
 
   @override
   void initState() {
-    _repo = QuestionDetailsRepo(widget.articleBean.id);
+    _repo = QuestionDetailsRepo(widget.args.id);
     super.initState();
     _scrollController = ScrollController()
       ..addListener(() {
@@ -85,7 +85,7 @@ class _QuestionDetailsPageState extends State<QuestionDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.articleBean.title ?? ''),
+        title: Text(widget.args.title ?? ''),
       ),
       body: Column(
         children: [
@@ -113,7 +113,7 @@ class _QuestionDetailsPageState extends State<QuestionDetailsPage> {
       SliverToBoxAdapter(
         child: Container(
           color: Theme.of(context).colorScheme.surface,
-          child: HtmlView(data: widget.articleBean.desc),
+          child: HtmlView(data: widget.args.desc),
         ),
       ),
       SliverToBoxAdapter(

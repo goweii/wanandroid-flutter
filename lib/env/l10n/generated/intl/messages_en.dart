@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_me": MessageLookupByLibrary.simpleMessage("About me"),
         "answers": MessageLookupByLibrary.simpleMessage("Answers"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
         "article_fab_tip_collect":
@@ -31,8 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),
         "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
-        "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
-        "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
+        "collected_article":
+            MessageLookupByLibrary.simpleMessage("Collected Article"),
+        "collected_link":
+            MessageLookupByLibrary.simpleMessage("Collected link"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
         "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
@@ -49,7 +52,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "level_prefix": MessageLookupByLibrary.simpleMessage("Level:"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "message_title": MessageLookupByLibrary.simpleMessage("Message"),
         "mine_collection": MessageLookupByLibrary.simpleMessage("Collection"),
+        "mine_share": MessageLookupByLibrary.simpleMessage("Shared"),
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),
         "new_tag": MessageLookupByLibrary.simpleMessage("NEW"),

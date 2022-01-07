@@ -490,21 +490,51 @@ class Strings {
     );
   }
 
-  /// `收藏文章`
+  /// `Collected Article`
   String get collected_article {
     return Intl.message(
-      '收藏文章',
+      'Collected Article',
       name: 'collected_article',
       desc: '',
       args: [],
     );
   }
 
-  /// `收藏网址`
+  /// `Collected link`
   String get collected_link {
     return Intl.message(
-      '收藏网址',
+      'Collected link',
       name: 'collected_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shared`
+  String get mine_share {
+    return Intl.message(
+      'Shared',
+      name: 'mine_share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About me`
+  String get about_me {
+    return Intl.message(
+      'About me',
+      name: 'about_me',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message`
+  String get message_title {
+    return Intl.message(
+      'Message',
+      name: 'message_title',
       desc: '',
       args: [],
     );

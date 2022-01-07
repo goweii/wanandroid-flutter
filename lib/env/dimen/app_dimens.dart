@@ -20,4 +20,6 @@ class AppDimens {
   static const double iconButtonSize = 48.0;
 
   static const double circularProgressIndicatorStrokeWidth = 3.0;
+
+  static const double gridMaxCrossAxisExtent = 640.0;
 }

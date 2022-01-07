@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about_me": MessageLookupByLibrary.simpleMessage("关于我"),
         "answers": MessageLookupByLibrary.simpleMessage("回答"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("关闭"),
         "article_fab_tip_collect": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -45,7 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "level_prefix": MessageLookupByLibrary.simpleMessage("等级:"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
+        "message_title": MessageLookupByLibrary.simpleMessage("消息"),
         "mine_collection": MessageLookupByLibrary.simpleMessage("收藏"),
+        "mine_share": MessageLookupByLibrary.simpleMessage("分享"),
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),
         "new_tag": MessageLookupByLibrary.simpleMessage("新"),

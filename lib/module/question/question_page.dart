@@ -3,6 +3,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
+import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
@@ -11,6 +12,7 @@ import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_item.dart';
+import 'package:wanandroid/module/question/question_args.dart';
 import 'package:wanandroid/module/question/question_view_model.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
 import 'package:wanandroid/widget/shici_refresh_header.dart';
@@ -93,7 +95,7 @@ class _QuestionPageState extends State<QuestionPage>
         },
       ),
       SliverMasonryGrid.extent(
-        maxCrossAxisExtent: 640,
+        maxCrossAxisExtent: AppDimens.gridMaxCrossAxisExtent,
         childCount: pagingData.datas.length,
         itemBuilder: (BuildContext context, int index) {
           return ArticleItem(
@@ -101,7 +103,11 @@ class _QuestionPageState extends State<QuestionPage>
             onPressed: (value) {
               AppRouter.of(context).pushNamed(
                 RouteMap.questionDetailsPage,
-                arguments: value,
+                arguments: QuestionArgs(
+                  id: value.id,
+                  title: value.title,
+                  desc: value.desc,
+                ),
               );
             },
           );

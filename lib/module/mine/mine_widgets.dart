@@ -4,7 +4,6 @@ import 'package:wanandroid/api/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
-import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
@@ -41,7 +40,13 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
           alignment: Alignment.topRight,
           children: [
             IconButton(
-              onPressed: null,
+              onPressed: () {
+                if (LoginState.value(context).isLogin) {
+                  AppRouter.of(context).pushNamed(RouteMap.messagePage);
+                } else {
+                  AppRouter.of(context).pushNamed(RouteMap.loginPage);
+                }
+              },
               icon: Icon(
                 Icons.notifications,
                 color: themeData.appBarTheme.iconTheme?.color,
@@ -185,6 +190,17 @@ class MineMenus extends StatelessWidget {
           },
         ),
         ActionItem(
+          leading: const Icon(CupertinoIcons.share),
+          title: Text(Strings.of(context).mine_share),
+          onPressed: () {
+            if (LoginState.value(context).isLogin) {
+              AppRouter.of(context).pushNamed(RouteMap.sharedPage);
+            } else {
+              AppRouter.of(context).pushNamed(RouteMap.loginPage);
+            }
+          },
+        ),
+        ActionItem(
           leading: const Icon(CupertinoIcons.heart),
           title: Text(Strings.of(context).mine_collection),
           onPressed: () {
@@ -193,6 +209,13 @@ class MineMenus extends StatelessWidget {
             } else {
               AppRouter.of(context).pushNamed(RouteMap.loginPage);
             }
+          },
+        ),
+        ActionItem(
+          leading: const Icon(CupertinoIcons.info),
+          title: Text(Strings.of(context).about_me),
+          onPressed: () {
+            AppRouter.of(context).pushNamed(RouteMap.aboutMePage);
           },
         ),
         ActionItem(

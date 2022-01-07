@@ -43,6 +43,9 @@
     "mine_collection": "Collection",
     "answers": "Answers",
     "coin_title": "Coin",
-    "collected_article": "收藏文章",
-    "collected_link": "收藏网址"
+    "collected_article": "Collected Article",
+    "collected_link": "Collected link",
+    "mine_share": "Shared",
+    "about_me": "About me",
+    "message_title": "Message"
 }

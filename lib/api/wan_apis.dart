@@ -1,5 +1,6 @@
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/api/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/bean/message_bean.dart';
 import 'package:wanandroid/api/bean/navigation_bean.dart';
 import 'package:wanandroid/api/bean/paged_bean.dart';
 import 'package:wanandroid/api/bean/question_commen_bean.dart';
@@ -218,14 +219,6 @@ class WanApis {
     ).request();
   }
 
-  static Future<int> getUnreadMessageCount() async {
-    return await WanApi(
-      method: HttpMethod.get,
-      path: '/message/lg/count_unread/json',
-      fromJsonT: null,
-    ).request();
-  }
-
   static Future<UserCoinBean> getUserCoin() async {
     return await WanApi(
       method: HttpMethod.get,
@@ -240,6 +233,32 @@ class WanApis {
       path: '/lg/coin/list/$page/json',
       fromJsonT: (json) => PagedBean.fromJson(
           json, (json) => UserCoinHistoryBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<int> getUnreadMessageCount() async {
+    return await WanApi(
+      method: HttpMethod.get,
+      path: '/message/lg/count_unread/json',
+      fromJsonT: null,
+    ).request();
+  }
+
+  static Future<PagedBean<MessageBean>> getReadedMessages(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/message/lg/readed_list/$page/json',
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => MessageBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<PagedBean<MessageBean>> getUnreadMessages(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/message/lg/unread_list/$page/json',
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => MessageBean.fromJson(json)),
     ).request();
   }
 }
