@@ -11,11 +11,9 @@ class ThemeModeChoiceItem extends StatelessWidget {
   const ThemeModeChoiceItem({
     Key? key,
     required this.themeMode,
-    this.onChoice,
   }) : super(key: key);
 
   final ThemeMode themeMode;
-  final ValueChanged? onChoice;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +35,9 @@ class LanguageChoiceItem extends StatelessWidget {
   const LanguageChoiceItem({
     Key? key,
     required this.locale,
-    this.onChoice,
   }) : super(key: key);
 
   final Locale? locale;
-  final ValueChanged? onChoice;
 
   @override
   Widget build(BuildContext context) {

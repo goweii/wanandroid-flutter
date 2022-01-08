@@ -43,8 +43,8 @@ class LocaleInfo {
   }
 }
 
-class Locales {
-  static List<LocaleInfo> locales = [
+class LocaleInfos {
+  static List<LocaleInfo> all = [
     LocaleInfo(
       languageTags: ['en_US'],
       languageName: 'English',
@@ -489,14 +489,14 @@ class Locales {
 extension LocaleExt on Locale {
   LocaleInfo? get localeInfo {
     Locale currLocale = this;
-    for (var localeInfo in Locales.locales) {
+    for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
         if (locale == currLocale) {
           return localeInfo;
         }
       }
     }
-    for (var localeInfo in Locales.locales) {
+    for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
         if (locale.languageCode == currLocale.languageCode &&
             (locale.countryCode == currLocale.countryCode ||
@@ -505,7 +505,7 @@ extension LocaleExt on Locale {
         }
       }
     }
-    for (var localeInfo in Locales.locales) {
+    for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
         if (locale.languageCode == currLocale.languageCode) {
           return localeInfo;
