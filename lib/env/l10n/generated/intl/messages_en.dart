@@ -33,9 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choice language"),
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),
+        "coin_rank_title": MessageLookupByLibrary.simpleMessage("Coin rank"),
         "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
         "collected_article":
-            MessageLookupByLibrary.simpleMessage("Collected Article"),
+            MessageLookupByLibrary.simpleMessage("Collected article"),
         "collected_link":
             MessageLookupByLibrary.simpleMessage("Collected link"),
         "develop_by_goweii":

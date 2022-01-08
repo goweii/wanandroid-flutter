@@ -3,6 +3,8 @@ import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
+import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/coin/coin_view_model.dart';
 import 'package:wanandroid/module/coin/coin_widget.dart';
 import 'package:wanandroid/widget/app_bar_bottom_wrapper.dart';
@@ -55,6 +57,14 @@ class _CoinPageState extends State<CoinPage> {
                 ? null
                 : AppBar(
                     title: Text(Strings.of(context).coin_title),
+                    actions: [
+                      IconButton(
+                        onPressed: () => {
+                          AppRouter.of(context).pushNamed(RouteMap.coinRankPage)
+                        },
+                        icon: const Icon(Icons.bar_chart_rounded),
+                      )
+                    ],
                     bottom: !isPortrait
                         ? null
                         : const AppBarBottomWrapper(
@@ -73,7 +83,18 @@ class _CoinPageState extends State<CoinPage> {
                       color: Theme.of(context).appBarTheme.backgroundColor,
                       child: Column(
                         children: [
-                          AppBar(title: Text(Strings.of(context).coin_title)),
+                          AppBar(
+                            title: Text(Strings.of(context).coin_title),
+                            actions: [
+                              IconButton(
+                                onPressed: () => {
+                                  AppRouter.of(context)
+                                      .pushNamed(RouteMap.coinRankPage)
+                                },
+                                icon: const Icon(Icons.bar_chart_rounded),
+                              )
+                            ],
+                          ),
                           const Expanded(
                             child: CoinWidget(
                               height: double.infinity,

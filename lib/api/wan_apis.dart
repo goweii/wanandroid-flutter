@@ -1,4 +1,5 @@
 import 'package:wanandroid/api/bean/article_bean.dart';
+import 'package:wanandroid/api/bean/coin_info_bean.dart';
 import 'package:wanandroid/api/bean/knowledge_bean.dart';
 import 'package:wanandroid/api/bean/message_bean.dart';
 import 'package:wanandroid/api/bean/navigation_bean.dart';
@@ -233,6 +234,15 @@ class WanApis {
       path: '/lg/coin/list/$page/json',
       fromJsonT: (json) => PagedBean.fromJson(
           json, (json) => UserCoinHistoryBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<PagedBean<CoinInfoBean>> getCoinRank(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/coin/rank/$page/json',
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => CoinInfoBean.fromJson(json)),
     ).request();
   }
 

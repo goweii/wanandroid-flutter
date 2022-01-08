@@ -45,9 +45,10 @@
     "mine_collection": "Collection",
     "answers": "Answers",
     "coin_title": "Coin",
-    "collected_article": "Collected Article",
+    "collected_article": "Collected article",
     "collected_link": "Collected link",
     "mine_share": "Shared",
     "about_me": "About me",
-    "message_title": "Message"
+    "message_title": "Message",
+    "coin_rank_title": "Coin rank"
 }

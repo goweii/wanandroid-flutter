@@ -510,10 +510,10 @@ class Strings {
     );
   }
 
-  /// `Collected Article`
+  /// `Collected article`
   String get collected_article {
     return Intl.message(
-      'Collected Article',
+      'Collected article',
       name: 'collected_article',
       desc: '',
       args: [],
@@ -555,6 +555,16 @@ class Strings {
     return Intl.message(
       'Message',
       name: 'message_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coin rank`
+  String get coin_rank_title {
+    return Intl.message(
+      'Coin rank',
+      name: 'coin_rank_title',
       desc: '',
       args: [],
     );

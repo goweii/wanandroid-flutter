@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
         "choice_language": MessageLookupByLibrary.simpleMessage("语言"),
         "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
+        "coin_rank_title": MessageLookupByLibrary.simpleMessage("积分榜"),
         "coin_title": MessageLookupByLibrary.simpleMessage("积分"),
         "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
         "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
