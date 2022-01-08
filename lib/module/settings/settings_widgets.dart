@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/l10n/locale_model.dart';
+import 'package:wanandroid/env/l10n/locale_ext.dart';
 import 'package:wanandroid/env/theme/theme_mode_ext.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
-import 'package:wanandroid/env/l10n/locale_ext.dart';
 import 'package:wanandroid/widget/action_item.dart';
 import 'package:wanandroid/widget/radio_box.dart';
 
@@ -32,24 +33,36 @@ class ThemeModeChoiceItem extends StatelessWidget {
 }
 
 class LanguageChoiceItem extends StatelessWidget {
-  const LanguageChoiceItem({
+  LanguageChoiceItem({
     Key? key,
-    required this.locale,
-  }) : super(key: key);
+    required Locale? locale,
+  })  : _locale = locale,
+        _logo = locale?.localeInfo?.locales.first.logo,
+        super(key: key);
 
-  final Locale? locale;
+  final Locale? _locale;
+  final String? _logo;
 
   @override
   Widget build(BuildContext context) {
     return ActionItem(
       backgroundColor: Theme.of(context).backgroundColor,
-      title: Text(locale?.localeInfo?.languageName ??
+      leading: CachedNetworkImage(
+        imageUrl: _logo ?? '',
+        width: 24,
+        height: 24,
+        fit: BoxFit.contain,
+        placeholder: (context, url) => const Icon(Icons.language_rounded),
+        errorWidget: (context, url, error) =>
+            const Icon(Icons.language_rounded),
+      ),
+      title: Text(_locale?.localeInfo?.languageName ??
           Strings.of(context).language_system),
       treading: RadioBox(
-        value: LocaleModel.listen(context).locale == locale,
+        value: LocaleModel.listen(context).locale == _locale,
       ),
       onPressed: () {
-        LocaleModel.of(context).locale = locale;
+        LocaleModel.of(context).locale = _locale;
       },
     );
   }

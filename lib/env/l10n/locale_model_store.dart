@@ -13,11 +13,11 @@ class LocaleModelStore {
       return LocaleModel();
     }
     var languageCode = tags[0];
-    var countryCode = tags[1];
-    var scriptCode = tags[2];
     if (languageCode.isEmpty) {
       return LocaleModel();
     }
+    var countryCode = tags[1].isNotEmpty ? tags[1] : null;
+    var scriptCode = tags[2].isNotEmpty ? tags[2] : null;
     return LocaleModel(
       locale: Locale.fromSubtags(
         languageCode: languageCode,

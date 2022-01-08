@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid/env/l10n/country_logo.dart';
 
 class LocaleInfo {
   final List<String> languageTags;
@@ -487,27 +488,94 @@ class LocaleInfos {
 }
 
 extension LocaleExt on Locale {
+  /// 是否有countryCode
+  bool get hasCountryCode => countryCode?.isNotEmpty == true;
+
+  /// 是否有scriptCode
+  bool get hasScriptCode => scriptCode?.isNotEmpty == true;
+
+  String? get logo {
+    if (!hasCountryCode) {
+      return null;
+    }
+    return CountryLogos.getLogoUrl(countryCode!);
+  }
+
+  /// 你应该使用这个去生成一个标签来代表一个语言
+  /// 生成的格式如：zh_CN-Hans,zh_CN,zh-Hans,zh
+  String get languageTag {
+    if (hasCountryCode && hasScriptCode) {
+      return '${languageCode}_$countryCode-$scriptCode';
+    } else if (hasCountryCode) {
+      return '${languageCode}_$countryCode';
+    } else if (hasScriptCode) {
+      return '$languageCode-$scriptCode';
+    } else {
+      return languageCode;
+    }
+  }
+
+  /// 判断两个是否完全相同
+  /// 使用 languageTag 判断
+  bool equalToExactly(Locale other) {
+    return languageTag == other.languageTag;
+  }
+
+  /// 判断两个是否模糊相等
+  /// 需要满足如下条件：
+  /// 1.languageCode 相等
+  /// 2.两个 Locale 的 countryCode 和 scriptCode 都为空
+  ///   或两个 Locale 的 countryCode 不为空并且相等
+  ///   或两个 Locale 的 scriptCode 不为空并且相等
+  bool equalToVaguely(Locale other) {
+    if (languageCode != other.languageCode) {
+      return false;
+    }
+    if (!hasCountryCode &&
+        !other.hasCountryCode &&
+        !hasScriptCode &&
+        !other.hasScriptCode) {
+      return true;
+    }
+    if (hasCountryCode &&
+        other.hasCountryCode &&
+        countryCode == other.countryCode) {
+      return true;
+    }
+    if (hasScriptCode &&
+        other.hasScriptCode &&
+        scriptCode == other.scriptCode) {
+      return true;
+    }
+    return false;
+  }
+
+  /// 判断两个是否可能相等
+  /// 使用 languageCode 判断
+  bool equalToPossibly(Locale other) {
+    return languageCode == other.languageCode;
+  }
+
+  /// 获取关联的 [LocaleInfo]
   LocaleInfo? get localeInfo {
     Locale currLocale = this;
     for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
-        if (locale == currLocale) {
+        if (currLocale.equalToExactly(locale)) {
           return localeInfo;
         }
       }
     }
     for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
-        if (locale.languageCode == currLocale.languageCode &&
-            (locale.countryCode == currLocale.countryCode ||
-                locale.scriptCode == currLocale.scriptCode)) {
+        if (currLocale.equalToVaguely(locale)) {
           return localeInfo;
         }
       }
     }
     for (var localeInfo in LocaleInfos.all) {
       for (var locale in localeInfo.locales) {
-        if (locale.languageCode == currLocale.languageCode) {
+        if (currLocale.equalToPossibly(locale)) {
           return localeInfo;
         }
       }
