@@ -250,10 +250,10 @@ class Strings {
     );
   }
 
-  /// `Welcome to use`
+  /// `Welcome to Use`
   String get welcome_to_use {
     return Intl.message(
-      'Welcome to use',
+      'Welcome to Use',
       name: 'welcome_to_use',
       desc: '',
       args: [],
@@ -270,20 +270,20 @@ class Strings {
     );
   }
 
-  /// `Go lgoin`
+  /// `Go Lgoin`
   String get go_login {
     return Intl.message(
-      'Go lgoin',
+      'Go Lgoin',
       name: 'go_login',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go register`
+  /// `Go Register`
   String get go_register {
     return Intl.message(
-      'Go register',
+      'Go Register',
       name: 'go_register',
       desc: '',
       args: [],
@@ -470,11 +470,11 @@ class Strings {
     );
   }
 
-  /// `Rank:`
-  String get rank_prefix {
+  /// `Ranking:`
+  String get ranking_prefix {
     return Intl.message(
-      'Rank:',
-      name: 'rank_prefix',
+      'Ranking:',
+      name: 'ranking_prefix',
       desc: '',
       args: [],
     );
@@ -510,20 +510,20 @@ class Strings {
     );
   }
 
-  /// `Collected article`
+  /// `Collected Article`
   String get collected_article {
     return Intl.message(
-      'Collected article',
+      'Collected Article',
       name: 'collected_article',
       desc: '',
       args: [],
     );
   }
 
-  /// `Collected link`
+  /// `Collected Link`
   String get collected_link {
     return Intl.message(
-      'Collected link',
+      'Collected Link',
       name: 'collected_link',
       desc: '',
       args: [],
@@ -550,6 +550,16 @@ class Strings {
     );
   }
 
+  /// `About Me`
+  String get about_me_title {
+    return Intl.message(
+      'About Me',
+      name: 'about_me_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Message`
   String get message_title {
     return Intl.message(
@@ -560,11 +570,51 @@ class Strings {
     );
   }
 
-  /// `Coin rank`
-  String get coin_rank_title {
+  /// `Coin Ranking`
+  String get coin_ranking_title {
     return Intl.message(
-      'Coin rank',
-      name: 'coin_rank_title',
+      'Coin Ranking',
+      name: 'coin_ranking_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm deletion`
+  String get confirm_deletion {
+    return Intl.message(
+      'Confirm deletion',
+      name: 'confirm_deletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not supported`
+  String get not_support {
+    return Intl.message(
+      'Not supported',
+      name: 'not_support',
       desc: '',
       args: [],
     );

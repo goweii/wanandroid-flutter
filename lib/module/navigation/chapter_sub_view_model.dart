@@ -31,7 +31,11 @@ class ChapterSubViewModel extends ViewModel {
     pagingData.toLoading();
     try {
       var data = await _paging.next();
-      pagingData.append(data);
+      if (_paging.isInitialPage) {
+        pagingData.replace(data);
+      } else {
+        pagingData.append(data);
+      }
     } catch (_) {
       pagingData.toError();
     }

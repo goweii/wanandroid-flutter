@@ -24,7 +24,7 @@ class ArticleInfo {
       title: articleBean.title,
       author: articleBean.author ?? articleBean.shareUser,
       cover: articleBean.envelopePic,
-      collected: articleBean.collect,
+      collected: articleBean.collect == true,
     );
   }
 

@@ -60,7 +60,11 @@ class HomeViewModel extends ViewModel {
     homeArticles.toLoading();
     try {
       var data = await _homeArticlePaging.next();
-      homeArticles.append(data);
+      if (_homeArticlePaging.isInitialPage) {
+        homeArticles.replace(data);
+      } else {
+        homeArticles.append(data);
+      }
       return true;
     } catch (_) {
       homeArticles.toError();

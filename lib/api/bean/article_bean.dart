@@ -6,17 +6,17 @@ part 'article_bean.g.dart';
 @JsonSerializable()
 class ArticleBean {
   final String? apkLink;
-  final int audit;
+  final int? audit;
   final String? author;
-  final bool canEdit;
-  final int chapterId;
+  final bool? canEdit;
+  final int? chapterId;
   final String? chapterName;
-  bool collect;
+  bool? collect;
   final int courseId;
   final String? desc;
   final String? descMd;
   final String? envelopePic;
-  final bool fresh;
+  final bool? fresh;
   final String? host;
   final int id;
   final String? link;
@@ -25,19 +25,19 @@ class ArticleBean {
   final String? origin;
   final String? prefix;
   final String? projectLink;
-  final int publishTime;
-  final int realSuperChapterId;
-  final int selfVisible;
+  final int? publishTime;
+  final int? realSuperChapterId;
+  final int? selfVisible;
   final int? shareDate;
   final String? shareUser;
-  final int superChapterId;
+  final int? superChapterId;
   final String? superChapterName;
   final List<TagBean>? tags;
   final String? title;
-  final int type;
-  final int userId;
-  final int visible;
-  final int zan;
+  final int? type;
+  final int? userId;
+  final int? visible;
+  final int? zan;
   final int? originId;
 
   ArticleBean({

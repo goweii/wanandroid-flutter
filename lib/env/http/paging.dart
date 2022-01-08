@@ -24,10 +24,12 @@ class StatablePagingData<T> extends ChangeNotifier {
   bool _ended = false;
   PagingState _state = PagingState.idle;
 
+  bool _disposed = false;
+
   bool get ended => _ended;
   set ended(bool ended) {
     _ended = ended;
-    notifyListeners();
+    notify();
   }
 
   bool get isIdle => _state == PagingState.idle;
@@ -37,7 +39,7 @@ class StatablePagingData<T> extends ChangeNotifier {
   PagingState get state => _state;
   set state(PagingState state) {
     _state = state;
-    notifyListeners();
+    notify();
   }
 
   List<T> get datas => _datas;
@@ -45,20 +47,28 @@ class StatablePagingData<T> extends ChangeNotifier {
   toLoading() {
     if (_state == PagingState.loading) return;
     _state = PagingState.loading;
-    notifyListeners();
+    notify();
   }
 
   toError() {
     if (_state == PagingState.error) return;
     _state = PagingState.error;
-    notifyListeners();
+    notify();
   }
 
   append(PagingData<T> pagingData) {
     _datas.addAll(pagingData.datas);
     _ended = pagingData.ended;
     _state = PagingState.succeed;
-    notifyListeners();
+    notify();
+  }
+
+  replace(PagingData<T> pagingData) {
+    _datas.clear();
+    _datas.addAll(pagingData.datas);
+    _ended = pagingData.ended;
+    _state = PagingState.succeed;
+    notify();
   }
 
   reset() {
@@ -76,11 +86,22 @@ class StatablePagingData<T> extends ChangeNotifier {
       changed = true;
     }
     if (changed) {
-      notifyListeners();
+      notify();
     }
   }
 
-  notify() => notifyListeners();
+  notify() {
+    if (_disposed) {
+      return;
+    }
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
+  }
 }
 
 class PagingData<T> {
@@ -114,6 +135,8 @@ class Paging<T> {
   bool get isLoading => _loadingTask != null;
 
   bool get hasNext => !isEnded;
+
+  bool get isInitialPage => currPage == null || currPage == _initialPage;
 
   Future<void> reset() async {
     await _loadingTask;

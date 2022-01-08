@@ -3,23 +3,23 @@ import 'package:wanandroid/api/wan_apis.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 
-class CoinRankPagingData extends StatablePagingData<CoinInfoBean> {
-  CoinRankPagingData() : super();
+class CoinRankingPagingData extends StatablePagingData<CoinInfoBean> {
+  CoinRankingPagingData() : super();
 }
 
-class CoinRankViewModel extends ViewModel {
-  final CoinRankPagingData coinRankPagingData = CoinRankPagingData();
+class CoinRankingViewModel extends ViewModel {
+  final CoinRankingPagingData coinRankPagingData = CoinRankingPagingData();
 
-  final Paging<CoinInfoBean> _coinRankPaging = Paging<CoinInfoBean>(
+  final Paging<CoinInfoBean> _coinRankingPaging = Paging<CoinInfoBean>(
     initialPage: 1,
     requester: (page) async {
-      var resp = await WanApis.getCoinRank(page);
+      var resp = await WanApis.getCoinRanking(page);
       return PagingData(ended: resp.over, datas: resp.datas);
     },
   );
 
   Future<bool> getInitialPage() async {
-    await _coinRankPaging.reset();
+    await _coinRankingPaging.reset();
     return await getNextPage();
   }
 
@@ -28,8 +28,12 @@ class CoinRankViewModel extends ViewModel {
     if (coinRankPagingData.isLoading) return true;
     coinRankPagingData.toLoading();
     try {
-      var data = await _coinRankPaging.next();
-      coinRankPagingData.append(data);
+      var data = await _coinRankingPaging.next();
+      if (_coinRankingPaging.isInitialPage) {
+        coinRankPagingData.replace(data);
+      } else {
+        coinRankPagingData.append(data);
+      }
       return true;
     } catch (_) {
       coinRankPagingData.toError();

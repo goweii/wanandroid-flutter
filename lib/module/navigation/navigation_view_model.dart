@@ -10,7 +10,7 @@ class NavigationViewModel extends ViewModel {
     data.toLoading();
     try {
       var list = await WanApis.getNavigations();
-      data.append(PagingData(ended: true, datas: list));
+      data.replace(PagingData(ended: true, datas: list));
       return true;
     } catch (_) {
       data.toError();

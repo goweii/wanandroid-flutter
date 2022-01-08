@@ -41,7 +41,7 @@
     "article_fab_tip_share": "分享",
     "guest_name": "游客",
     "level_prefix": "等级:",
-    "rank_prefix": "排名:",
+    "ranking_prefix": "排名:",
     "mine_collection": "收藏",
     "answers": "回答",
     "coin_title": "积分",
@@ -49,6 +49,11 @@
     "collected_link": "收藏网址",
     "mine_share": "分享",
     "about_me": "关于我",
+    "about_me_title": "关于我",
     "message_title": "消息",
-    "coin_rank_title": "积分榜"
+    "coin_ranking_title": "积分榜",
+    "delete": "删除",
+    "confirm_deletion": "确认删除",
+    "edit": "编辑",
+    "not_support": "暂不支持"
 }

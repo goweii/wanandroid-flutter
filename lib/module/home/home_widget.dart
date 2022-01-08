@@ -36,10 +36,12 @@ class _BannerViewState extends State<BannerView> {
         );
       },
       itemCount: widget.banners.length,
-      pagination: const SwiperPagination(
+      pagination: SwiperPagination(
         builder: DotSwiperPaginationBuilder(
           size: 6.0,
           activeSize: 6.0,
+          color: Theme.of(context).colorScheme.surface.withOpacity(0.4),
+          activeColor: Theme.of(context).colorScheme.surface,
         ),
       ),
       autoplay: true,

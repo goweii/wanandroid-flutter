@@ -1,6 +1,7 @@
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/api/bean/coin_info_bean.dart';
 import 'package:wanandroid/api/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/bean/link_bean.dart';
 import 'package:wanandroid/api/bean/message_bean.dart';
 import 'package:wanandroid/api/bean/navigation_bean.dart';
 import 'package:wanandroid/api/bean/paged_bean.dart';
@@ -91,10 +92,13 @@ class WanApis {
 
   static Future<dynamic> uncollectByCollectId({
     required int collectId,
+    required int? articleId,
   }) async {
     return await WanApi(
       method: HttpMethod.post,
       path: '/lg/uncollect/$collectId/json',
+      body: {"originId": articleId ?? -1},
+      bodyType: BodyType.form,
       fromJsonT: (json) => json,
     ).request();
   }
@@ -237,7 +241,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<PagedBean<CoinInfoBean>> getCoinRank(int page) {
+  static Future<PagedBean<CoinInfoBean>> getCoinRanking(int page) {
     return WanApi(
       method: HttpMethod.get,
       path: '/coin/rank/$page/json',
@@ -269,6 +273,58 @@ class WanApis {
       path: '/message/lg/unread_list/$page/json',
       fromJsonT: (json) =>
           PagedBean.fromJson(json, (json) => MessageBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<PagedBean<ArticleBean>> getCollectedArticles(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/lg/collect/list/$page/json',
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => ArticleBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<List<LinkBean>> getCollectedLinks() {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/lg/collect/usertools/json',
+      fromJsonT: (json) {
+        var data = <LinkBean>[];
+        json as List;
+        for (var v in json) {
+          data.add(LinkBean.fromJson(v));
+        }
+        return data;
+      },
+    ).request();
+  }
+
+  static Future<dynamic> deleteCollectedLink(int id) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/collect/deletetool/json',
+      body: {"id": id},
+      bodyType: BodyType.form,
+      fromJsonT: null,
+    ).request();
+  }
+
+  static Future<dynamic> updateCollectedLink({
+    required int id,
+    required String name,
+    required String link,
+  }) async {
+    return await WanApi(
+      method: HttpMethod.post,
+      path: '/lg/collect/updatetool/json',
+      body: {
+        "id": id,
+        "name": name,
+        "link": link,
+      },
+      bodyType: BodyType.form,
+      fromJsonT: null,
     ).request();
   }
 }

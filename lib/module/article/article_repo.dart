@@ -31,9 +31,11 @@ class ArticleRepo {
 
   Future<dynamic> uncollectByCollectId({
     required int collectId,
+    required int? articleId,
   }) {
     return WanApis.uncollectByCollectId(
       collectId: collectId,
+      articleId: articleId,
     );
   }
 }

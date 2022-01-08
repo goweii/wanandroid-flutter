@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_me": MessageLookupByLibrary.simpleMessage("About me"),
+        "about_me_title": MessageLookupByLibrary.simpleMessage("About Me"),
         "answers": MessageLookupByLibrary.simpleMessage("Answers"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
         "article_fab_tip_collect":
@@ -33,16 +34,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choice language"),
         "choice_theme_mode":
             MessageLookupByLibrary.simpleMessage("Choice theme mode"),
-        "coin_rank_title": MessageLookupByLibrary.simpleMessage("Coin rank"),
+        "coin_ranking_title":
+            MessageLookupByLibrary.simpleMessage("Coin Ranking"),
         "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
         "collected_article":
-            MessageLookupByLibrary.simpleMessage("Collected article"),
+            MessageLookupByLibrary.simpleMessage("Collected Article"),
         "collected_link":
-            MessageLookupByLibrary.simpleMessage("Collected link"),
+            MessageLookupByLibrary.simpleMessage("Collected Link"),
+        "confirm_deletion":
+            MessageLookupByLibrary.simpleMessage("Confirm deletion"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
-        "go_login": MessageLookupByLibrary.simpleMessage("Go lgoin"),
-        "go_register": MessageLookupByLibrary.simpleMessage("Go register"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
+        "go_login": MessageLookupByLibrary.simpleMessage("Go Lgoin"),
+        "go_register": MessageLookupByLibrary.simpleMessage("Go Register"),
         "guest_name": MessageLookupByLibrary.simpleMessage("Guest"),
         "home_title": MessageLookupByLibrary.simpleMessage("Home"),
         "input_account_hint":
@@ -63,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),
         "new_tag": MessageLookupByLibrary.simpleMessage("NEW"),
+        "not_support": MessageLookupByLibrary.simpleMessage("Not supported"),
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("No more data"),
         "paged_list_footer_load_more":
@@ -71,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loading data"),
         "publish_title": MessageLookupByLibrary.simpleMessage("Publish"),
         "question_title": MessageLookupByLibrary.simpleMessage("Question"),
-        "rank_prefix": MessageLookupByLibrary.simpleMessage("Rank:"),
+        "ranking_prefix": MessageLookupByLibrary.simpleMessage("Ranking:"),
         "refresh_header_state_pull_to_refresh":
             MessageLookupByLibrary.simpleMessage("Pull to refresh"),
         "refresh_header_state_refresh_failed":
@@ -92,6 +99,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("Unknown"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("WanAndroid"),
-        "welcome_to_use": MessageLookupByLibrary.simpleMessage("Welcome to use")
+        "welcome_to_use": MessageLookupByLibrary.simpleMessage("Welcome to Use")
       };
 }

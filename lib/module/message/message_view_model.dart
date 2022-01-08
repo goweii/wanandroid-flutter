@@ -37,10 +37,17 @@ class MessageViewModel extends ViewModel {
     try {
       if (!_unreadMsgPaging.isEnded) {
         var unreadList = await _unreadMsgPaging.next();
-        msgStatablePagingData.append(PagingData(
-          ended: false,
-          datas: unreadList.datas,
-        ));
+        if (_unreadMsgPaging.isInitialPage) {
+          msgStatablePagingData.replace(PagingData(
+            ended: false,
+            datas: unreadList.datas,
+          ));
+        } else {
+          msgStatablePagingData.append(PagingData(
+            ended: false,
+            datas: unreadList.datas,
+          ));
+        }
         if (_unreadMsgPaging.isEnded) {
           getNextPage();
         }

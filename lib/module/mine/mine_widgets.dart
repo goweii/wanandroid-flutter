@@ -144,7 +144,7 @@ class MineHeader extends StatelessWidget {
               ),
               const SizedBox(width: AppDimens.marginNormal),
               Text(
-                Strings.of(context).rank_prefix +
+                Strings.of(context).ranking_prefix +
                     (userBean?.coinInfo.rank ?? '0'),
                 style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
                       fontSize: Theme.of(context).textTheme.bodyText2?.fontSize,

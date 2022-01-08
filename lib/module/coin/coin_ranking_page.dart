@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
-import 'package:wanandroid/module/coin/coin_rank_view_model.dart';
-import 'package:wanandroid/module/coin/coin_rank_widget.dart';
+import 'package:wanandroid/module/coin/coin_ranking_view_model.dart';
+import 'package:wanandroid/module/coin/coin_ranking_widget.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
 
-class CoinRankPage extends StatefulWidget {
-  const CoinRankPage({Key? key}) : super(key: key);
+class CoinRankingPage extends StatefulWidget {
+  const CoinRankingPage({Key? key}) : super(key: key);
 
   @override
-  _CoinRankPageState createState() => _CoinRankPageState();
+  _CoinRankingPageState createState() => _CoinRankingPageState();
 }
 
-class _CoinRankPageState extends State<CoinRankPage> {
-  final CoinRankViewModel _viewModel = CoinRankViewModel();
+class _CoinRankingPageState extends State<CoinRankingPage> {
+  final CoinRankingViewModel _viewModel = CoinRankingViewModel();
 
   ScrollController? _scrollController;
 
@@ -33,18 +33,18 @@ class _CoinRankPageState extends State<CoinRankPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<CoinRankViewModel>(
+    return ViewModelProvider<CoinRankingViewModel>(
       create: (context) => _viewModel..getInitialPage(),
       provide: (viewModel) => [
-        DataProvider<CoinRankPagingData>(
+        DataProvider<CoinRankingPagingData>(
             create: (context) => viewModel.coinRankPagingData),
       ],
       builder: (context, viewModel) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(Strings.of(context).coin_rank_title),
+            title: Text(Strings.of(context).coin_ranking_title),
           ),
-          body: DataConsumer<CoinRankPagingData>(
+          body: DataConsumer<CoinRankingPagingData>(
             builder: (context, pagingData) {
               if (pagingData.datas.isEmpty) {
                 return const Center(
@@ -67,12 +67,12 @@ class _CoinRankPageState extends State<CoinRankPage> {
     );
   }
 
-  List<Widget> _buildSlivers(CoinRankPagingData pagingData) {
+  List<Widget> _buildSlivers(CoinRankingPagingData pagingData) {
     return [
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            return CoinRankItem(
+            return CoinRankingItem(
               coinInfoBean: pagingData.datas[index],
               maxCoinCount: pagingData.datas[0].coinCount,
             );

@@ -92,7 +92,7 @@ class _ArticlePageState extends State<ArticlePage>
                 onPressed: () {
                   WanToast(
                     context,
-                    msg: "Not supported!",
+                    msg: Strings.of(context).not_support,
                     type: WanToastType.error,
                   ).show();
                 },

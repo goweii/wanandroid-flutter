@@ -6,7 +6,7 @@ import 'package:wanandroid/env/route/route_path.dart';
 import 'package:wanandroid/module/aboutme/about_me_page.dart';
 import 'package:wanandroid/module/article/article_page.dart';
 import 'package:wanandroid/module/coin/coin_page.dart';
-import 'package:wanandroid/module/coin/coin_rank_page.dart';
+import 'package:wanandroid/module/coin/coin_ranking_page.dart';
 import 'package:wanandroid/module/collection/collection_page.dart';
 import 'package:wanandroid/module/login/login_page.dart';
 import 'package:wanandroid/module/main/main_page.dart';
@@ -108,7 +108,7 @@ class RouteMap {
     coinRankPage: (context, page) => RightPageRoute(
           page: page,
           builder: (context, arguments) {
-            return const CoinRankPage();
+            return const CoinRankingPage();
           },
         ),
   };

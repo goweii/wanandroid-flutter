@@ -12,6 +12,8 @@ class StatableData<T> extends ObservableData<T> {
 
   State _state = State.idle;
 
+  bool _disposed = false;
+
   @override
   set value(T newValue) {
     bool needNotity = false;
@@ -24,7 +26,7 @@ class StatableData<T> extends ObservableData<T> {
       needNotity = false;
     }
     if (needNotity) {
-      notifyListeners();
+      notify();
     }
   }
 
@@ -35,18 +37,31 @@ class StatableData<T> extends ObservableData<T> {
   State get state => _state;
   set state(State state) {
     _state = state;
-    notifyListeners();
+    notify();
   }
 
   toLoading() {
     if (_state == State.loading) return;
     _state = State.loading;
-    notifyListeners();
+    notify();
   }
 
   toError() {
     if (_state == State.error) return;
     _state = State.error;
+    notify();
+  }
+
+  notify() {
+    if (_disposed) {
+      return;
+    }
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _disposed = true;
+    super.dispose();
   }
 }

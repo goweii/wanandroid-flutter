@@ -14,12 +14,11 @@ import 'package:wanandroid/utils/string_utils.dart';
 import 'package:wanandroid/widget/image_placeholder.dart';
 
 class ArticleItem extends StatefulWidget {
-  const ArticleItem({
-    Key? key,
+  ArticleItem({
     required this.article,
     this.top = false,
     this.onPressed,
-  }) : super(key: key);
+  }) : super(key: ValueKey('${article.id}-${article.originId ?? -1}'));
 
   final ArticleBean article;
   final bool top;
@@ -66,7 +65,7 @@ class _ArticleItemState extends State<ArticleItem> {
     }
     var article = widget.article;
     try {
-      if (!article.collect) {
+      if (article.collect != true) {
         if (article.originId == null) {
           await _articleRepo.collectArticle(
             articleId: article.id,
@@ -97,6 +96,7 @@ class _ArticleItemState extends State<ArticleItem> {
         } else {
           await _articleRepo.uncollectByCollectId(
             collectId: article.id,
+            articleId: article.originId,
           );
           Bus().send(CollectEvent(
             collect: false,
@@ -106,9 +106,10 @@ class _ArticleItemState extends State<ArticleItem> {
         }
       }
       setState(() {
-        article.collect = !article.collect;
+        article.collect = !(article.collect == true);
       });
-    } catch (_) {}
+    } catch (_) {
+    }
   }
 }
 
@@ -158,7 +159,7 @@ class _ItemTopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (article.fresh) ...[
+        if (article.fresh == true) ...[
           Text(
             Strings.of(context).new_tag,
             style: Theme.of(context).textTheme.caption?.copyWith(
@@ -290,10 +291,12 @@ class _ItemBottomBar extends StatelessWidget {
           splashRadius: 12 + AppDimens.marginSmall,
           iconSize: 24,
           icon: Icon(
-            article.collect ? Icons.favorite_rounded : Icons.favorite_rounded,
-            color: !article.collect
-                ? Theme.of(context).textTheme.caption?.color
-                : Theme.of(context).colorScheme.error,
+            article.collect == true
+                ? Icons.favorite_rounded
+                : Icons.favorite_rounded,
+            color: article.collect == true
+                ? Theme.of(context).colorScheme.error
+                : Theme.of(context).textTheme.caption?.color,
           ),
         )
       ],

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/coin_info_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 
-class CoinRankItem extends StatelessWidget {
-  const CoinRankItem({
+class CoinRankingItem extends StatelessWidget {
+  const CoinRankingItem({
     Key? key,
     required this.coinInfoBean,
     required this.maxCoinCount,
@@ -42,7 +42,7 @@ class CoinRankItem extends StatelessWidget {
                       minWidth: 30,
                     ),
                     alignment: Alignment.center,
-                    child: _CoinRankIndex(index: index),
+                    child: _CoinRankingIndex(index: index),
                   ),
                   const SizedBox(width: AppDimens.marginHalf),
                   Expanded(
@@ -68,8 +68,8 @@ class CoinRankItem extends StatelessWidget {
   }
 }
 
-class _CoinRankIndex extends StatelessWidget {
-  const _CoinRankIndex({
+class _CoinRankingIndex extends StatelessWidget {
+  const _CoinRankingIndex({
     Key? key,
     required this.index,
   }) : super(key: key);
@@ -98,7 +98,7 @@ class _CoinRankIndex extends StatelessWidget {
     }
     return Text(
       '$index',
-      style: Theme.of(context).textTheme.subtitle1?.copyWith(
+      style: Theme.of(context).textTheme.subtitle2?.copyWith(
             color: Theme.of(context).textTheme.caption?.color,
           ),
     );

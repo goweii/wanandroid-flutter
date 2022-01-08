@@ -3,13 +3,15 @@ import 'package:wanandroid/api/wan_apis.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 
-class SquareViewModel extends ViewModel {
-  final StatablePagingData<ArticleBean> pagingData = StatablePagingData();
+class CollectedArticlesPagingData extends StatablePagingData<ArticleBean> {}
+
+class CollectedArticleViewModel extends ViewModel {
+  final CollectedArticlesPagingData pagingData = CollectedArticlesPagingData();
 
   final Paging<ArticleBean> _paging = Paging<ArticleBean>(
     initialPage: 1,
     requester: (page) async {
-      var resp = await WanApis.getSquareArticles(page);
+      var resp = await WanApis.getCollectedArticles(page);
       return PagingData(ended: resp.over, datas: resp.datas);
     },
   );
@@ -25,6 +27,9 @@ class SquareViewModel extends ViewModel {
     pagingData.toLoading();
     try {
       var data = await _paging.next();
+      for (var e in data.datas) {
+        e.collect = true;
+      }
       if (_paging.isInitialPage) {
         pagingData.replace(data);
       } else {
@@ -36,5 +41,4 @@ class SquareViewModel extends ViewModel {
       return false;
     }
   }
-
 }

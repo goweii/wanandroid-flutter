@@ -1,13 +1,13 @@
 class CollectEvent {
   final int? articleId;
   final int? collectId;
-  final String? articleLink;
+  final String? link;
   final bool collect;
 
   CollectEvent({
     this.articleId,
     this.collectId,
-    this.articleLink,
+    this.link,
     required this.collect,
   });
 }

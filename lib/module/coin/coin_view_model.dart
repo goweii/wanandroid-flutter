@@ -65,10 +65,17 @@ class CoinViewModel extends ViewModel {
       var voList = data.datas.map((e) {
         return parseUserCoinHistoryBeanToVO(e);
       }).toList();
-      userCoinHistoryPagingData.append(PagingData(
-        ended: data.ended,
-        datas: voList,
-      ));
+      if (_userCoinHistoryPaging.isInitialPage) {
+        userCoinHistoryPagingData.replace(PagingData(
+          ended: data.ended,
+          datas: voList,
+        ));
+      } else {
+        userCoinHistoryPagingData.append(PagingData(
+          ended: data.ended,
+          datas: voList,
+        ));
+      }
       return true;
     } catch (_) {
       userCoinHistoryPagingData.toError();
@@ -86,9 +93,9 @@ class CoinViewModel extends ViewModel {
     var coin1 = 0;
     var coin2 = 0;
     if (match != null && match.groupCount == 3) {
-    niceDate = match.group(1)!;
-    coin1 = int.tryParse(match.group(2)!) ?? 0;
-    coin2 = int.tryParse(match.group(3)!) ?? 0;
+      niceDate = match.group(1)!;
+      coin1 = int.tryParse(match.group(2)!) ?? 0;
+      coin2 = int.tryParse(match.group(3)!) ?? 0;
     }
     return UserCoinHistoryVO(
       reasn: '${bean.reason} $coin1+$coin2',

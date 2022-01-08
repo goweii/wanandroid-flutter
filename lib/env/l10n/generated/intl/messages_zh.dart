@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_me": MessageLookupByLibrary.simpleMessage("关于我"),
+        "about_me_title": MessageLookupByLibrary.simpleMessage("关于我"),
         "answers": MessageLookupByLibrary.simpleMessage("回答"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("关闭"),
         "article_fab_tip_collect": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -30,12 +31,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
         "choice_language": MessageLookupByLibrary.simpleMessage("语言"),
         "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
-        "coin_rank_title": MessageLookupByLibrary.simpleMessage("积分榜"),
+        "coin_ranking_title": MessageLookupByLibrary.simpleMessage("积分榜"),
         "coin_title": MessageLookupByLibrary.simpleMessage("积分"),
         "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
         "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
+        "confirm_deletion": MessageLookupByLibrary.simpleMessage("确认删除"),
+        "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
+        "edit": MessageLookupByLibrary.simpleMessage("编辑"),
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
         "go_register": MessageLookupByLibrary.simpleMessage("去注册"),
         "guest_name": MessageLookupByLibrary.simpleMessage("游客"),
@@ -55,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),
         "new_tag": MessageLookupByLibrary.simpleMessage("新"),
+        "not_support": MessageLookupByLibrary.simpleMessage("暂不支持"),
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("没有更多数据"),
         "paged_list_footer_load_more":
@@ -63,7 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
         "publish_title": MessageLookupByLibrary.simpleMessage("广场"),
         "question_title": MessageLookupByLibrary.simpleMessage("问答"),
-        "rank_prefix": MessageLookupByLibrary.simpleMessage("排名:"),
+        "ranking_prefix": MessageLookupByLibrary.simpleMessage("排名:"),
         "refresh_header_state_pull_to_refresh":
             MessageLookupByLibrary.simpleMessage("下拉刷新"),
         "refresh_header_state_refresh_failed":
