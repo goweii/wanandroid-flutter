@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
+import 'package:wanandroid/widget/image_placeholder.dart';
 
 class BannerView extends StatefulWidget {
   const BannerView({
@@ -26,9 +28,11 @@ class _BannerViewState extends State<BannerView> {
     return Swiper(
       scrollDirection: widget.scrollDirection,
       itemBuilder: (BuildContext context, int index) {
-        return Image.network(
-          widget.banners[index].imagePath,
+        return CachedNetworkImage(
+          imageUrl: widget.banners[index].imagePath,
           fit: BoxFit.cover,
+          placeholder: (context, url) => const ImagePlaceholder(),
+          errorWidget: (context, url, error) => const ImagePlaceholder(),
         );
       },
       itemCount: widget.banners.length,

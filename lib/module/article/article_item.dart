@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/api/bean/article_bean.dart';
 import 'package:wanandroid/api/wan_store.dart';
@@ -10,6 +11,7 @@ import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_repo.dart';
 import 'package:wanandroid/utils/string_utils.dart';
+import 'package:wanandroid/widget/image_placeholder.dart';
 
 class ArticleItem extends StatefulWidget {
   const ArticleItem({
@@ -316,9 +318,11 @@ class _Cover extends StatelessWidget {
       child: ClipRRect(
         borderRadius:
             const BorderRadius.all(Radius.circular(AppDimens.radiusSmall)),
-        child: Image.network(
-          url,
+        child: CachedNetworkImage(
+          imageUrl: url,
           fit: BoxFit.cover,
+          placeholder: (context, url) => const ImagePlaceholder(),
+          errorWidget: (context, url, error) => const ImagePlaceholder(),
         ),
       ),
     );
