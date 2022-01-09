@@ -7,7 +7,7 @@ part of 'user_bean.dart';
 // **************************************************************************
 
 UserBean _$UserBeanFromJson(Map<String, dynamic> json) => UserBean(
-      coinInfo: CoinInfoBean.fromJson(json['coinInfo'] as Map<String, dynamic>),
+      coinInfo: UserCoinBean.fromJson(json['coinInfo'] as Map<String, dynamic>),
       userInfo: UserInfoBean.fromJson(json['userInfo'] as Map<String, dynamic>),
     );
 

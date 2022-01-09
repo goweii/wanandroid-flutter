@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 
 class CoinRankingItem extends StatelessWidget {
   const CoinRankingItem({
@@ -9,7 +11,7 @@ class CoinRankingItem extends StatelessWidget {
     required this.maxCoinCount,
   }) : super(key: key);
 
-  final CoinInfoBean coinInfoBean;
+  final UserCoinBean coinInfoBean;
   final int maxCoinCount;
 
   int get index => int.tryParse(coinInfoBean.rank) ?? -1;
@@ -19,7 +21,12 @@ class CoinRankingItem extends StatelessWidget {
     return Material(
       color: Theme.of(context).colorScheme.surface,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          AppRouter.of(context).pushNamed(
+            RouteMap.userPage,
+            arguments: coinInfoBean.userId,
+          );
+        },
         child: Stack(
           children: [
             Positioned.fill(
@@ -47,7 +54,7 @@ class CoinRankingItem extends StatelessWidget {
                   const SizedBox(width: AppDimens.marginHalf),
                   Expanded(
                     child: Text(
-                      coinInfoBean.username,
+                      coinInfoBean.nameToShow,
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ),

@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/bean/user_info_bean.dart';
 
 part 'user_bean.g.dart';
 
 @JsonSerializable()
 class UserBean {
-  CoinInfoBean coinInfo;
+  UserCoinBean coinInfo;
   UserInfoBean userInfo;
 
   UserBean({

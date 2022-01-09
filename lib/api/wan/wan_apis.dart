@@ -1,5 +1,5 @@
 import 'package:wanandroid/api/wan/bean/article_bean.dart';
-import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 import 'package:wanandroid/api/wan/bean/link_bean.dart';
 import 'package:wanandroid/api/wan/bean/message_bean.dart';
@@ -7,8 +7,8 @@ import 'package:wanandroid/api/wan/bean/navigation_bean.dart';
 import 'package:wanandroid/api/wan/bean/paged_bean.dart';
 import 'package:wanandroid/api/wan/bean/question_commen_bean.dart';
 import 'package:wanandroid/api/wan/bean/user_bean.dart';
-import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/bean/user_coin_history_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_page_bean.dart';
 import 'package:wanandroid/api/wan/wan_api.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
@@ -241,12 +241,12 @@ class WanApis {
     ).request();
   }
 
-  static Future<PagedBean<CoinInfoBean>> getCoinRanking(int page) {
+  static Future<PagedBean<UserCoinBean>> getCoinRanking(int page) {
     return WanApi(
       method: HttpMethod.get,
       path: '/coin/rank/$page/json',
       fromJsonT: (json) =>
-          PagedBean.fromJson(json, (json) => CoinInfoBean.fromJson(json)),
+          PagedBean.fromJson(json, (json) => UserCoinBean.fromJson(json)),
     ).request();
   }
 
@@ -325,6 +325,33 @@ class WanApis {
       },
       bodyType: BodyType.form,
       fromJsonT: null,
+    ).request();
+  }
+
+  static Future<UserPageBean> getSharedArticles(int page) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/user/lg/private_articles/$page/json',
+      fromJsonT: (json) => UserPageBean.fromJson(json),
+    ).request();
+  }
+
+  static Future<dynamic> deleteSharedArticle(int id) {
+    return WanApi(
+      method: HttpMethod.post,
+      path: '/lg/user_article/delete/$id/json',
+      fromJsonT: null,
+    ).request();
+  }
+
+  static Future<UserPageBean> getUserSharedArticles({
+    required int userid,
+    required int page,
+  }) {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/user/$userid/share_articles/$page/json',
+      fromJsonT: (json) => UserPageBean.fromJson(json),
     ).request();
   }
 }

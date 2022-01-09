@@ -17,6 +17,7 @@ import 'package:wanandroid/module/question/question_args.dart';
 import 'package:wanandroid/module/question/question_details_page.dart';
 import 'package:wanandroid/module/settings/settings_page.dart';
 import 'package:wanandroid/module/shared/shared_page.dart';
+import 'package:wanandroid/module/userpage/user_page.dart';
 
 class RouteMap {
   static const String mainPage = "/";
@@ -31,6 +32,7 @@ class RouteMap {
   static const String aboutMePage = "/aboutMe";
   static const String messagePage = "/message";
   static const String coinRankPage = "/coinRank";
+  static const String userPage = "/user";
 
   static final Map<String, RouteBuilder> map = {
     mainPage: (context, page) => NonePageRoute(
@@ -109,6 +111,12 @@ class RouteMap {
           page: page,
           builder: (context, arguments) {
             return const CoinRankingPage();
+          },
+        ),
+    userPage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return UserPage(userid: arguments as int);
           },
         ),
   };

@@ -1,16 +1,16 @@
-import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 
-class CoinRankingPagingData extends StatablePagingData<CoinInfoBean> {
+class CoinRankingPagingData extends StatablePagingData<UserCoinBean> {
   CoinRankingPagingData() : super();
 }
 
 class CoinRankingViewModel extends ViewModel {
   final CoinRankingPagingData coinRankPagingData = CoinRankingPagingData();
 
-  final Paging<CoinInfoBean> _coinRankingPaging = Paging<CoinInfoBean>(
+  final Paging<UserCoinBean> _coinRankingPaging = Paging<UserCoinBean>(
     initialPage: 1,
     requester: (page) async {
       var resp = await WanApis.getCoinRanking(page);
