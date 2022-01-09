@@ -1,5 +1,5 @@
-import 'package:wanandroid/api/bean/user_bean.dart';
-import 'package:wanandroid/api/wan_apis.dart';
+import 'package:wanandroid/api/wan/bean/user_bean.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/mvvm/statable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 
@@ -13,7 +13,8 @@ class UnreadMessageCountStatableData extends StatableData<int> {
 
 class MineViewModel extends ViewModel {
   final UserBeanStatableData userBean = UserBeanStatableData();
-  final UnreadMessageCountStatableData unreadMessageCount = UnreadMessageCountStatableData();
+  final UnreadMessageCountStatableData unreadMessageCount =
+      UnreadMessageCountStatableData();
 
   void clearUserInfo() {
     userBean.value = null;

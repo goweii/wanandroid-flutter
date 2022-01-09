@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/message_bean.dart';
+import 'package:wanandroid/api/wan/bean/message_bean.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/route/route_map.dart';

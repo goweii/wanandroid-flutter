@@ -1,5 +1,5 @@
-import 'package:wanandroid/api/bean/link_bean.dart';
-import 'package:wanandroid/api/wan_apis.dart';
+import 'package:wanandroid/api/wan/bean/link_bean.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/mvvm/statable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 

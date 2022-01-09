@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanandroid/api/bean/coin_info_bean.dart';
-import 'package:wanandroid/api/bean/user_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_info_bean.dart';
 
 part 'user_bean.g.dart';
 

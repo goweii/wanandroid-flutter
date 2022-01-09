@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/article_bean.dart';
-import 'package:wanandroid/api/wan_store.dart';
+import 'package:wanandroid/api/wan/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/wan_store.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/entity/article_info.dart';
@@ -108,8 +108,7 @@ class _ArticleItemState extends State<ArticleItem> {
       setState(() {
         article.collect = !(article.collect == true);
       });
-    } catch (_) {
-    }
+    } catch (_) {}
   }
 }
 

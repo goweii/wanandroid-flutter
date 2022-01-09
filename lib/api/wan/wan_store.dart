@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:wanandroid/api/wan_cookie_jar.dart';
-import 'package:wanandroid/api/wan_cookies_interceptor.dart';
+import 'package:wanandroid/api/wan/wan_cookie_jar.dart';
+import 'package:wanandroid/api/wan/wan_cookies_interceptor.dart';
 import 'package:wanandroid/env/http/http.dart';
 import 'package:wanandroid/env/provider/login.dart';
 

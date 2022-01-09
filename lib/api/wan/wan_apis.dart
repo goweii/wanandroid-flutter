@@ -1,15 +1,15 @@
-import 'package:wanandroid/api/bean/article_bean.dart';
-import 'package:wanandroid/api/bean/coin_info_bean.dart';
-import 'package:wanandroid/api/bean/knowledge_bean.dart';
-import 'package:wanandroid/api/bean/link_bean.dart';
-import 'package:wanandroid/api/bean/message_bean.dart';
-import 'package:wanandroid/api/bean/navigation_bean.dart';
-import 'package:wanandroid/api/bean/paged_bean.dart';
-import 'package:wanandroid/api/bean/question_commen_bean.dart';
-import 'package:wanandroid/api/bean/user_bean.dart';
-import 'package:wanandroid/api/bean/user_coin_bean.dart';
-import 'package:wanandroid/api/bean/user_coin_history_bean.dart';
-import 'package:wanandroid/api/wan_api.dart';
+import 'package:wanandroid/api/wan/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/wan/bean/link_bean.dart';
+import 'package:wanandroid/api/wan/bean/message_bean.dart';
+import 'package:wanandroid/api/wan/bean/navigation_bean.dart';
+import 'package:wanandroid/api/wan/bean/paged_bean.dart';
+import 'package:wanandroid/api/wan/bean/question_commen_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_coin_history_bean.dart';
+import 'package:wanandroid/api/wan/wan_api.dart';
 import 'package:wanandroid/env/http/api.dart';
 import 'package:wanandroid/module/home/bean/banner_bean.dart';
 

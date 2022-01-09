@@ -26,6 +26,7 @@ class _BannerViewState extends State<BannerView> {
   @override
   Widget build(BuildContext context) {
     return Swiper(
+      key: UniqueKey(),
       scrollDirection: widget.scrollDirection,
       itemBuilder: (BuildContext context, int index) {
         return CachedNetworkImage(

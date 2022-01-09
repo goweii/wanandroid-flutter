@@ -1,4 +1,4 @@
-import 'package:wanandroid/api/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 
 class ChapterInfo {
   final KnowledgeBean knowledgeBean;

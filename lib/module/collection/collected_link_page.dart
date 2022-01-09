@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:wanandroid/api/bean/link_bean.dart';
-import 'package:wanandroid/api/wan_toast.dart';
+import 'package:wanandroid/api/wan/bean/link_bean.dart';
+import 'package:wanandroid/api/wan/wan_toast.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';

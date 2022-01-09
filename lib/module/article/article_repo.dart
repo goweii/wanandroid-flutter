@@ -1,4 +1,4 @@
-import 'package:wanandroid/api/wan_apis.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
 
 class ArticleRepo {
   Future<dynamic> collectArticleByLink({

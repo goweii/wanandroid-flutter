@@ -440,10 +440,10 @@ class Strings {
     );
   }
 
-  /// `Shart`
+  /// `Share`
   String get article_fab_tip_share {
     return Intl.message(
-      'Shart',
+      'Share',
       name: 'article_fab_tip_share',
       desc: '',
       args: [],
@@ -615,6 +615,16 @@ class Strings {
     return Intl.message(
       'Not supported',
       name: 'not_support',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Buy him a cup of coffee`
+  String get buy_him_a_cup_of_coffee {
+    return Intl.message(
+      'Buy him a cup of coffee',
+      name: 'buy_him_a_cup_of_coffee',
       desc: '',
       args: [],
     );

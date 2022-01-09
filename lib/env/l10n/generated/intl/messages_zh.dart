@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "article_fab_tip_collect": MessageLookupByLibrary.simpleMessage("收藏"),
         "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("分享"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
+        "buy_him_a_cup_of_coffee":
+            MessageLookupByLibrary.simpleMessage("请他喝杯咖啡"),
         "choice_language": MessageLookupByLibrary.simpleMessage("语言"),
         "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
         "coin_ranking_title": MessageLookupByLibrary.simpleMessage("积分榜"),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';

@@ -1,6 +1,6 @@
-import 'package:wanandroid/api/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/bean/article_bean.dart';
 import 'package:wanandroid/env/http/paging.dart';
-import 'package:wanandroid/api/wan_apis.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 
 class QuestionViewModel extends ViewModel {

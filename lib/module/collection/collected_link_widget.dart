@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
-import 'package:wanandroid/api/bean/link_bean.dart';
+import 'package:wanandroid/api/wan/bean/link_bean.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';

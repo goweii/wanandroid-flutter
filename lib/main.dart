@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:wanandroid/api/wan_store.dart';
+import 'package:wanandroid/api/wan/wan_store.dart';
 import 'package:wanandroid/env/l10n/locale_model.dart';
 import 'package:wanandroid/env/l10n/locale_model_provider.dart';
 import 'package:wanandroid/env/l10n/locale_model_store.dart';

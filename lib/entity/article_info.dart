@@ -1,4 +1,4 @@
-import 'package:wanandroid/api/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/bean/article_bean.dart';
 
 class ArticleInfo {
   final int? id;

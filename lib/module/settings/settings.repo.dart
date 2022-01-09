@@ -1,5 +1,5 @@
-import 'package:wanandroid/api/wan_apis.dart';
-import 'package:wanandroid/api/wan_store.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
+import 'package:wanandroid/api/wan/wan_store.dart';
 
 class SettingsRepo {
   Future<dynamic> logout() async {

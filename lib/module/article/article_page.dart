@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/wan_toast.dart';
+import 'package:wanandroid/api/wan/wan_toast.dart';
 import 'package:wanandroid/entity/article_info.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/route/router.dart';

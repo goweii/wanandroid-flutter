@@ -28,8 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
         "article_fab_tip_collect":
             MessageLookupByLibrary.simpleMessage("Collect"),
-        "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("Shart"),
+        "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("Share"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
+        "buy_him_a_cup_of_coffee":
+            MessageLookupByLibrary.simpleMessage("Buy him a cup of coffee"),
         "choice_language":
             MessageLookupByLibrary.simpleMessage("Choice language"),
         "choice_theme_mode":

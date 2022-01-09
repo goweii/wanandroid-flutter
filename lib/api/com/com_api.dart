@@ -1,9 +1,8 @@
-import 'package:wanandroid/api/bean/wan_resp.dart';
-import 'package:wanandroid/api/wan_store.dart';
+import 'package:wanandroid/api/com/bean/com_resp.dart';
 import 'package:wanandroid/env/http/api.dart';
 
-class WanApi<T> extends Api<T> {
-  WanApi({
+class ComApi<T> extends Api<T> {
+  ComApi({
     required HttpMethod method,
     required String path,
     Map<String, dynamic>? queries,
@@ -13,18 +12,18 @@ class WanApi<T> extends Api<T> {
     required T Function(dynamic json)? fromJsonT,
   }) : super(
           method: method,
-          host: WanStore.host,
-          path: path,
+          host: 'gitee.com',
+          path: '/goweii/flutter_wanandroid_server/raw/master' + path,
           body: body,
           bodyType: bodyType,
-          converter: WanRespConverter<T>(fromJsonT: fromJsonT),
+          converter: ComRespConverter<T>(fromJsonT: fromJsonT),
         );
 }
 
-class WanRespConverter<T> implements RespConverter<T> {
+class ComRespConverter<T> implements RespConverter<T> {
   final T Function(dynamic json)? fromJsonT;
 
-  WanRespConverter({
+  ComRespConverter({
     required this.fromJsonT,
   });
 
@@ -33,13 +32,13 @@ class WanRespConverter<T> implements RespConverter<T> {
     if (fromJsonT == null) {
       return json as T;
     }
-    WanResp<T> resp = WanResp<T>.fromJson(json, fromJsonT!);
-    if (resp.errorCode == 0) {
+    ComResp<T> resp = ComResp<T>.fromJson(json, fromJsonT!);
+    if (resp.code == 0) {
       return resp.data;
     } else {
       throw ApiException(
-        code: resp.errorCode,
-        msg: resp.errorMsg,
+        code: resp.code,
+        msg: resp.msg,
       );
     }
   }

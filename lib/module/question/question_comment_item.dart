@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/question_commen_bean.dart';
+import 'package:wanandroid/api/wan/bean/question_commen_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/widget/html_view.dart';
 

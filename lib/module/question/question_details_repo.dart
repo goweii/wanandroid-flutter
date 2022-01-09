@@ -1,6 +1,6 @@
 import 'package:wanandroid/env/http/paging.dart';
-import 'package:wanandroid/api/wan_apis.dart';
-import 'package:wanandroid/api/bean/question_commen_bean.dart';
+import 'package:wanandroid/api/wan/wan_apis.dart';
+import 'package:wanandroid/api/wan/bean/question_commen_bean.dart';
 
 class QuestionDetailsRepo {
   final int questionId;

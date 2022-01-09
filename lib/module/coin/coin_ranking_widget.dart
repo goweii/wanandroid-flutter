@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/coin_info_bean.dart';
+import 'package:wanandroid/api/wan/bean/coin_info_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 
 class CoinRankingItem extends StatelessWidget {

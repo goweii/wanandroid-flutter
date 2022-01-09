@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:wanandroid/api/bean/user_bean.dart';
+import 'package:wanandroid/api/wan/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
@@ -106,8 +106,8 @@ class MineHeader extends StatelessWidget {
           onTap: () => _toUserInfoPage(context),
           child: ClipOval(
             child: SizedBox(
-              width: 80,
-              height: 80,
+              width: AppDimens.avatarSize,
+              height: AppDimens.avatarSize,
               child: Container(
                 color: Theme.of(context)
                     .appBarTheme
@@ -214,6 +214,8 @@ class MineMenus extends StatelessWidget {
         ActionItem(
           leading: const Icon(CupertinoIcons.info),
           title: Text(Strings.of(context).about_me),
+          tip: Text(Strings.of(context).buy_him_a_cup_of_coffee),
+          tipColor: Theme.of(context).colorScheme.error,
           onPressed: () {
             AppRouter.of(context).pushNamed(RouteMap.aboutMePage);
           },

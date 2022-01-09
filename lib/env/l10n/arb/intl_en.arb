@@ -38,7 +38,7 @@
     "language_system": "Follow system",
     "article_fab_tip_close": "Close",
     "article_fab_tip_collect": "Collect",
-    "article_fab_tip_share": "Shart",
+    "article_fab_tip_share": "Share",
     "guest_name": "Guest",
     "level_prefix": "Level:",
     "ranking_prefix": "Ranking:",
@@ -55,5 +55,6 @@
     "delete": "Delete",
     "confirm_deletion": "Confirm deletion",
     "edit": "Edit",
-    "not_support": "Not supported"
+    "not_support": "Not supported",
+    "buy_him_a_cup_of_coffee": "Buy him a cup of coffee"
 }

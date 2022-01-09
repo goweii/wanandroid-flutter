@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:wanandroid/api/bean/article_bean.dart';
-import 'package:wanandroid/api/bean/knowledge_bean.dart';
+import 'package:wanandroid/api/wan/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
 import 'package:wanandroid/env/http/paging.dart';

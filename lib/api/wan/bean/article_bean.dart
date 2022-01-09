@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:wanandroid/api/bean/tag_bean.dart';
+import 'package:wanandroid/api/wan/bean/tag_bean.dart';
 
 part 'article_bean.g.dart';
 

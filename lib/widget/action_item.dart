@@ -9,6 +9,7 @@ class ActionItem extends StatefulWidget {
     required this.title,
     this.desc,
     this.tip,
+    this.tipColor,
     this.treading,
     this.onPressed,
     this.children,
@@ -20,6 +21,7 @@ class ActionItem extends StatefulWidget {
   final Widget title;
   final Widget? desc;
   final Widget? tip;
+  final Color? tipColor;
   final Widget? treading;
   final VoidCallback? onPressed;
   final List<Widget>? children;
@@ -93,7 +95,10 @@ class _ActionItemState extends State<ActionItem> {
                   if (widget.tip != null) ...[
                     const SizedBox(width: AppDimens.marginSmall),
                     DefaultTextStyle(
-                      style: Theme.of(context).textTheme.caption!,
+                      style: Theme.of(context).textTheme.caption!.copyWith(
+                            color: widget.tipColor ??
+                                Theme.of(context).textTheme.caption!.color,
+                          ),
                       child: widget.tip!,
                     ),
                   ],

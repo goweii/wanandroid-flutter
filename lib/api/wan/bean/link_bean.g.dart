@@ -15,6 +15,7 @@ LinkBean _$LinkBeanFromJson(Map<String, dynamic> json) => LinkBean(
       order: json['order'] as int,
       userId: json['userId'] as int,
       visible: json['visible'] as int,
+      collect: json['collect'] as bool?,
     );
 
 Map<String, dynamic> _$LinkBeanToJson(LinkBean instance) => <String, dynamic>{
@@ -26,4 +27,5 @@ Map<String, dynamic> _$LinkBeanToJson(LinkBean instance) => <String, dynamic>{
       'order': instance.order,
       'userId': instance.userId,
       'visible': instance.visible,
+      'collect': instance.collect,
     };
