@@ -1,8 +1,11 @@
 import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_swiper_null_safety/flutter_swiper_null_safety.dart';
 import 'package:wanandroid/api/com/bean/about_me_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
+import 'package:wanandroid/env/l10n/generated/l10n.dart';
 
 class BlurredImage extends StatelessWidget {
   const BlurredImage({
@@ -27,6 +30,29 @@ class BlurredImage extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       ),
+    );
+  }
+}
+
+class AboutMeAppBar extends StatelessWidget {
+  const AboutMeAppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+    return AppBar(
+      title: Text(Strings.of(context).about_me),
+      toolbarHeight: themeData.appBarTheme.toolbarHeight,
+      titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+        color: themeData.colorScheme.onSurface,
+      ),
+      iconTheme: themeData.appBarTheme.iconTheme?.copyWith(
+        color: themeData.colorScheme.onSurface,
+      ),
+      backgroundColor: Colors.transparent,
+      systemOverlayStyle: themeData.brightness == Brightness.light
+          ? SystemUiOverlayStyle.dark
+          : SystemUiOverlayStyle.light,
     );
   }
 }
@@ -57,17 +83,40 @@ class AboutMeInfo extends StatelessWidget {
         const SizedBox(height: AppDimens.marginNormal),
         Text(
           aboutMeBean?.nickname ?? '',
-          style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
-                fontSize: Theme.of(context).textTheme.headline6?.fontSize,
-              ),
+          style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: AppDimens.marginHalf),
         Text(
           aboutMeBean?.signature ?? '',
-          style: Theme.of(context).appBarTheme.titleTextStyle?.copyWith(
-                fontSize: Theme.of(context).textTheme.bodyText2?.fontSize,
-              ),
+          style: Theme.of(context).textTheme.bodyText2,
         ),
+      ],
+    );
+  }
+}
+
+class QrCodePager extends StatelessWidget {
+  const QrCodePager({
+    Key? key,
+    required this.viewportFraction,
+    required this.scrollDirection,
+    required this.aboutMeBean,
+  }) : super(key: key);
+
+  final double viewportFraction;
+  final Axis scrollDirection;
+  final AboutMeBean? aboutMeBean;
+
+  @override
+  Widget build(BuildContext context) {
+    return Swiper.children(
+      key: UniqueKey(),
+      scrollDirection: scrollDirection,
+      viewportFraction: viewportFraction.clamp(0.1, 0.8),
+      scale: 0.9,
+      children: [
+        QrCodeItem(url: aboutMeBean?.wxQrcode ?? ''),
+        QrCodeItem(url: aboutMeBean?.zfbQrcode ?? ''),
       ],
     );
   }

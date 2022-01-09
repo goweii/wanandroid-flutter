@@ -17,10 +17,19 @@ class MineToolbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: AppDimens.appBarHeight,
-      alignment: Alignment.centerRight,
-      child: const MineUnreadMessageCountIcon(),
+    final ThemeData themeData = Theme.of(context);
+    return AppBar(
+      toolbarHeight: themeData.appBarTheme.toolbarHeight,
+      titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+        color: themeData.colorScheme.onSurface,
+      ),
+      iconTheme: themeData.appBarTheme.iconTheme?.copyWith(
+        color: themeData.colorScheme.onSurface,
+      ),
+      actions: const [
+        MineUnreadMessageCountIcon(),
+      ],
+      backgroundColor: Colors.transparent,
     );
   }
 }
