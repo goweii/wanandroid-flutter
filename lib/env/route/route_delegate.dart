@@ -24,8 +24,10 @@ class AppRouteDelegate extends RouterDelegate<RoutePath<dynamic>>
   }
 
   void push(RoutePath<dynamic> routePath) {
-    _stack.add(routePath);
-    notifyListeners();
+    if (!_stack.contains(routePath)) {
+      _stack.add(routePath);
+      notifyListeners();
+    }
   }
 
   void pop() {

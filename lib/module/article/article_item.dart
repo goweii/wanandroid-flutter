@@ -12,6 +12,7 @@ import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_repo.dart';
 import 'package:wanandroid/utils/string_utils.dart';
 import 'package:wanandroid/widget/image_placeholder.dart';
+import 'package:wanandroid/widget/opacity_button.dart';
 
 class ArticleItem extends StatefulWidget {
   ArticleItem({
@@ -167,13 +168,21 @@ class _ItemTopBar extends StatelessWidget {
           ),
           const SizedBox(width: AppDimens.marginHalf),
         ],
-        Text(
-          (article.author ?? "").isNotEmpty
-              ? article.author!
-              : (article.shareUser ?? "").isNotEmpty
-                  ? article.shareUser!
-                  : Strings.of(context).unknown_username,
-          style: Theme.of(context).textTheme.caption,
+        OpacityButton(
+          onPressed: () {
+            AppRouter.of(context).pushNamed(
+              RouteMap.userPage,
+              arguments: article.userId ?? -1,
+            );
+          },
+          child: Text(
+            (article.author ?? "").isNotEmpty
+                ? article.author!
+                : (article.shareUser ?? "").isNotEmpty
+                    ? article.shareUser!
+                    : Strings.of(context).unknown_username,
+            style: Theme.of(context).textTheme.caption,
+          ),
         ),
         if (article.tags != null && article.tags!.isNotEmpty) ...[
           const SizedBox(width: AppDimens.marginHalf),

@@ -9,7 +9,7 @@ class AppPage extends Page<dynamic> {
     required RoutePath routePath,
     required this.builder,
   }) : super(
-          key: ValueKey(routePath.location),
+          key: ValueKey(routePath),
           name: routePath.location,
           arguments: routePath.arguments,
         );
