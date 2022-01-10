@@ -11,11 +11,11 @@ class CoinInfoStatableData extends StatableData<UserCoinBean?> {
   CoinInfoStatableData() : super(null);
 }
 
-class SharedViewModel extends ViewModel {
+class MyShareViewModel extends ViewModel {
   final SharedArticlesPagingData pagingData = SharedArticlesPagingData();
   late Paging<ArticleBean> _paging;
 
-  SharedViewModel() {
+  MyShareViewModel() {
     _paging = Paging<ArticleBean>(
       initialPage: 1,
       requester: _request,

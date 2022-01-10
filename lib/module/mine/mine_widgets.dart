@@ -203,7 +203,7 @@ class MineMenus extends StatelessWidget {
           title: Text(Strings.of(context).mine_share),
           onPressed: () {
             if (LoginState.value(context).isLogin) {
-              AppRouter.of(context).pushNamed(RouteMap.sharedPage);
+              AppRouter.of(context).pushNamed(RouteMap.mySharePage);
             } else {
               AppRouter.of(context).pushNamed(RouteMap.loginPage);
             }

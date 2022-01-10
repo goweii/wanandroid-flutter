@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wanandroid/api/wan/bean/article_bean.dart';
@@ -8,6 +9,8 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_item.dart';
 import 'package:wanandroid/module/square/square_view_model.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
@@ -60,6 +63,14 @@ class _SquarePageState extends State<SquarePage>
         return Scaffold(
           appBar: AppBar(
             title: Text(Strings.of(context).publish_title),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  AppRouter.of(context).pushNamed(RouteMap.shareArticlePage);
+                },
+                icon: const Icon(CupertinoIcons.add),
+              )
+            ],
           ),
           body: DataProvider<StatablePagingData<ArticleBean>>(
             create: (context) => _viewModel.pagingData,

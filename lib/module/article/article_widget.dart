@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -5,6 +6,26 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
+
+class WebShareInfo {
+  final String? url;
+  final String? title;
+  final String? desc;
+  final List<String>? imgs;
+
+  WebShareInfo({
+    required this.url,
+    required this.title,
+    required this.desc,
+    required this.imgs,
+  });
+
+  WebShareInfo.fromJson(Map<String, dynamic> json)
+      : url = null,
+        title = json['title'] as String,
+        desc = json['desc'] as String,
+        imgs = json['imgs'] as List<String>;
+}
 
 class WebController {
   InAppWebViewController? _controller;
@@ -15,6 +36,14 @@ class WebController {
 
   detachController() {
     _controller = null;
+  }
+
+  Future<String?> getTitle() async {
+    return await _controller?.getTitle();
+  }
+
+  Future<Uri?> getUrl() async {
+    return await _controller?.getUrl();
   }
 
   Future<bool> canGoBack() async {
@@ -38,18 +67,83 @@ class WebController {
   Future<void> goForward() async {
     await _controller?.goForward();
   }
+
+  Future<WebShareInfo?> getShareInfo() async {
+    if (_controller == null) {
+      return null;
+    }
+    String js = """
+javascript:(
+  function getShareInfo() {
+    var map = {};
+    map["title"] = document.title;
+    map["desc"] = document.querySelector('meta[name="description"]').getAttribute('content');
+    var imgElements = document.getElementsByTagName("img");
+    var imgs = [];
+    for(var i = 0 ; i < imgElements.length; i++){
+      var imgEle = imgElements[i];
+      var w = imgEle.naturalWidth;
+      var h = imgEle.naturalHeight;
+      if(w > 200 && h > 100){
+        imgs.push(imgEle.src);
+      }
+    }
+    map["imgs"] = imgs;
+    return JSON.stringify(map);;
+  }
+)()
+""";
+    try {
+      dynamic result = await _controller?.evaluateJavascript(source: js);
+      var json = jsonDecode(result) as Map<String, dynamic>;
+      return WebShareInfo.fromJson(json);
+    } catch (_) {
+      return WebShareInfo(
+        url: (await getUrl())?.toString(),
+        title: await getTitle(),
+        desc: null,
+        imgs: null,
+      );
+    }
+  }
+
+  Future<void> goTop() async {
+    String js = """
+javascript:(
+  function(){
+    var timer = null;
+    cancelAnimationFrame(timer);
+    var startTime = +new Date();
+    var b = document.body.scrollTop || document.documentElement.scrollTop;
+    var d = 500;
+    var c = b;
+    var timer = requestAnimationFrame(function func(){
+      var t = d - Math.max(0,startTime - (+new Date()) + d);
+      document.documentElement.scrollTop = document.body.scrollTop = t * (-c) / d + b;
+      timer = requestAnimationFrame(func);
+      if(t == d){
+        cancelAnimationFrame(timer);
+      }
+    });
+  }
+)() 
+""";
+    await _controller?.evaluateJavascript(source: js);
+  }
 }
 
 class Web extends StatefulWidget {
   const Web({
     Key? key,
     required this.url,
-    required this.onProgress,
     required this.controller,
+    this.onProgress,
+    this.onUpdateVisitedHistory,
   }) : super(key: key);
 
   final String? url;
-  final ValueChanged<double?> onProgress;
+  final ValueChanged<double?>? onProgress;
+  final ValueChanged<String?>? onUpdateVisitedHistory;
   final WebController controller;
 
   @override
@@ -93,18 +187,21 @@ class _WebState extends State<Web> {
       onWebViewCreated: (InAppWebViewController controller) {
         widget.controller.attachController(controller);
       },
+      onUpdateVisitedHistory: (controller, url, androidIsReload) {
+        widget.onUpdateVisitedHistory?.call(url?.toString());
+      },
       onProgressChanged: (controller, progress) {
         if (progress > 95) {
-          widget.onProgress(null);
+          widget.onProgress?.call(null);
         } else {
-          widget.onProgress((progress / 100.0).clamp(0.0, 1.0));
+          widget.onProgress?.call((progress / 100.0).clamp(0.0, 1.0));
         }
       },
       onLoadStart: (controller, url) {
-        widget.onProgress(0.0);
+        widget.onProgress?.call(0.0);
       },
       onLoadStop: (controller, url) {
-        widget.onProgress(null);
+        widget.onProgress?.call(null);
       },
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         var scheme = navigationAction.request.url?.scheme;

@@ -629,6 +629,66 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Share Article`
+  String get share_article {
+    return Intl.message(
+      'Share Article',
+      name: 'share_article',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Article title`
+  String get share_article_title_label {
+    return Intl.message(
+      'Article title',
+      name: 'share_article_title_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Article link`
+  String get share_article_link_label {
+    return Intl.message(
+      'Article link',
+      name: 'share_article_link_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input article title`
+  String get share_article_title_hint {
+    return Intl.message(
+      'Input article title',
+      name: 'share_article_title_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Input article link`
+  String get share_article_link_hint {
+    return Intl.message(
+      'Input article link',
+      name: 'share_article_link_hint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share article successfully`
+  String get share_article_successfully {
+    return Intl.message(
+      'Share article successfully',
+      name: 'share_article_successfully',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

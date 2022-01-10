@@ -9,20 +9,22 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_item.dart';
-import 'package:wanandroid/module/shared/shared_view_model.dart';
+import 'package:wanandroid/module/share/my_share_view_model.dart';
 import 'package:wanandroid/widget/paged_list_footer.dart';
 import 'package:wanandroid/widget/shici_refresh_header.dart';
 
-class SharedPage extends StatefulWidget {
-  const SharedPage({Key? key}) : super(key: key);
+class MySharePage extends StatefulWidget {
+  const MySharePage({Key? key}) : super(key: key);
 
   @override
-  _SharedPageState createState() => _SharedPageState();
+  _MySharePageState createState() => _MySharePageState();
 }
 
-class _SharedPageState extends State<SharedPage> {
-  final SharedViewModel _viewModel = SharedViewModel();
+class _MySharePageState extends State<MySharePage> {
+  final MyShareViewModel _viewModel = MyShareViewModel();
 
   ScrollController? _scrollController;
 
@@ -50,12 +52,20 @@ class _SharedPageState extends State<SharedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<SharedViewModel>(
+    return ViewModelProvider<MyShareViewModel>(
         create: (context) => _viewModel..getInitialPage(),
         builder: (context, viewModel) {
           return Scaffold(
             appBar: AppBar(
               title: Text(Strings.of(context).mine_share),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    AppRouter.of(context).pushNamed(RouteMap.shareArticlePage);
+                  },
+                  icon: const Icon(Icons.add_rounded),
+                )
+              ],
             ),
             body: DataProvider<SharedArticlesPagingData>(
               create: (context) => _viewModel.pagingData,

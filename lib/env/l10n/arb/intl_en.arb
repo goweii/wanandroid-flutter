@@ -56,5 +56,11 @@
     "confirm_deletion": "Confirm deletion",
     "edit": "Edit",
     "not_support": "Not supported",
-    "buy_him_a_cup_of_coffee": "Buy him a cup of coffee"
+    "buy_him_a_cup_of_coffee": "Buy him a cup of coffee",
+    "share_article": "Share Article",
+    "share_article_title_label": "Article title",
+    "share_article_link_label": "Article link",
+    "share_article_title_hint": "Input article title",
+    "share_article_link_hint": "Input article link",
+    "share_article_successfully": "Share article successfully"
 }

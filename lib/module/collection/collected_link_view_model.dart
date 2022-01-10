@@ -18,7 +18,7 @@ class CollectedLinkViewModel extends ViewModel {
       for (var e in data) {
         e.collect = true;
       }
-      statableData.value = data;
+      statableData.value = data.reversed.toList();
       return true;
     } catch (_) {
       statableData.toError();

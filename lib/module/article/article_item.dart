@@ -68,7 +68,7 @@ class _ArticleItemState extends State<ArticleItem> {
     try {
       if (article.collect != true) {
         if (article.originId == null) {
-          await _articleRepo.collectArticle(
+          await _articleRepo.collectInSiteArticle(
             articleId: article.id,
           );
           Bus().send(CollectEvent(
@@ -76,7 +76,7 @@ class _ArticleItemState extends State<ArticleItem> {
             articleId: article.id,
           ));
         } else {
-          await _articleRepo.collectArticle(
+          await _articleRepo.collectInSiteArticle(
             articleId: article.originId!,
           );
           Bus().send(CollectEvent(
@@ -87,7 +87,7 @@ class _ArticleItemState extends State<ArticleItem> {
         }
       } else {
         if (article.originId == null) {
-          await _articleRepo.uncollectByArticleId(
+          await _articleRepo.uncollectArticleByArticleId(
             articleId: article.id,
           );
           Bus().send(CollectEvent(
@@ -95,7 +95,7 @@ class _ArticleItemState extends State<ArticleItem> {
             articleId: article.id,
           ));
         } else {
-          await _articleRepo.uncollectByCollectId(
+          await _articleRepo.uncollectArticleByCollectId(
             collectId: article.id,
             articleId: article.originId,
           );

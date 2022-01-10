@@ -83,6 +83,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("释放刷新"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
         "settings_title": MessageLookupByLibrary.simpleMessage("设置"),
+        "share_article": MessageLookupByLibrary.simpleMessage("分享文章"),
+        "share_article_link_hint":
+            MessageLookupByLibrary.simpleMessage("请输入文章链接"),
+        "share_article_link_label":
+            MessageLookupByLibrary.simpleMessage("文章链接"),
+        "share_article_successfully":
+            MessageLookupByLibrary.simpleMessage("分享文章成功"),
+        "share_article_title_hint":
+            MessageLookupByLibrary.simpleMessage("请输入文章标题"),
+        "share_article_title_label":
+            MessageLookupByLibrary.simpleMessage("文章标题"),
         "theme_mode_dark": MessageLookupByLibrary.simpleMessage("暗色"),
         "theme_mode_light": MessageLookupByLibrary.simpleMessage("亮色"),
         "theme_mode_system": MessageLookupByLibrary.simpleMessage("跟随系统"),

@@ -25,6 +25,54 @@ class WanToast extends Toast {
             );
           },
         );
+
+  WanToast.tip(
+    BuildContext context, {
+    required String msg,
+  }) : super(
+          context,
+          builder: (context, animation) {
+            return _AnimatedWanToastView(
+              animation: animation,
+              child: _WanToastView(
+                msg: msg,
+                type: WanToastType.tip,
+              ),
+            );
+          },
+        );
+
+  WanToast.success(
+    BuildContext context, {
+    required String msg,
+  }) : super(
+          context,
+          builder: (context, animation) {
+            return _AnimatedWanToastView(
+              animation: animation,
+              child: _WanToastView(
+                msg: msg,
+                type: WanToastType.success,
+              ),
+            );
+          },
+        );
+
+  WanToast.error(
+    BuildContext context, {
+    required String msg,
+  }) : super(
+          context,
+          builder: (context, animation) {
+            return _AnimatedWanToastView(
+              animation: animation,
+              child: _WanToastView(
+                msg: msg,
+                type: WanToastType.error,
+              ),
+            );
+          },
+        );
 }
 
 class _AnimatedWanToastView extends StatefulWidget {

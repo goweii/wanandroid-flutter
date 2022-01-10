@@ -16,7 +16,9 @@ import 'package:wanandroid/module/navigation/chapter_page.dart';
 import 'package:wanandroid/module/question/question_args.dart';
 import 'package:wanandroid/module/question/question_details_page.dart';
 import 'package:wanandroid/module/settings/settings_page.dart';
-import 'package:wanandroid/module/shared/shared_page.dart';
+import 'package:wanandroid/module/share/share_article_info.dart';
+import 'package:wanandroid/module/share/share_article_page.dart';
+import 'package:wanandroid/module/share/my_share_page.dart';
 import 'package:wanandroid/module/userpage/user_page.dart';
 
 class RouteMap {
@@ -28,11 +30,12 @@ class RouteMap {
   static const String chapterPage = "/chapter";
   static const String coinPage = "/coin";
   static const String collectionPage = "/collection";
-  static const String sharedPage = "/shared";
+  static const String mySharePage = "/myShare";
   static const String aboutMePage = "/aboutMe";
   static const String messagePage = "/message";
   static const String coinRankPage = "/coinRank";
   static const String userPage = "/user";
+  static const String shareArticlePage = "/shareArticle";
 
   static final Map<String, RouteBuilder> map = {
     mainPage: (context, page) => NonePageRoute(
@@ -89,10 +92,10 @@ class RouteMap {
             return const CollectionPage();
           },
         ),
-    sharedPage: (context, page) => RightPageRoute(
+    mySharePage: (context, page) => RightPageRoute(
           page: page,
           builder: (context, arguments) {
-            return const SharedPage();
+            return const MySharePage();
           },
         ),
     aboutMePage: (context, page) => RightPageRoute(
@@ -117,6 +120,14 @@ class RouteMap {
           page: page,
           builder: (context, arguments) {
             return UserPage(userid: arguments as int);
+          },
+        ),
+    shareArticlePage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return ShareArticlePage(
+              shareArticleInfo: arguments as ShareArticleInfo?,
+            );
           },
         ),
   };

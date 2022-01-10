@@ -93,6 +93,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Release to refresh"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
+        "share_article": MessageLookupByLibrary.simpleMessage("Share Article"),
+        "share_article_link_hint":
+            MessageLookupByLibrary.simpleMessage("Input article link"),
+        "share_article_link_label":
+            MessageLookupByLibrary.simpleMessage("Article link"),
+        "share_article_successfully":
+            MessageLookupByLibrary.simpleMessage("Share article successfully"),
+        "share_article_title_hint":
+            MessageLookupByLibrary.simpleMessage("Input article title"),
+        "share_article_title_label":
+            MessageLookupByLibrary.simpleMessage("Article title"),
         "theme_mode_dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "theme_mode_light": MessageLookupByLibrary.simpleMessage("Light"),
         "theme_mode_system":

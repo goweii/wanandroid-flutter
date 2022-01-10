@@ -7,7 +7,7 @@ class SquareViewModel extends ViewModel {
   final StatablePagingData<ArticleBean> pagingData = StatablePagingData();
 
   final Paging<ArticleBean> _paging = Paging<ArticleBean>(
-    initialPage: 1,
+    initialPage: 0,
     requester: (page) async {
       var resp = await WanApis.getSquareArticles(page);
       return PagingData(ended: resp.over, datas: resp.datas);

@@ -28,12 +28,16 @@ class WanRespConverter<T> implements RespConverter<T> {
     required this.fromJsonT,
   });
 
+  T _defFromJsonT(json) {
+    return json as T;
+  }
+
   @override
   T convert(Map<String, dynamic> json) {
-    if (fromJsonT == null) {
-      return json as T;
-    }
-    WanResp<T> resp = WanResp<T>.fromJson(json, fromJsonT!);
+    WanResp<T> resp = WanResp<T>.fromJson(
+      json,
+      fromJsonT != null ? fromJsonT! : _defFromJsonT,
+    );
     if (resp.errorCode == 0) {
       return resp.data;
     } else {

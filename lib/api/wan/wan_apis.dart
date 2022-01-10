@@ -1,4 +1,5 @@
 import 'package:wanandroid/api/wan/bean/article_bean.dart';
+import 'package:wanandroid/api/wan/bean/collect_link_bean.dart';
 import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 import 'package:wanandroid/api/wan/bean/link_bean.dart';
@@ -53,7 +54,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<dynamic> collectArticle({
+  static Future<dynamic> collectInSiteArticle({
     required int articleId,
   }) async {
     return await WanApi(
@@ -63,7 +64,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<dynamic> collectArticleByLink({
+  static Future<ArticleBean> collectOffSiteArticle({
     required String title,
     required String author,
     required String link,
@@ -76,11 +77,11 @@ class WanApis {
         "author": author,
         "link": link,
       },
-      fromJsonT: (json) => json,
+      fromJsonT: (json) => ArticleBean.fromJson(json),
     ).request();
   }
 
-  static Future<dynamic> uncollectByArticleId({
+  static Future<dynamic> uncollectArticleByArticleId({
     required int articleId,
   }) async {
     return await WanApi(
@@ -90,7 +91,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<dynamic> uncollectByCollectId({
+  static Future<dynamic> uncollectArticleByCollectId({
     required int collectId,
     required int? articleId,
   }) async {
@@ -300,6 +301,22 @@ class WanApis {
     ).request();
   }
 
+  static Future<CollectLinkBean> collectLink({
+    required String name,
+    required String link,
+  }) {
+    return WanApi(
+      method: HttpMethod.post,
+      path: '/lg/collect/addtool/json',
+      body: {
+        'name': name,
+        'link': link,
+      },
+      bodyType: BodyType.form,
+      fromJsonT: (json) => CollectLinkBean.fromJson(json),
+    ).request();
+  }
+
   static Future<dynamic> deleteCollectedLink(int id) async {
     return await WanApi(
       method: HttpMethod.post,
@@ -310,7 +327,7 @@ class WanApis {
     ).request();
   }
 
-  static Future<dynamic> updateCollectedLink({
+  static Future<CollectLinkBean> updateCollectedLink({
     required int id,
     required String name,
     required String link,
@@ -324,7 +341,7 @@ class WanApis {
         "link": link,
       },
       bodyType: BodyType.form,
-      fromJsonT: null,
+      fromJsonT: (json) => CollectLinkBean.fromJson(json),
     ).request();
   }
 
@@ -352,6 +369,22 @@ class WanApis {
       method: HttpMethod.get,
       path: '/user/$userid/share_articles/$page/json',
       fromJsonT: (json) => UserPageBean.fromJson(json),
+    ).request();
+  }
+
+  static Future<dynamic> shareArticle({
+    required String title,
+    required String link,
+  }) {
+    return WanApi(
+      method: HttpMethod.post,
+      path: '/lg/user_article/add/json',
+      body: {
+        'title': title,
+        'link': link,
+      },
+      bodyType: BodyType.form,
+      fromJsonT: null,
     ).request();
   }
 }

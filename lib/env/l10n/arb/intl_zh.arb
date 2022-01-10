@@ -56,5 +56,11 @@
     "confirm_deletion": "确认删除",
     "edit": "编辑",
     "not_support": "暂不支持",
-    "buy_him_a_cup_of_coffee": "请他喝杯咖啡"
+    "buy_him_a_cup_of_coffee": "请他喝杯咖啡",
+    "share_article": "分享文章",
+    "share_article_title_label": "文章标题",
+    "share_article_link_label": "文章链接",
+    "share_article_title_hint": "请输入文章标题",
+    "share_article_link_hint": "请输入文章链接",
+    "share_article_successfully": "分享文章成功"
 }
