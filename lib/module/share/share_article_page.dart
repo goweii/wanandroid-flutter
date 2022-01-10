@@ -68,6 +68,7 @@ class _ShareArticlePageState extends State<ShareArticlePage> {
       appBar: AppBar(
         title: Text(Strings.of(context).share_article),
       ),
+      backgroundColor: themeData.colorScheme.surface,
       body: Container(
         padding: const EdgeInsets.only(
           left: AppDimens.marginNormal,
