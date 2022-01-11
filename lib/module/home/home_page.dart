@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
@@ -5,6 +6,8 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/route/route_map.dart';
+import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/home/home_view_model.dart';
 import 'package:wanandroid/module/home/home_widget.dart';
 import 'package:wanandroid/module/article/article_item.dart';
@@ -59,7 +62,17 @@ class _HomePageState extends State<HomePage>
       },
       builder: (context, viewModel) {
         return Scaffold(
-          appBar: AppBar(title: Text(Strings.of(context).home_title)),
+          appBar: AppBar(
+            title: Text(Strings.of(context).home_title),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  AppRouter.of(context).pushNamed(RouteMap.scanPage);
+                },
+                icon: const Icon(CupertinoIcons.qrcode_viewfinder),
+              )
+            ],
+          ),
           body: DataProvider3<BannerPagingData, TopArticlePagingData,
               HomeArticlePagingData>(
             create1: (context) => viewModel.banners,

@@ -62,5 +62,8 @@
     "share_article_link_label": "文章链接",
     "share_article_title_hint": "请输入文章标题",
     "share_article_link_hint": "请输入文章链接",
-    "share_article_successfully": "分享文章成功"
+    "share_article_successfully": "分享文章成功",
+    "sacn_page_camera_permission_title": "相机权限",
+    "sacn_page_camera_permission_request": "必须授予相机权限才能开始扫码",
+    "sacn_page_camera_permission_go_settings": "请前往设置并打开相机权限"
 }

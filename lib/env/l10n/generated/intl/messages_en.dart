@@ -92,6 +92,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "refresh_header_state_release_to_refresh":
             MessageLookupByLibrary.simpleMessage("Release to refresh"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "sacn_page_camera_permission_go_settings":
+            MessageLookupByLibrary.simpleMessage(
+                "Please go to settings and turn on camera permission"),
+        "sacn_page_camera_permission_request":
+            MessageLookupByLibrary.simpleMessage(
+                "Camera permission must be granted to start scanning"),
+        "sacn_page_camera_permission_title":
+            MessageLookupByLibrary.simpleMessage("Camera Permission"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
         "share_article": MessageLookupByLibrary.simpleMessage("Share Article"),
         "share_article_link_hint":

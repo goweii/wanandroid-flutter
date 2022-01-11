@@ -689,6 +689,36 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Camera Permission`
+  String get sacn_page_camera_permission_title {
+    return Intl.message(
+      'Camera Permission',
+      name: 'sacn_page_camera_permission_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera permission must be granted to start scanning`
+  String get sacn_page_camera_permission_request {
+    return Intl.message(
+      'Camera permission must be granted to start scanning',
+      name: 'sacn_page_camera_permission_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please go to settings and turn on camera permission`
+  String get sacn_page_camera_permission_go_settings {
+    return Intl.message(
+      'Please go to settings and turn on camera permission',
+      name: 'sacn_page_camera_permission_go_settings',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

@@ -62,5 +62,8 @@
     "share_article_link_label": "Article link",
     "share_article_title_hint": "Input article title",
     "share_article_link_hint": "Input article link",
-    "share_article_successfully": "Share article successfully"
+    "share_article_successfully": "Share article successfully",
+    "sacn_page_camera_permission_title": "Camera Permission",
+    "sacn_page_camera_permission_request": "Camera permission must be granted to start scanning",
+    "sacn_page_camera_permission_go_settings": "Please go to settings and turn on camera permission"
 }

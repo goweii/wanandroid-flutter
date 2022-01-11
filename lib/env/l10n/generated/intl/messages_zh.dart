@@ -82,6 +82,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "refresh_header_state_release_to_refresh":
             MessageLookupByLibrary.simpleMessage("释放刷新"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
+        "sacn_page_camera_permission_go_settings":
+            MessageLookupByLibrary.simpleMessage("请前往设置并打开相机权限"),
+        "sacn_page_camera_permission_request":
+            MessageLookupByLibrary.simpleMessage("必须授予相机权限才能开始扫码"),
+        "sacn_page_camera_permission_title":
+            MessageLookupByLibrary.simpleMessage("相机权限"),
         "settings_title": MessageLookupByLibrary.simpleMessage("设置"),
         "share_article": MessageLookupByLibrary.simpleMessage("分享文章"),
         "share_article_link_hint":
