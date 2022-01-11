@@ -42,8 +42,9 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if (_settingsOpened) {
-      if (state == AppLifecycleState.resumed) {
+    if (state == AppLifecycleState.resumed) {
+      if (_settingsOpened) {
+        _settingsOpened = false;
         _checkPermissionAfterSettings();
       }
     }
@@ -77,7 +78,9 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
               barcode: _result,
             );
           }
-          if (status.isPermanentlyDenied) {
+          if (status.isPermanentlyDenied ||
+              status.isRestricted ||
+              status.isLimited) {
             return PermissionPermanentlyDeniedWidget(
               onPressed: () => _openSettings(),
             );
