@@ -35,9 +35,9 @@ class _ScanWidgetState extends State<ScanWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return OverflowBox(
-        child: Stack(
+    return OverflowBox(
+      child: LayoutBuilder(builder: (context, constraints) {
+        return Stack(
           fit: StackFit.expand,
           children: [
             QRView(
@@ -87,9 +87,9 @@ class _ScanWidgetState extends State<ScanWidget> {
                 ),
               )
           ],
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }
 
