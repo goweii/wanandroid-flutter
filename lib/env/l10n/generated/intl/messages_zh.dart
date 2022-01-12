@@ -88,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("必须授予相机权限才能开始扫码"),
         "sacn_page_camera_permission_title":
             MessageLookupByLibrary.simpleMessage("相机权限"),
+        "search_history_title": MessageLookupByLibrary.simpleMessage("历史搜索"),
+        "search_hot_title": MessageLookupByLibrary.simpleMessage("热门搜索"),
         "settings_title": MessageLookupByLibrary.simpleMessage("设置"),
         "share_article": MessageLookupByLibrary.simpleMessage("分享文章"),
         "share_article_link_hint":

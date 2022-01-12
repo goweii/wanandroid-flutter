@@ -1,5 +1,6 @@
 import 'package:wanandroid/api/wan/bean/article_bean.dart';
 import 'package:wanandroid/api/wan/bean/collect_link_bean.dart';
+import 'package:wanandroid/api/wan/bean/hot_key_bean.dart';
 import 'package:wanandroid/api/wan/bean/user_coin_bean.dart';
 import 'package:wanandroid/api/wan/bean/knowledge_bean.dart';
 import 'package:wanandroid/api/wan/bean/link_bean.dart';
@@ -385,6 +386,35 @@ class WanApis {
       },
       bodyType: BodyType.form,
       fromJsonT: null,
+    ).request();
+  }
+
+  static Future<PagedBean<ArticleBean>> search({
+    required String key,
+    required int page,
+  }) {
+    return WanApi(
+      method: HttpMethod.post,
+      path: '/article/query/$page/json',
+      body: {'k': key},
+      bodyType: BodyType.form,
+      fromJsonT: (json) =>
+          PagedBean.fromJson(json, (json) => ArticleBean.fromJson(json)),
+    ).request();
+  }
+
+  static Future<List<HotKeyBean>> getHotKey() {
+    return WanApi(
+      method: HttpMethod.get,
+      path: '/hotkey/json',
+      fromJsonT: (json) {
+        var data = <HotKeyBean>[];
+        json as List;
+        for (var v in json) {
+          data.add(HotKeyBean.fromJson(v));
+        }
+        return data;
+      },
     ).request();
   }
 }

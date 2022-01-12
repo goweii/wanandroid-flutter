@@ -719,6 +719,26 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Hot search`
+  String get search_hot_title {
+    return Intl.message(
+      'Hot search',
+      name: 'search_hot_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `History search`
+  String get search_history_title {
+    return Intl.message(
+      'History search',
+      name: 'search_history_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

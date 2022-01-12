@@ -100,6 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Camera permission must be granted to start scanning"),
         "sacn_page_camera_permission_title":
             MessageLookupByLibrary.simpleMessage("Camera Permission"),
+        "search_history_title":
+            MessageLookupByLibrary.simpleMessage("History search"),
+        "search_hot_title": MessageLookupByLibrary.simpleMessage("Hot search"),
         "settings_title": MessageLookupByLibrary.simpleMessage("Settings"),
         "share_article": MessageLookupByLibrary.simpleMessage("Share Article"),
         "share_article_link_hint":

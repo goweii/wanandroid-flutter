@@ -65,5 +65,7 @@
     "share_article_successfully": "Share article successfully",
     "sacn_page_camera_permission_title": "Camera Permission",
     "sacn_page_camera_permission_request": "Camera permission must be granted to start scanning",
-    "sacn_page_camera_permission_go_settings": "Please go to settings and turn on camera permission"
+    "sacn_page_camera_permission_go_settings": "Please go to settings and turn on camera permission",
+    "search_hot_title": "Hot search",
+    "search_history_title": "History search"
 }

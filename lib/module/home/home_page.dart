@@ -64,13 +64,19 @@ class _HomePageState extends State<HomePage>
         return Scaffold(
           appBar: AppBar(
             title: Text(Strings.of(context).home_title),
+            leading: IconButton(
+              onPressed: () {
+                AppRouter.of(context).pushNamed(RouteMap.scanPage);
+              },
+              icon: const Icon(CupertinoIcons.qrcode_viewfinder),
+            ),
             actions: [
               IconButton(
                 onPressed: () {
-                  AppRouter.of(context).pushNamed(RouteMap.scanPage);
+                  AppRouter.of(context).pushNamed(RouteMap.searchPage);
                 },
-                icon: const Icon(CupertinoIcons.qrcode_viewfinder),
-              )
+                icon: const Icon(CupertinoIcons.search),
+              ),
             ],
           ),
           body: DataProvider3<BannerPagingData, TopArticlePagingData,

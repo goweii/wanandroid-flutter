@@ -16,6 +16,7 @@ import 'package:wanandroid/module/navigation/chapter_page.dart';
 import 'package:wanandroid/module/question/question_args.dart';
 import 'package:wanandroid/module/question/question_details_page.dart';
 import 'package:wanandroid/module/scan/scan_page.dart';
+import 'package:wanandroid/module/search/search_page.dart';
 import 'package:wanandroid/module/settings/settings_page.dart';
 import 'package:wanandroid/module/share/share_article_info.dart';
 import 'package:wanandroid/module/share/share_article_page.dart';
@@ -38,6 +39,7 @@ class RouteMap {
   static const String userPage = "/user";
   static const String shareArticlePage = "/shareArticle";
   static const String scanPage = "/scan";
+  static const String searchPage = "/search";
 
   static final Map<String, RouteBuilder> map = {
     mainPage: (context, page) => NonePageRoute(
@@ -136,6 +138,12 @@ class RouteMap {
           page: page,
           builder: (context, arguments) {
             return const ScanPage();
+          },
+        ),
+    searchPage: (context, page) => RightPageRoute(
+          page: page,
+          builder: (context, arguments) {
+            return const SearchPage();
           },
         ),
   };
