@@ -2,10 +2,12 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
+import 'package:wanandroid/env/provider/unread.dart';
 import 'package:wanandroid/module/home/home_page.dart';
 import 'package:wanandroid/module/mine/mine_page.dart';
 import 'package:wanandroid/module/navigation/navigation_page.dart';
 import 'package:wanandroid/module/question/question_page.dart';
+import 'package:wanandroid/widget/read_point.dart';
 
 class MainHomePage extends StatefulWidget {
   const MainHomePage({
@@ -103,7 +105,21 @@ class _MainHomePageState extends State<MainHomePage>
                         text: Strings.of(context).navigation_title,
                       ),
                       Tab(
-                        icon: const Icon(Icons.person_rounded),
+                        icon: UnreadModelConsumer(
+                          builder: (context, unreadModel) {
+                            return Stack(
+                              children: [
+                                const Icon(Icons.person_rounded),
+                                if (unreadModel.unreadMsgCount > 0)
+                                  const Positioned(
+                                    right: 0,
+                                    top: 0,
+                                    child: RedPoint(count: 0),
+                                  ),
+                              ],
+                            );
+                          },
+                        ),
                         iconMargin: const EdgeInsets.only(bottom: 0),
                         text: Strings.of(context).mine_title,
                       ),

@@ -2,6 +2,7 @@ import 'package:wanandroid/api/wan/bean/message_bean.dart';
 import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
+import 'package:wanandroid/env/provider/unread.dart';
 
 class MsgStatablePagingData extends StatablePagingData<MessageBean> {}
 
@@ -42,13 +43,16 @@ class MessageViewModel extends ViewModel {
             ended: false,
             datas: unreadList.datas,
           ));
+          UnreadModel().unreadMsgCount -= unreadList.datas.length;
         } else {
           msgStatablePagingData.append(PagingData(
             ended: false,
             datas: unreadList.datas,
           ));
+          UnreadModel().unreadMsgCount -= unreadList.datas.length;
         }
         if (_unreadMsgPaging.isEnded) {
+          UnreadModel().unreadMsgCount = 0;
           getNextPage();
         }
         return true;

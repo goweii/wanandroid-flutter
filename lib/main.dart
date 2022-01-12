@@ -8,11 +8,13 @@ import 'package:wanandroid/env/l10n/locale_model_store.dart';
 import 'package:wanandroid/env/l10n/localization.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/provider/unread.dart';
 import 'package:wanandroid/env/route/route_delegate.dart';
 import 'package:wanandroid/env/route/route_parser.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/env/theme/theme_model_store.dart';
 import 'package:wanandroid/env/theme/theme_model_provider.dart';
+import 'package:wanandroid/main_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,7 @@ Future<void> main() async {
       ThemeModelProvider(themeModel: themeModel),
       LocaleModelProvider(localeModel: localeModel),
       LoginStateProvider(loginState: loginState),
+      UnreadModelProvider(),
     ],
     child: const MyApp(),
   ));
@@ -42,8 +45,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final MainViewModel _viewModel = MainViewModel();
   final AppRouteDelegate _appRouteDelegate = AppRouteDelegate();
   final AppRouteParser _appRouteParser = AppRouteParser();
+
+  @override
+  void initState() {
+    super.initState();
+    LoginState.stream().listen((event) {
+      _viewModel.updateUnreadMsgCount();
+    });
+    _viewModel.updateUnreadMsgCount();
+  }
 
   @override
   Widget build(BuildContext context) {

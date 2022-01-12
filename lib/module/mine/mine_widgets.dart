@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/api/wan/bean/user_bean.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
-import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/provider/login.dart';
+import 'package:wanandroid/env/provider/unread.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
-import 'package:wanandroid/module/mine/mine_view_model.dart';
 import 'package:wanandroid/widget/action_item.dart';
+import 'package:wanandroid/widget/read_point.dart';
 
 class MineToolbar extends StatelessWidget {
   const MineToolbar({
@@ -42,9 +42,9 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return DataConsumer<UnreadMessageCountStatableData>(
+    return UnreadModelConsumer(
       builder: (context, value) {
-        var count = value.value;
+        var count = value.unreadMsgCount;
         return Stack(
           alignment: Alignment.topRight,
           children: [
@@ -63,32 +63,12 @@ class MineUnreadMessageCountIcon extends StatelessWidget {
             ),
             if (count > 0)
               Container(
-                constraints: const BoxConstraints(
-                  minWidth: 12,
-                  minHeight: 12,
-                  maxHeight: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: themeData.colorScheme.error,
-                  borderRadius: BorderRadius.circular(99),
-                ),
                 margin: const EdgeInsets.only(
                   right: 10,
                   top: 10,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 1,
-                  horizontal: 3,
-                ),
-                child: Text(
-                  count < 100 ? '$count' : '99+',
-                  style: themeData.textTheme.caption?.copyWith(
-                    color: themeData.colorScheme.onError,
-                    fontSize: 10,
-                    height: 1,
-                  ),
-                ),
-              )
+                child: RedPoint(count: count),
+              ),
           ],
         );
       },

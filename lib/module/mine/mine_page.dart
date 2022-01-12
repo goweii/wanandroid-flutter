@@ -36,8 +36,6 @@ class _MinePageState extends State<MinePage>
       create: (context) => _viewModel,
       provide: (viewModel) => [
         DataProvider<UserBeanStatableData>(create: (_) => viewModel.userBean),
-        DataProvider<UnreadMessageCountStatableData>(
-            create: (_) => viewModel.unreadMessageCount),
       ],
       builder: (context, viewModel) {
         return DataConsumer<UserBeanStatableData>(
@@ -128,10 +126,8 @@ class _MinePageState extends State<MinePage>
     LoginState loginState = LoginState.value(context);
     if (loginState.isLogin) {
       await _viewModel.getUserInfo();
-      await _viewModel.getUnreadMessageCount();
     } else {
       _viewModel.clearUserInfo();
-      _viewModel.clearUnreadMessageCount();
     }
   }
 }
