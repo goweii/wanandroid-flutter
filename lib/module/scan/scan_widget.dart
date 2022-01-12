@@ -36,53 +36,58 @@ class _ScanWidgetState extends State<ScanWidget> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Stack(
-        fit: StackFit.expand,
-        children: [
-          QRView(
-            key: widget.qrViewKey,
-            onQRViewCreated: widget.onQRViewCreated,
-          ),
-          if (widget.barcode == null)
-            AnimatedAlign(
-              duration: const Duration(milliseconds: 5000),
-              alignment: Alignment(0, _alignment),
-              onEnd: () => setState(() {
-                _alignment = -_alignment;
-              }),
-              child: ClipRect(
-                child: Align(
-                  heightFactor: 0.5,
-                  alignment: _alignment > 0
-                      ? Alignment.topCenter
-                      : Alignment.bottomCenter,
-                  child: Transform(
-                    alignment: Alignment.center,
-                    transform: Matrix4.diagonal3Values(5, 1, 1.0),
-                    child: Container(
-                      width: double.infinity,
-                      height: constraints.maxWidth * 0.2,
-                      decoration: BoxDecoration(
-                        gradient: RadialGradient(
-                          center: const Alignment(0, 0),
-                          colors: [
-                            Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.6),
-                            Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withOpacity(0.0),
-                          ],
+      return OverflowBox(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            QRView(
+              key: widget.qrViewKey,
+              onQRViewCreated: widget.onQRViewCreated,
+              formatsAllowed: const [
+                BarcodeFormat.qrcode,
+              ],
+            ),
+            if (widget.barcode == null)
+              AnimatedAlign(
+                duration: const Duration(milliseconds: 5000),
+                alignment: Alignment(0, _alignment),
+                onEnd: () => setState(() {
+                  _alignment = -_alignment;
+                }),
+                child: ClipRect(
+                  child: Align(
+                    heightFactor: 0.5,
+                    alignment: _alignment > 0
+                        ? Alignment.topCenter
+                        : Alignment.bottomCenter,
+                    child: Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.diagonal3Values(5, 1, 1.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: constraints.maxWidth * 0.2,
+                        decoration: BoxDecoration(
+                          gradient: RadialGradient(
+                            center: const Alignment(0, 0),
+                            colors: [
+                              Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.6),
+                              Theme.of(context)
+                                  .colorScheme
+                                  .primary
+                                  .withOpacity(0.0),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            )
-        ],
+              )
+          ],
+        ),
       );
     });
   }

@@ -34,6 +34,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
     super.reassemble();
     if (Platform.isAndroid) {
       controller?.pauseCamera();
+      controller?.resumeCamera();
     } else if (Platform.isIOS) {
       controller?.resumeCamera();
     }
@@ -65,6 +66,7 @@ class _ScanPageState extends State<ScanPage> with WidgetsBindingObserver {
         backgroundColor: Colors.transparent,
       ),
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       body: LayoutBuilder(
         builder: (context, constraints) {
           PermissionStatus? status = _permissionStatus;

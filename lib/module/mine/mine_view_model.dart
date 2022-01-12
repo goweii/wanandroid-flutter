@@ -2,7 +2,6 @@ import 'package:wanandroid/api/wan/bean/user_bean.dart';
 import 'package:wanandroid/api/wan/wan_apis.dart';
 import 'package:wanandroid/env/mvvm/statable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
-import 'package:wanandroid/env/provider/unread.dart';
 
 class UserBeanStatableData extends StatableData<UserBean?> {
   UserBeanStatableData() : super(null);
