@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
         "buy_him_a_cup_of_coffee":
             MessageLookupByLibrary.simpleMessage("请他喝杯咖啡"),
+        "checksum_error": MessageLookupByLibrary.simpleMessage("检查出错"),
         "choice_language": MessageLookupByLibrary.simpleMessage("语言"),
         "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
         "coin_ranking_title": MessageLookupByLibrary.simpleMessage("积分榜"),
@@ -38,9 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
         "collected_link": MessageLookupByLibrary.simpleMessage("收藏网址"),
         "confirm_deletion": MessageLookupByLibrary.simpleMessage("确认删除"),
+        "date_perfix": MessageLookupByLibrary.simpleMessage("日期:"),
         "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
+        "download_error": MessageLookupByLibrary.simpleMessage("下载出错"),
+        "downloading": MessageLookupByLibrary.simpleMessage("下载中"),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
         "go_login": MessageLookupByLibrary.simpleMessage("去登录"),
         "go_register": MessageLookupByLibrary.simpleMessage("去注册"),
@@ -50,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "input_password_again_hint":
             MessageLookupByLibrary.simpleMessage("请再次输入你的密码"),
         "input_password_hint": MessageLookupByLibrary.simpleMessage("请输入你的密码"),
+        "install_error": MessageLookupByLibrary.simpleMessage("安装出错"),
+        "install_now": MessageLookupByLibrary.simpleMessage("立即安装"),
+        "installing": MessageLookupByLibrary.simpleMessage("安装中"),
         "knowledge_title": MessageLookupByLibrary.simpleMessage("体系"),
         "language_system": MessageLookupByLibrary.simpleMessage("跟随系统"),
         "level_prefix": MessageLookupByLibrary.simpleMessage("等级:"),
@@ -68,6 +75,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("上滑加载更多"),
         "paged_list_footer_loading":
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
+        "permission_not_granted":
+            MessageLookupByLibrary.simpleMessage("权限获取失败"),
         "publish_title": MessageLookupByLibrary.simpleMessage("广场"),
         "question_title": MessageLookupByLibrary.simpleMessage("问答"),
         "ranking_prefix": MessageLookupByLibrary.simpleMessage("排名:"),
@@ -82,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "refresh_header_state_release_to_refresh":
             MessageLookupByLibrary.simpleMessage("释放刷新"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
+        "retry": MessageLookupByLibrary.simpleMessage("重试"),
         "sacn_page_camera_permission_go_settings":
             MessageLookupByLibrary.simpleMessage("请前往设置并打开相机权限"),
         "sacn_page_camera_permission_request":
@@ -108,6 +118,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "top_tag": MessageLookupByLibrary.simpleMessage("置顶"),
         "unknown_error": MessageLookupByLibrary.simpleMessage("未知错误"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("佚名"),
+        "update_error": MessageLookupByLibrary.simpleMessage("更新出错"),
+        "update_now": MessageLookupByLibrary.simpleMessage("立即更新"),
+        "update_title": MessageLookupByLibrary.simpleMessage("发现一个新版本"),
+        "version_perfix": MessageLookupByLibrary.simpleMessage("版本号:"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("玩安卓"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("欢迎使用")
       };

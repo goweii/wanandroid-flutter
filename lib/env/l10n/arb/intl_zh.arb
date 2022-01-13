@@ -67,5 +67,18 @@
     "sacn_page_camera_permission_request": "必须授予相机权限才能开始扫码",
     "sacn_page_camera_permission_go_settings": "请前往设置并打开相机权限",
     "search_hot_title": "热门搜索",
-    "search_history_title": "历史搜索"
+    "search_history_title": "历史搜索",
+    "update_title": "发现一个新版本",
+    "version_perfix": "版本号:",
+    "date_perfix": "日期:",
+    "update_now": "立即更新",
+    "downloading": "下载中",
+    "install_now": "立即安装",
+    "installing": "安装中",
+    "retry": "重试",
+    "permission_not_granted": "权限获取失败",
+    "update_error": "更新出错",
+    "install_error": "安装出错",
+    "download_error": "下载出错",
+    "checksum_error": "检查出错"
 }

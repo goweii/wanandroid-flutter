@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/main/main_home_page.dart';
+import 'package:wanandroid/module/main/main_view_model.dart';
 import 'package:wanandroid/module/square/square_page.dart';
+import 'package:wanandroid/module/update/update_dialog.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,6 +17,8 @@ class _MainPageState extends State<MainPage>
   @override
   bool get wantKeepAlive => true;
 
+  final MainViewModel _viewModel = MainViewModel();
+
   PageController? _pageController;
 
   bool _canOpenSquarePage = true;
@@ -22,6 +27,24 @@ class _MainPageState extends State<MainPage>
   void initState() {
     _pageController = PageController(initialPage: 1);
     super.initState();
+    LoginState.stream().listen((event) {
+      _viewModel.updateUnreadMsgCount();
+    });
+    _viewModel.updateUnreadMsgCount();
+    _viewModel.checkUpdate().then((value) {
+      showDialog(
+        context: context,
+        barrierDismissible: !value.force,
+        builder: (context) {
+          return WillPopScope(
+            onWillPop: () async => !value.force,
+            child: UpdateDialogWidget(
+              updateInfo: value,
+            ),
+          );
+        },
+      );
+    });
   }
 
   @override
@@ -46,17 +69,19 @@ class _MainPageState extends State<MainPage>
       controller: _pageController,
       children: [
         const SquarePage(),
-        MainHomePage(onPageChanged: (value) {
-          if (!_canOpenSquarePage) {
-            if (value == 0) {
-              setState(() => _canOpenSquarePage = true);
+        MainHomePage(
+          onPageChanged: (value) {
+            if (!_canOpenSquarePage) {
+              if (value == 0) {
+                setState(() => _canOpenSquarePage = true);
+              }
+            } else {
+              if (value != 0) {
+                setState(() => _canOpenSquarePage = false);
+              }
             }
-          } else {
-            if (value != 0) {
-              setState(() => _canOpenSquarePage = false);
-            }
-          }
-        }),
+          },
+        ),
         // const ToDoPage(),
       ],
     );

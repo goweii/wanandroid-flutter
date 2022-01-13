@@ -14,7 +14,6 @@ import 'package:wanandroid/env/route/route_parser.dart';
 import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/env/theme/theme_model_store.dart';
 import 'package:wanandroid/env/theme/theme_model_provider.dart';
-import 'package:wanandroid/main_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,17 +44,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final MainViewModel _viewModel = MainViewModel();
   final AppRouteDelegate _appRouteDelegate = AppRouteDelegate();
   final AppRouteParser _appRouteParser = AppRouteParser();
 
   @override
   void initState() {
     super.initState();
-    LoginState.stream().listen((event) {
-      _viewModel.updateUnreadMsgCount();
-    });
-    _viewModel.updateUnreadMsgCount();
   }
 
   @override

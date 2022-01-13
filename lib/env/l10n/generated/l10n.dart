@@ -739,6 +739,136 @@ class Strings {
       args: [],
     );
   }
+
+  /// `New Version`
+  String get update_title {
+    return Intl.message(
+      'New Version',
+      name: 'update_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version:`
+  String get version_perfix {
+    return Intl.message(
+      'Version:',
+      name: 'version_perfix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date:`
+  String get date_perfix {
+    return Intl.message(
+      'Date:',
+      name: 'date_perfix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Now`
+  String get update_now {
+    return Intl.message(
+      'Update Now',
+      name: 'update_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Downloading`
+  String get downloading {
+    return Intl.message(
+      'Downloading',
+      name: 'downloading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Install Now`
+  String get install_now {
+    return Intl.message(
+      'Install Now',
+      name: 'install_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Installing`
+  String get installing {
+    return Intl.message(
+      'Installing',
+      name: 'installing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message(
+      'Retry',
+      name: 'retry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission not granted`
+  String get permission_not_granted {
+    return Intl.message(
+      'Permission not granted',
+      name: 'permission_not_granted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update error`
+  String get update_error {
+    return Intl.message(
+      'Update error',
+      name: 'update_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Install error`
+  String get install_error {
+    return Intl.message(
+      'Install error',
+      name: 'install_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download error`
+  String get download_error {
+    return Intl.message(
+      'Download error',
+      name: 'download_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Checksum error`
+  String get checksum_error {
+    return Intl.message(
+      'Checksum error',
+      name: 'checksum_error',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {

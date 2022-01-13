@@ -32,6 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
         "buy_him_a_cup_of_coffee":
             MessageLookupByLibrary.simpleMessage("Buy him a cup of coffee"),
+        "checksum_error":
+            MessageLookupByLibrary.simpleMessage("Checksum error"),
         "choice_language":
             MessageLookupByLibrary.simpleMessage("Choice language"),
         "choice_theme_mode":
@@ -45,9 +47,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Collected Link"),
         "confirm_deletion":
             MessageLookupByLibrary.simpleMessage("Confirm deletion"),
+        "date_perfix": MessageLookupByLibrary.simpleMessage("Date:"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
+        "download_error":
+            MessageLookupByLibrary.simpleMessage("Download error"),
+        "downloading": MessageLookupByLibrary.simpleMessage("Downloading"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "go_login": MessageLookupByLibrary.simpleMessage("Go Lgoin"),
         "go_register": MessageLookupByLibrary.simpleMessage("Go Register"),
@@ -59,6 +65,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input your password again"),
         "input_password_hint":
             MessageLookupByLibrary.simpleMessage("Input your password"),
+        "install_error": MessageLookupByLibrary.simpleMessage("Install error"),
+        "install_now": MessageLookupByLibrary.simpleMessage("Install Now"),
+        "installing": MessageLookupByLibrary.simpleMessage("Installing"),
         "knowledge_title": MessageLookupByLibrary.simpleMessage("Knowledge"),
         "language_system":
             MessageLookupByLibrary.simpleMessage("Follow system"),
@@ -78,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Slide up to load more"),
         "paged_list_footer_loading":
             MessageLookupByLibrary.simpleMessage("Loading data"),
+        "permission_not_granted":
+            MessageLookupByLibrary.simpleMessage("Permission not granted"),
         "publish_title": MessageLookupByLibrary.simpleMessage("Publish"),
         "question_title": MessageLookupByLibrary.simpleMessage("Question"),
         "ranking_prefix": MessageLookupByLibrary.simpleMessage("Ranking:"),
@@ -92,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "refresh_header_state_release_to_refresh":
             MessageLookupByLibrary.simpleMessage("Release to refresh"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
         "sacn_page_camera_permission_go_settings":
             MessageLookupByLibrary.simpleMessage(
                 "Please go to settings and turn on camera permission"),
@@ -122,6 +134,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "top_tag": MessageLookupByLibrary.simpleMessage("TOP"),
         "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("Unknown"),
+        "update_error": MessageLookupByLibrary.simpleMessage("Update error"),
+        "update_now": MessageLookupByLibrary.simpleMessage("Update Now"),
+        "update_title": MessageLookupByLibrary.simpleMessage("New Version"),
+        "version_perfix": MessageLookupByLibrary.simpleMessage("Version:"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("WanAndroid"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("Welcome to Use")
       };
