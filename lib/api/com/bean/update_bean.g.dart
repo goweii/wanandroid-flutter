@@ -7,7 +7,8 @@ part of 'update_bean.dart';
 // **************************************************************************
 
 UpdateBean _$UpdateBeanFromJson(Map<String, dynamic> json) => UpdateBean(
-      url: json['url'] as String,
+      androidUrl: json['android_url'] as String,
+      iosUrl: json['ios_url'] as String,
       versionCode: json['version_code'] as int,
       versionName: json['version_name'] as String,
       desc: json['desc'] as String,
@@ -18,7 +19,8 @@ UpdateBean _$UpdateBeanFromJson(Map<String, dynamic> json) => UpdateBean(
 
 Map<String, dynamic> _$UpdateBeanToJson(UpdateBean instance) =>
     <String, dynamic>{
-      'url': instance.url,
+      'android_url': instance.androidUrl,
+      'ios_url': instance.iosUrl,
       'version_code': instance.versionCode,
       'version_name': instance.versionName,
       'desc': instance.desc,

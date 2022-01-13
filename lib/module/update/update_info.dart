@@ -1,5 +1,6 @@
 class UpdateInfo {
-  final String url;
+  final String androidUrl;
+  final String iosUrl;
   final int versionCode;
   final String versionName;
   final String desc;
@@ -7,7 +8,8 @@ class UpdateInfo {
   final bool force;
 
   UpdateInfo({
-    required this.url,
+    required this.androidUrl,
+    required this.iosUrl,
     required this.versionCode,
     required this.versionName,
     required this.desc,

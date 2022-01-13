@@ -12,7 +12,8 @@ class UpdateUtils {
       return null;
     }
     return UpdateInfo(
-      url: updateBean.url,
+      androidUrl: updateBean.androidUrl,
+      iosUrl: updateBean.iosUrl,
       versionCode: updateBean.versionCode,
       versionName: updateBean.versionName,
       desc: updateBean.desc,

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:ota_update/ota_update.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wanandroid/env/asset/app_images.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
@@ -227,8 +230,40 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
   }
 
   _onUpdateNow() {
+    if (Platform.isIOS) {
+      _updateIOS();
+    } else if (Platform.isIOS) {
+      _updateAndroid();
+    } else {
+      // ignore
+    }
+  }
+
+  _updateIOS() async {
     try {
-      OtaUpdate().execute(widget.updateInfo.url).listen(
+      if (await canLaunch(widget.updateInfo.iosUrl)) {
+        await launch(widget.updateInfo.iosUrl);
+        setState(() {
+          currState = DownloadButtonState.installing;
+          errorReason = null;
+        });
+      } else {
+        setState(() {
+          currState = DownloadButtonState.error;
+          errorReason = Strings.of(context).update_error;
+        });
+      }
+    } catch (_) {
+      setState(() {
+        currState = DownloadButtonState.error;
+        errorReason = Strings.of(context).update_error;
+      });
+    }
+  }
+
+  _updateAndroid() {
+    try {
+      OtaUpdate().execute(widget.updateInfo.androidUrl).listen(
         (OtaEvent event) {
           switch (event.status) {
             case OtaStatus.DOWNLOADING:

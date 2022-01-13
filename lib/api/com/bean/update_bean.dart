@@ -4,7 +4,10 @@ part 'update_bean.g.dart';
 
 @JsonSerializable()
 class UpdateBean {
-  final String url;
+  @JsonKey(name: 'android_url')
+  final String androidUrl;
+  @JsonKey(name: 'ios_url')
+  final String iosUrl;
   @JsonKey(name: 'version_code')
   final int versionCode;
   @JsonKey(name: 'version_name')
@@ -17,7 +20,8 @@ class UpdateBean {
   final String forceVersionName;
 
   UpdateBean({
-    required this.url,
+    required this.androidUrl,
+    required this.iosUrl,
     required this.versionCode,
     required this.versionName,
     required this.desc,
