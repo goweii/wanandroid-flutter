@@ -30,20 +30,27 @@ class _NavigationPageState extends State<NavigationPage>
     return Scaffold(
       appBar: AppBar(
         title: Center(
-          child: TabBar(
-            isScrollable: true,
-            indicatorWeight: 0.0001,
-            indicatorSize: TabBarIndicatorSize.tab,
-            indicatorColor: Colors.transparent,
-            controller: _tabController,
-            labelStyle: Theme.of(context).appBarTheme.titleTextStyle,
-            overlayColor: MaterialStateProperty.resolveWith((states) {
-              return Colors.transparent;
-            }),
-            tabs: [
-              Tab(text: Strings.of(context).navigation_title),
-              Tab(text: Strings.of(context).knowledge_title),
-            ],
+          child: Material(
+            color: Colors.transparent,
+            child: TabBar(
+              isScrollable: true,
+              indicatorWeight: 0.0001,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorColor: Colors.transparent,
+              controller: _tabController,
+              labelStyle: Theme.of(context).appBarTheme.titleTextStyle,
+              labelColor: Theme.of(context).appBarTheme.titleTextStyle?.color,
+              unselectedLabelColor: Theme.of(context)
+                  .appBarTheme
+                  .titleTextStyle
+                  ?.color
+                  ?.withOpacity(0.4),
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
+              tabs: [
+                Tab(text: Strings.of(context).navigation_title),
+                Tab(text: Strings.of(context).knowledge_title),
+              ],
+            ),
           ),
         ),
       ),

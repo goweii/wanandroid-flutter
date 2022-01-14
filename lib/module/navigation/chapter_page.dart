@@ -48,9 +48,13 @@ class _ChapterPageState extends State<ChapterPage>
               indicatorColor: Colors.transparent,
               controller: _tabController,
               labelStyle: Theme.of(context).appBarTheme.toolbarTextStyle,
-              overlayColor: MaterialStateProperty.resolveWith((states) {
-                return Colors.transparent;
-              }),
+              labelColor: Theme.of(context).appBarTheme.toolbarTextStyle?.color,
+              unselectedLabelColor: Theme.of(context)
+                  .appBarTheme
+                  .toolbarTextStyle
+                  ?.color
+                  ?.withOpacity(0.4),
+              overlayColor: MaterialStateProperty.all(Colors.transparent),
               tabs: [
                 ...widget.chapterInfo.knowledgeBean.children
                     .map((e) => Tab(text: e.name))

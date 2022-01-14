@@ -40,6 +40,10 @@ class Themes {
           fontSize: 18.0,
           fontWeight: FontWeight.w500,
         ),
+        toolbarTextStyle: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w500,
+        ),
         iconTheme: IconThemeData(),
         actionsIconTheme: IconThemeData(),
       ),
@@ -69,6 +73,9 @@ class Themes {
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: themeData.colorScheme.primary,
         titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+          color: themeData.colorScheme.onPrimary,
+        ),
+        toolbarTextStyle: themeData.appBarTheme.toolbarTextStyle?.copyWith(
           color: themeData.colorScheme.onPrimary,
         ),
         iconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
@@ -104,6 +111,9 @@ class Themes {
       appBarTheme: themeData.appBarTheme.copyWith(
         backgroundColor: themeData.colorScheme.surface,
         titleTextStyle: themeData.appBarTheme.titleTextStyle?.copyWith(
+          color: themeData.colorScheme.onSurface,
+        ),
+        toolbarTextStyle: themeData.appBarTheme.toolbarTextStyle?.copyWith(
           color: themeData.colorScheme.onSurface,
         ),
         iconTheme: themeData.appBarTheme.actionsIconTheme?.copyWith(
