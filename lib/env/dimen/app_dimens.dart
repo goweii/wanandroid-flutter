@@ -21,7 +21,7 @@ class AppDimens {
 
   static const double circularProgressIndicatorStrokeWidth = 3.0;
 
-  static const double gridMaxCrossAxisExtent = 640.0;
+  static const double gridMaxCrossAxisExtent = 600.0;
 
   static const double avatarSize = 80.0;
 }

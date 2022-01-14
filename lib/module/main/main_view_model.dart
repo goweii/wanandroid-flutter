@@ -1,5 +1,6 @@
 import 'package:wanandroid/api/com/com_apis.dart';
 import 'package:wanandroid/api/wan/wan_apis.dart';
+import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/provider/unread.dart';
@@ -23,7 +24,7 @@ class MainViewModel extends ViewModel {
       var updateBean = await ComApis.getUpdateInfo();
       var updateInfo = await UpdateUtils.parseUpdateInfo(updateBean);
       if (updateInfo == null) {
-        throw 'Already the latest version';
+        throw Strings.current.already_the_latest_version;
       }
       return updateInfo;
     } catch (e) {

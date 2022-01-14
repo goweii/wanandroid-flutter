@@ -30,11 +30,11 @@
     "input_password_hint": "Input your password",
     "input_password_again_hint": "Input your password again",
     "unknown_error": "Unknown error",
-    "choice_theme_mode": "Choice theme mode",
+    "choice_theme_mode": "Theme mode",
     "theme_mode_system": "Follow system",
     "theme_mode_dark": "Dark",
     "theme_mode_light": "Light",
-    "choice_language": "Choice language",
+    "choice_language": "Language",
     "language_system": "Follow system",
     "article_fab_tip_close": "Close",
     "article_fab_tip_collect": "Collect",
@@ -81,5 +81,11 @@
     "update_error": "Update error",
     "install_error": "Install error",
     "download_error": "Download error",
-    "checksum_error": "Checksum error"
+    "checksum_error": "Checksum error",
+    "about_title": "About",
+    "privacy_policy": "Privacy policy",
+    "official_website": "Official website",
+    "version_update": "Version update",
+    "already_the_latest_version": "Already the latest version",
+    "new_version_found": "New version found"
 }

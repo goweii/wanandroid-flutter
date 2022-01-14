@@ -32,19 +32,8 @@ class _MainPageState extends State<MainPage>
     });
     _viewModel.updateUnreadMsgCount();
     _viewModel.checkUpdate().then((value) {
-      showDialog(
-        context: context,
-        barrierDismissible: !value.force,
-        builder: (context) {
-          return WillPopScope(
-            onWillPop: () async => !value.force,
-            child: UpdateDialogWidget(
-              updateInfo: value,
-            ),
-          );
-        },
-      );
-    });
+      UpdateDialog.show(context: context, updateInfo: value);
+    }, onError: (_) {});
   }
 
   @override

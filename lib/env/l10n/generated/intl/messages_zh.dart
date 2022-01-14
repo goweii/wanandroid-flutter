@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_me": MessageLookupByLibrary.simpleMessage("关于我"),
         "about_me_title": MessageLookupByLibrary.simpleMessage("关于我"),
+        "about_title": MessageLookupByLibrary.simpleMessage("关于"),
+        "already_the_latest_version":
+            MessageLookupByLibrary.simpleMessage("已是最新版本"),
         "answers": MessageLookupByLibrary.simpleMessage("回答"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("关闭"),
         "article_fab_tip_collect": MessageLookupByLibrary.simpleMessage("收藏"),
@@ -33,7 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请他喝杯咖啡"),
         "checksum_error": MessageLookupByLibrary.simpleMessage("检查出错"),
         "choice_language": MessageLookupByLibrary.simpleMessage("语言"),
-        "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题模式"),
+        "choice_theme_mode": MessageLookupByLibrary.simpleMessage("主题"),
         "coin_ranking_title": MessageLookupByLibrary.simpleMessage("积分榜"),
         "coin_title": MessageLookupByLibrary.simpleMessage("积分"),
         "collected_article": MessageLookupByLibrary.simpleMessage("收藏文章"),
@@ -68,7 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_title": MessageLookupByLibrary.simpleMessage("我的"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("导航"),
         "new_tag": MessageLookupByLibrary.simpleMessage("新"),
+        "new_version_found": MessageLookupByLibrary.simpleMessage("发现新版本"),
         "not_support": MessageLookupByLibrary.simpleMessage("暂不支持"),
+        "official_website": MessageLookupByLibrary.simpleMessage("官方网站"),
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("没有更多数据"),
         "paged_list_footer_load_more":
@@ -77,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
         "permission_not_granted":
             MessageLookupByLibrary.simpleMessage("权限获取失败"),
+        "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "publish_title": MessageLookupByLibrary.simpleMessage("广场"),
         "question_title": MessageLookupByLibrary.simpleMessage("问答"),
         "ranking_prefix": MessageLookupByLibrary.simpleMessage("排名:"),
@@ -123,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "update_now": MessageLookupByLibrary.simpleMessage("立即更新"),
         "update_title": MessageLookupByLibrary.simpleMessage("发现一个新版本"),
         "version_perfix": MessageLookupByLibrary.simpleMessage("版本号:"),
+        "version_update": MessageLookupByLibrary.simpleMessage("版本更新"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("玩安卓"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("欢迎使用")
       };

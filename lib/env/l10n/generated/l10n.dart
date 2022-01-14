@@ -360,10 +360,10 @@ class Strings {
     );
   }
 
-  /// `Choice theme mode`
+  /// `Theme mode`
   String get choice_theme_mode {
     return Intl.message(
-      'Choice theme mode',
+      'Theme mode',
       name: 'choice_theme_mode',
       desc: '',
       args: [],
@@ -400,10 +400,10 @@ class Strings {
     );
   }
 
-  /// `Choice language`
+  /// `Language`
   String get choice_language {
     return Intl.message(
-      'Choice language',
+      'Language',
       name: 'choice_language',
       desc: '',
       args: [],
@@ -875,6 +875,66 @@ class Strings {
     return Intl.message(
       'Checksum error',
       name: 'checksum_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About`
+  String get about_title {
+    return Intl.message(
+      'About',
+      name: 'about_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy policy`
+  String get privacy_policy {
+    return Intl.message(
+      'Privacy policy',
+      name: 'privacy_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Official website`
+  String get official_website {
+    return Intl.message(
+      'Official website',
+      name: 'official_website',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version update`
+  String get version_update {
+    return Intl.message(
+      'Version update',
+      name: 'version_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already the latest version`
+  String get already_the_latest_version {
+    return Intl.message(
+      'Already the latest version',
+      name: 'already_the_latest_version',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New version found`
+  String get new_version_found {
+    return Intl.message(
+      'New version found',
+      name: 'new_version_found',
       desc: '',
       args: [],
     );

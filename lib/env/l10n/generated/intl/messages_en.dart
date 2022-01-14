@@ -24,6 +24,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about_me": MessageLookupByLibrary.simpleMessage("About me"),
         "about_me_title": MessageLookupByLibrary.simpleMessage("About Me"),
+        "about_title": MessageLookupByLibrary.simpleMessage("About"),
+        "already_the_latest_version":
+            MessageLookupByLibrary.simpleMessage("Already the latest version"),
         "answers": MessageLookupByLibrary.simpleMessage("Answers"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
         "article_fab_tip_collect":
@@ -34,10 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Buy him a cup of coffee"),
         "checksum_error":
             MessageLookupByLibrary.simpleMessage("Checksum error"),
-        "choice_language":
-            MessageLookupByLibrary.simpleMessage("Choice language"),
-        "choice_theme_mode":
-            MessageLookupByLibrary.simpleMessage("Choice theme mode"),
+        "choice_language": MessageLookupByLibrary.simpleMessage("Language"),
+        "choice_theme_mode": MessageLookupByLibrary.simpleMessage("Theme mode"),
         "coin_ranking_title":
             MessageLookupByLibrary.simpleMessage("Coin Ranking"),
         "coin_title": MessageLookupByLibrary.simpleMessage("Coin"),
@@ -80,7 +81,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "mine_title": MessageLookupByLibrary.simpleMessage("Mine"),
         "navigation_title": MessageLookupByLibrary.simpleMessage("Navigation"),
         "new_tag": MessageLookupByLibrary.simpleMessage("NEW"),
+        "new_version_found":
+            MessageLookupByLibrary.simpleMessage("New version found"),
         "not_support": MessageLookupByLibrary.simpleMessage("Not supported"),
+        "official_website":
+            MessageLookupByLibrary.simpleMessage("Official website"),
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("No more data"),
         "paged_list_footer_load_more":
@@ -89,6 +94,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loading data"),
         "permission_not_granted":
             MessageLookupByLibrary.simpleMessage("Permission not granted"),
+        "privacy_policy":
+            MessageLookupByLibrary.simpleMessage("Privacy policy"),
         "publish_title": MessageLookupByLibrary.simpleMessage("Publish"),
         "question_title": MessageLookupByLibrary.simpleMessage("Question"),
         "ranking_prefix": MessageLookupByLibrary.simpleMessage("Ranking:"),
@@ -139,6 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "update_now": MessageLookupByLibrary.simpleMessage("Update Now"),
         "update_title": MessageLookupByLibrary.simpleMessage("New Version"),
         "version_perfix": MessageLookupByLibrary.simpleMessage("Version:"),
+        "version_update":
+            MessageLookupByLibrary.simpleMessage("Version update"),
         "wanandroid": MessageLookupByLibrary.simpleMessage("WanAndroid"),
         "welcome_to_use": MessageLookupByLibrary.simpleMessage("Welcome to Use")
       };

@@ -8,19 +8,26 @@ import 'package:wanandroid/module/update/update_info.dart';
 import 'package:wanandroid/module/update/update_widget.dart';
 import 'package:wanandroid/widget/opacity_button.dart';
 
-class UpdateDialog extends Dialog {
-  UpdateDialog({
-    Key? key,
+class UpdateDialog extends StatefulWidget {
+  static Future<void> show({
+    required BuildContext context,
     required UpdateInfo updateInfo,
-  }) : super(
-            key: key,
-            child: UpdateDialog(
-              updateInfo: updateInfo,
-            ));
-}
+  }) {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: !updateInfo.force,
+      builder: (context) {
+        return WillPopScope(
+          onWillPop: () async => !updateInfo.force,
+          child: UpdateDialog(
+            updateInfo: updateInfo,
+          ),
+        );
+      },
+    );
+  }
 
-class UpdateDialogWidget extends StatefulWidget {
-  const UpdateDialogWidget({
+  const UpdateDialog({
     Key? key,
     required this.updateInfo,
   }) : super(key: key);
@@ -28,10 +35,10 @@ class UpdateDialogWidget extends StatefulWidget {
   final UpdateInfo updateInfo;
 
   @override
-  _UpdateDialogWidgetState createState() => _UpdateDialogWidgetState();
+  _UpdateDialogState createState() => _UpdateDialogState();
 }
 
-class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
+class _UpdateDialogState extends State<UpdateDialog>
     with WidgetsBindingObserver {
   DownloadButtonState currState = DownloadButtonState.initial;
   String? errorReason;
