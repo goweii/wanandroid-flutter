@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
@@ -63,7 +64,7 @@ class _MySharePageState extends State<MySharePage> {
                   onPressed: () {
                     AppRouter.of(context).pushNamed(RouteMap.shareArticlePage);
                   },
-                  icon: const Icon(Icons.add_rounded),
+                  icon: const Icon(CupertinoIcons.add),
                 )
               ],
             ),
