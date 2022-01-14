@@ -440,6 +440,16 @@ class Strings {
     );
   }
 
+  /// `Publish`
+  String get article_fab_tip_publish {
+    return Intl.message(
+      'Publish',
+      name: 'article_fab_tip_publish',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Share`
   String get article_fab_tip_share {
     return Intl.message(
@@ -935,6 +945,16 @@ class Strings {
     return Intl.message(
       'New version found',
       name: 'new_version_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share now`
+  String get share_now {
+    return Intl.message(
+      'Share now',
+      name: 'share_now',
       desc: '',
       args: [],
     );

@@ -23,5 +23,7 @@ class AppDimens {
 
   static const double gridMaxCrossAxisExtent = 600.0;
 
+  static const double shareCardMaxWidth = 320.0;
+
   static const double avatarSize = 80.0;
 }

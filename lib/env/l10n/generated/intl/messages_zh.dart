@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "answers": MessageLookupByLibrary.simpleMessage("回答"),
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("关闭"),
         "article_fab_tip_collect": MessageLookupByLibrary.simpleMessage("收藏"),
+        "article_fab_tip_publish": MessageLookupByLibrary.simpleMessage("广场"),
         "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("分享"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("书签"),
         "buy_him_a_cup_of_coffee":
@@ -118,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("请输入文章标题"),
         "share_article_title_label":
             MessageLookupByLibrary.simpleMessage("文章标题"),
+        "share_now": MessageLookupByLibrary.simpleMessage("立即分享"),
         "theme_mode_dark": MessageLookupByLibrary.simpleMessage("暗色"),
         "theme_mode_light": MessageLookupByLibrary.simpleMessage("亮色"),
         "theme_mode_system": MessageLookupByLibrary.simpleMessage("跟随系统"),

@@ -11,6 +11,8 @@ import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/article/article_repo.dart';
 import 'package:wanandroid/module/article/article_widget.dart';
 import 'package:wanandroid/module/article/collected_info.dart';
+import 'package:wanandroid/module/common/share/share_dialog.dart';
+import 'package:wanandroid/module/common/share/share_info.dart';
 import 'package:wanandroid/module/share/share_article_info.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
 
@@ -65,73 +67,103 @@ class _ArticlePageState extends State<ArticlePage>
     var statusBarIconBrightness = statusBarBrightness == Brightness.light
         ? Brightness.dark
         : Brightness.light;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        systemOverlayStyle:
-            Theme.of(context).appBarTheme.systemOverlayStyle?.copyWith(
-                  statusBarBrightness: statusBarBrightness,
-                  statusBarIconBrightness: statusBarIconBrightness,
-                ),
-        toolbarHeight: 0,
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          SizedBox.expand(
-            child: Web(
-              url: widget.articleInfo.link,
-              controller: controller,
-              onProgress: (value) => setState(() => _pageProgress = value),
-              onUpdateVisitedHistory: (value) {
-                setState(() {
-                  _collected = collectInfos[value]?.collected ?? false;
-                });
-              },
+    return WillPopScope(
+      onWillPop: _handleWillPop,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          systemOverlayStyle:
+              Theme.of(context).appBarTheme.systemOverlayStyle?.copyWith(
+                    statusBarBrightness: statusBarBrightness,
+                    statusBarIconBrightness: statusBarIconBrightness,
+                  ),
+          toolbarHeight: 0,
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            SizedBox.expand(
+              child: Web(
+                url: widget.articleInfo.link,
+                controller: controller,
+                onProgress: (value) => setState(() => _pageProgress = value),
+                onUpdateVisitedHistory: (value) {
+                  setState(() {
+                    _collected = collectInfos[value]?.collected ?? false;
+                  });
+                },
+              ),
             ),
-          ),
-          FabMenu(
-            progress: _pageProgress,
-            onBackPress: _handleBackPress,
-            actions: [
-              Fab(
-                icon: const Icon(Icons.power_settings_new_rounded),
-                tip: Strings.of(context).article_fab_tip_close,
-                onPressed: () {
-                  AppRouter.of(context).pop();
-                },
-              ),
-              Fab(
-                icon: _collected
-                    ? Icon(
-                        Icons.favorite_rounded,
-                        color: Theme.of(context).colorScheme.error,
-                      )
-                    : const Icon(
-                        Icons.favorite_outline_rounded,
-                      ),
-                tip: Strings.of(context).article_fab_tip_collect,
-                onPressed: _onCollectPressed,
-              ),
-              Fab(
-                icon: const Icon(Icons.share),
-                tip: Strings.of(context).article_fab_tip_share,
-                onPressed: () async {
-                  String? title = await controller.getTitle();
-                  Uri? url = await controller.getUrl();
-                  AppRouter.of(context).pushNamed(
-                    RouteMap.shareArticlePage,
-                    arguments: ShareArticleInfo(
-                      title: title,
-                      link: url?.toString(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
+            FabMenu(
+              progress: _pageProgress,
+              onBackPress: _handleBackPress,
+              actions: [
+                Fab(
+                  icon: const Icon(Icons.power_settings_new_rounded),
+                  tip: Strings.of(context).article_fab_tip_close,
+                  onPressed: () {
+                    AppRouter.of(context).pop();
+                  },
+                ),
+                Fab(
+                  icon: _collected
+                      ? Icon(
+                          Icons.favorite_rounded,
+                          color: Theme.of(context).colorScheme.error,
+                        )
+                      : const Icon(
+                          Icons.favorite_outline_rounded,
+                        ),
+                  tip: Strings.of(context).article_fab_tip_collect,
+                  onPressed: _onCollectPressed,
+                ),
+                Fab(
+                  icon: const Icon(Icons.publish_rounded),
+                  tip: Strings.of(context).article_fab_tip_publish,
+                  onPressed: _handleShareToSquare,
+                ),
+                Fab(
+                  icon: const Icon(Icons.share),
+                  tip: Strings.of(context).article_fab_tip_share,
+                  onPressed: _handleShareToQrcode,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _handleShareToSquare() async {
+    String? title = await controller.getTitle();
+    Uri? url = await controller.getUrl();
+    AppRouter.of(context).pushNamed(
+      RouteMap.shareArticlePage,
+      arguments: ShareArticleInfo(
+        title: title,
+        link: url?.toString(),
+      ),
+    );
+  }
+
+  _handleShareToQrcode() async {
+    var info = await controller.getShareInfo();
+    if (info == null) {
+      return;
+    }
+    if (info.url.isEmpty || info.title.isEmpty) {
+      WanToast.error(context, msg: Strings.of(context).unknown_error);
+      return;
+    }
+    ShareDialog.show(
+      context: context,
+      shareInfo: ShareInfo(
+        url: info.url,
+        title: info.title,
+        desc: info.desc,
+        imgs: info.imgs,
       ),
     );
   }
@@ -142,6 +174,14 @@ class _ArticlePageState extends State<ArticlePage>
       return;
     }
     AppRouter.of(context).pop();
+  }
+
+  Future<bool> _handleWillPop() async {
+    if (await controller.canGoBack()) {
+      await controller.goBack();
+      return false;
+    }
+    return true;
   }
 
   _onCollectPressed() async {

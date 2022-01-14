@@ -38,6 +38,7 @@
     "language_system": "跟随系统",
     "article_fab_tip_close": "关闭",
     "article_fab_tip_collect": "收藏",
+    "article_fab_tip_publish": "广场",
     "article_fab_tip_share": "分享",
     "guest_name": "游客",
     "level_prefix": "等级:",
@@ -87,5 +88,6 @@
     "official_website": "官方网站",
     "version_update": "版本更新",
     "already_the_latest_version": "已是最新版本",
-    "new_version_found": "发现新版本"
+    "new_version_found": "发现新版本",
+    "share_now": "立即分享"
 }

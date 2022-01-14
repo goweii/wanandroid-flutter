@@ -8,10 +8,10 @@ import 'package:wanandroid/env/theme/theme_model.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
 
 class WebShareInfo {
-  final String? url;
-  final String? title;
-  final String? desc;
-  final List<String>? imgs;
+  final String url;
+  final String title;
+  final String desc;
+  final List<String> imgs;
 
   WebShareInfo({
     required this.url,
@@ -19,12 +19,6 @@ class WebShareInfo {
     required this.desc,
     required this.imgs,
   });
-
-  WebShareInfo.fromJson(Map<String, dynamic> json)
-      : url = null,
-        title = json['title'] as String,
-        desc = json['desc'] as String,
-        imgs = json['imgs'] as List<String>;
 }
 
 class WebController {
@@ -93,18 +87,31 @@ javascript:(
   }
 )()
 """;
+    String? url = (await getUrl())?.toString();
+    String? title;
+    String? desc;
+    List<String>? imgs;
     try {
       dynamic result = await _controller?.evaluateJavascript(source: js);
       var json = jsonDecode(result) as Map<String, dynamic>;
-      return WebShareInfo.fromJson(json);
-    } catch (_) {
-      return WebShareInfo(
-        url: (await getUrl())?.toString(),
-        title: await getTitle(),
-        desc: null,
-        imgs: null,
-      );
+      title = json['title'] as String?;
+      desc = json['desc'] as String?;
+      imgs = (json['imgs'] as List<dynamic>?)?.map((e) => e as String).toList();
+    } catch (_) {}
+    if (title == null || title.isEmpty) {
+      title = await getTitle();
     }
+    url ??= '';
+    title ??= '';
+    desc ??= '';
+    imgs ??= [];
+    imgs.removeWhere((e) => e.isEmpty);
+    return WebShareInfo(
+      url: url,
+      title: title,
+      desc: desc,
+      imgs: imgs,
+    );
   }
 
   Future<void> goTop() async {

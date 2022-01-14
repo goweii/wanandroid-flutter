@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "article_fab_tip_close": MessageLookupByLibrary.simpleMessage("Close"),
         "article_fab_tip_collect":
             MessageLookupByLibrary.simpleMessage("Collect"),
+        "article_fab_tip_publish":
+            MessageLookupByLibrary.simpleMessage("Publish"),
         "article_fab_tip_share": MessageLookupByLibrary.simpleMessage("Share"),
         "bookmark_title": MessageLookupByLibrary.simpleMessage("Bookmark"),
         "buy_him_a_cup_of_coffee":
@@ -134,6 +136,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Input article title"),
         "share_article_title_label":
             MessageLookupByLibrary.simpleMessage("Article title"),
+        "share_now": MessageLookupByLibrary.simpleMessage("Share now"),
         "theme_mode_dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "theme_mode_light": MessageLookupByLibrary.simpleMessage("Light"),
         "theme_mode_system":

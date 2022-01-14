@@ -38,6 +38,7 @@
     "language_system": "Follow system",
     "article_fab_tip_close": "Close",
     "article_fab_tip_collect": "Collect",
+    "article_fab_tip_publish": "Publish",
     "article_fab_tip_share": "Share",
     "guest_name": "Guest",
     "level_prefix": "Level:",
@@ -87,5 +88,6 @@
     "official_website": "Official website",
     "version_update": "Version update",
     "already_the_latest_version": "Already the latest version",
-    "new_version_found": "New version found"
+    "new_version_found": "New version found",
+    "share_now": "Share now"
 }
