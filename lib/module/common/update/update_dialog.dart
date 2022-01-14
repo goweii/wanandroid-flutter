@@ -4,8 +4,8 @@ import 'package:ota_update/ota_update.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
-import 'package:wanandroid/module/update/update_info.dart';
-import 'package:wanandroid/module/update/update_widget.dart';
+import 'package:wanandroid/module/common/update/update_info.dart';
+import 'package:wanandroid/module/common/update/update_widget.dart';
 import 'package:wanandroid/widget/opacity_button.dart';
 
 class UpdateDialog extends StatefulWidget {

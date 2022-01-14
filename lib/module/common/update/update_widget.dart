@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wanandroid/env/asset/app_images.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
-import 'package:wanandroid/module/update/update_info.dart';
+import 'package:wanandroid/module/common/update/update_info.dart';
 
 class UpdateHeader extends StatelessWidget {
   const UpdateHeader({

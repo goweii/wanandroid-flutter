@@ -4,8 +4,8 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
 import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/env/provider/unread.dart';
-import 'package:wanandroid/module/update/update_info.dart';
-import 'package:wanandroid/module/update/update_utils.dart';
+import 'package:wanandroid/module/common/update/update_info.dart';
+import 'package:wanandroid/module/common/update/update_utils.dart';
 
 class MainViewModel extends ViewModel {
   Future<void> updateUnreadMsgCount() async {

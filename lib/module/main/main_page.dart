@@ -3,7 +3,7 @@ import 'package:wanandroid/env/provider/login.dart';
 import 'package:wanandroid/module/main/main_home_page.dart';
 import 'package:wanandroid/module/main/main_view_model.dart';
 import 'package:wanandroid/module/square/square_page.dart';
-import 'package:wanandroid/module/update/update_dialog.dart';
+import 'package:wanandroid/module/common/update/update_dialog.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);

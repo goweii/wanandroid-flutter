@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:wanandroid/api/com/bean/update_bean.dart';
-import 'package:wanandroid/module/update/update_info.dart';
+import 'package:wanandroid/module/common/update/update_info.dart';
 
 class UpdateUtils {
   /// 检查是否需要更新

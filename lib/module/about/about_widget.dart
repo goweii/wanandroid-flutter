@@ -7,7 +7,7 @@ import 'package:wanandroid/env/mvvm/data_provider.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/module/about/about_view_model.dart';
-import 'package:wanandroid/module/update/update_dialog.dart';
+import 'package:wanandroid/module/common/update/update_dialog.dart';
 import 'package:wanandroid/widget/action_item.dart';
 
 class WanLogo extends StatelessWidget {

@@ -3,8 +3,8 @@ import 'package:wanandroid/api/com/com_apis.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/statable_data.dart';
 import 'package:wanandroid/env/mvvm/view_model.dart';
-import 'package:wanandroid/module/update/update_info.dart';
-import 'package:wanandroid/module/update/update_utils.dart';
+import 'package:wanandroid/module/common/update/update_info.dart';
+import 'package:wanandroid/module/common/update/update_utils.dart';
 
 class AppInfo {
   final String appName;
