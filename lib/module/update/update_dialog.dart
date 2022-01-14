@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:ota_update/ota_update.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:wanandroid/env/asset/app_images.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/module/update/update_info.dart';
+import 'package:wanandroid/module/update/update_widget.dart';
+import 'package:wanandroid/widget/opacity_button.dart';
 
 class UpdateDialog extends Dialog {
   UpdateDialog({
@@ -86,25 +86,7 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Logo(
-                      size: 120,
-                      color: themeData.colorScheme.primary,
-                    ),
-                    Text(
-                      Strings.of(context).update_title,
-                      style: themeData.textTheme.subtitle1,
-                    ),
-                    const SizedBox(height: AppDimens.marginHalf),
-                    Text(
-                      Strings.of(context).version_perfix +
-                          widget.updateInfo.versionName,
-                      style: themeData.textTheme.subtitle2,
-                    ),
-                    const SizedBox(height: AppDimens.marginHalf),
-                    Text(
-                      Strings.of(context).date_perfix + widget.updateInfo.date,
-                      style: themeData.textTheme.caption,
-                    ),
+                    UpdateHeader(updateInfo: widget.updateInfo),
                     const SizedBox(height: AppDimens.marginNormal),
                     Container(
                       constraints: const BoxConstraints(
@@ -133,13 +115,23 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
                       ),
                     ),
                     const SizedBox(height: AppDimens.marginNormal),
-                    DownloadButton(
+                    UpdateStateButton(
                       state: currState,
                       errorReason: errorReason,
                       downloadPercent: downloadProgress,
                       onUpdateNow: _onUpdateNow,
                     ),
                     const SizedBox(height: AppDimens.marginNormal),
+                    if (!widget.updateInfo.force)
+                      OpacityButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          Strings.of(context).update_later,
+                          style: themeData.textTheme.caption,
+                        ),
+                      ),
                   ],
                 ),
               );
@@ -149,51 +141,49 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
                   color: themeData.colorScheme.surface,
                   borderRadius: BorderRadius.circular(AppDimens.radiusNormal),
                 ),
-                padding: const EdgeInsets.only(
-                  left: AppDimens.marginNormal,
-                  right: AppDimens.marginNormal,
-                  top: AppDimens.marginNormal,
-                  bottom: AppDimens.marginNormal,
-                ),
+                padding: const EdgeInsets.all(AppDimens.marginNormal),
                 width: 600,
                 height: 300,
                 child: Row(
                   children: [
                     Expanded(
-                      child: Center(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Logo(
-                              size: 120,
-                              color: themeData.colorScheme.primary,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                UpdateHeader(updateInfo: widget.updateInfo),
+                                const SizedBox(height: AppDimens.marginNormal),
+                                UpdateStateButton(
+                                  state: currState,
+                                  errorReason: errorReason,
+                                  downloadPercent: downloadProgress,
+                                  onUpdateNow: _onUpdateNow,
+                                ),
+                              ],
                             ),
-                            Text(
-                              Strings.of(context).update_title,
-                              style: themeData.textTheme.subtitle1,
+                          ),
+                          if (!widget.updateInfo.force)
+                            OpacityButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: themeData.hoverColor,
+                                  borderRadius: BorderRadius.circular(99),
+                                ),
+                                padding: const EdgeInsets.all(4),
+                                child: Icon(
+                                  Icons.close_rounded,
+                                  size: 18,
+                                  color: themeData.textTheme.caption?.color,
+                                ),
+                              ),
                             ),
-                            const SizedBox(height: AppDimens.marginHalf),
-                            Text(
-                              Strings.of(context).version_perfix +
-                                  widget.updateInfo.versionName,
-                              style: themeData.textTheme.subtitle2,
-                            ),
-                            const SizedBox(height: AppDimens.marginHalf),
-                            Text(
-                              Strings.of(context).date_perfix +
-                                  widget.updateInfo.date,
-                              style: themeData.textTheme.caption,
-                            ),
-                            const SizedBox(height: AppDimens.marginNormal),
-                            DownloadButton(
-                              state: currState,
-                              errorReason: errorReason,
-                              downloadPercent: downloadProgress,
-                              onUpdateNow: _onUpdateNow,
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
                     ),
                     const SizedBox(width: AppDimens.marginNormal),
@@ -235,18 +225,21 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
     } else if (Platform.isIOS) {
       _updateAndroid();
     } else {
-      // ignore
+      setState(() {
+        currState = DownloadButtonState.error;
+        errorReason = Strings.of(context).update_error;
+      });
     }
   }
 
   _updateIOS() async {
     try {
-      if (await canLaunch(widget.updateInfo.iosUrl)) {
-        await launch(widget.updateInfo.iosUrl);
+      if (await canLaunch(widget.updateInfo.url)) {
         setState(() {
           currState = DownloadButtonState.installing;
           errorReason = null;
         });
+        await launch(widget.updateInfo.url);
       } else {
         setState(() {
           currState = DownloadButtonState.error;
@@ -263,7 +256,7 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
 
   _updateAndroid() {
     try {
-      OtaUpdate().execute(widget.updateInfo.androidUrl).listen(
+      OtaUpdate().execute(widget.updateInfo.url).listen(
         (OtaEvent event) {
           switch (event.status) {
             case OtaStatus.DOWNLOADING:
@@ -316,148 +309,5 @@ class _UpdateDialogWidgetState extends State<UpdateDialogWidget>
         errorReason = Strings.of(context).update_error;
       });
     }
-  }
-}
-
-enum DownloadButtonState {
-  initial,
-  downloading,
-  installing,
-  error,
-}
-
-class DownloadButton extends StatelessWidget {
-  const DownloadButton({
-    Key? key,
-    required this.state,
-    required this.onUpdateNow,
-    this.downloadPercent = 0.2,
-    this.errorReason,
-  }) : super(key: key);
-
-  final DownloadButtonState state;
-  final double downloadPercent;
-  final String? errorReason;
-  final VoidCallback onUpdateNow;
-
-  @override
-  Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final Strings strings = Strings.of(context);
-    Widget widget;
-    switch (state) {
-      case DownloadButtonState.initial:
-        widget = Material(
-          color: themeData.colorScheme.primary,
-          borderRadius: BorderRadius.circular(99),
-          clipBehavior: Clip.hardEdge,
-          child: InkWell(
-            onTap: onUpdateNow,
-            child: Center(
-              child: Text(
-                strings.update_now,
-                style: themeData.textTheme.button?.copyWith(
-                  color: themeData.colorScheme.onPrimary,
-                ),
-              ),
-            ),
-          ),
-        );
-        break;
-      case DownloadButtonState.downloading:
-        widget = Stack(
-          children: [
-            ClipRect(
-              child: AnimatedAlign(
-                alignment: Alignment.centerLeft,
-                duration: const Duration(milliseconds: 100),
-                widthFactor: downloadPercent.clamp(0.0, 1.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: themeData.colorScheme.primary,
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: themeData.colorScheme.primary.withOpacity(0.3),
-                borderRadius: BorderRadius.circular(99),
-              ),
-              child: Center(
-                child: Text(
-                  '${strings.downloading}(${(downloadPercent * 100).round()}%)',
-                  style: themeData.textTheme.button?.copyWith(
-                    color: themeData.colorScheme.onPrimary,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-        break;
-      case DownloadButtonState.installing:
-        widget = Container(
-          decoration: BoxDecoration(
-            color: themeData.colorScheme.primary.withOpacity(0.3),
-            borderRadius: BorderRadius.circular(99),
-          ),
-          child: Center(
-            child: Text(
-              strings.installing,
-              style: themeData.textTheme.button?.copyWith(
-                color: themeData.colorScheme.onPrimary,
-              ),
-            ),
-          ),
-        );
-        break;
-      case DownloadButtonState.error:
-        widget = Material(
-          color: themeData.colorScheme.error,
-          borderRadius: BorderRadius.circular(99),
-          clipBehavior: Clip.hardEdge,
-          child: InkWell(
-            onTap: onUpdateNow,
-            child: Center(
-              child: Text(
-                errorReason ?? Strings.of(context).unknown_error,
-                style: themeData.textTheme.button?.copyWith(
-                  color: themeData.colorScheme.onError,
-                ),
-              ),
-            ),
-          ),
-        );
-        break;
-    }
-    return SizedBox(
-      width: double.infinity,
-      height: AppDimens.buttonHeight,
-      child: widget,
-    );
-  }
-}
-
-class Logo extends StatelessWidget {
-  const Logo({
-    Key? key,
-    this.size,
-    this.color,
-  }) : super(key: key);
-
-  final double? size;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.asset(
-      AppImages.logo,
-      color: color,
-      width: size,
-      height: size,
-      fit: BoxFit.contain,
-    );
   }
 }

@@ -780,6 +780,16 @@ class Strings {
     );
   }
 
+  /// `Update Later`
+  String get update_later {
+    return Intl.message(
+      'Update Later',
+      name: 'update_later',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Downloading`
   String get downloading {
     return Intl.message(

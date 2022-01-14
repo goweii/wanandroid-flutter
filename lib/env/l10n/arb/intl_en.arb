@@ -72,6 +72,7 @@
     "version_perfix": "Version:",
     "date_perfix": "Date:",
     "update_now": "Update Now",
+    "update_later": "Update Later",
     "downloading": "Downloading",
     "install_now": "Install Now",
     "installing": "Installing",

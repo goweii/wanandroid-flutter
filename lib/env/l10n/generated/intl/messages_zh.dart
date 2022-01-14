@@ -119,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unknown_error": MessageLookupByLibrary.simpleMessage("未知错误"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("佚名"),
         "update_error": MessageLookupByLibrary.simpleMessage("更新出错"),
+        "update_later": MessageLookupByLibrary.simpleMessage("以后更新"),
         "update_now": MessageLookupByLibrary.simpleMessage("立即更新"),
         "update_title": MessageLookupByLibrary.simpleMessage("发现一个新版本"),
         "version_perfix": MessageLookupByLibrary.simpleMessage("版本号:"),

@@ -72,6 +72,7 @@
     "version_perfix": "版本号:",
     "date_perfix": "日期:",
     "update_now": "立即更新",
+    "update_later": "以后更新",
     "downloading": "下载中",
     "install_now": "立即安装",
     "installing": "安装中",

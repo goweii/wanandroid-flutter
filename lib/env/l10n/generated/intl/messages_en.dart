@@ -135,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
         "unknown_username": MessageLookupByLibrary.simpleMessage("Unknown"),
         "update_error": MessageLookupByLibrary.simpleMessage("Update error"),
+        "update_later": MessageLookupByLibrary.simpleMessage("Update Later"),
         "update_now": MessageLookupByLibrary.simpleMessage("Update Now"),
         "update_title": MessageLookupByLibrary.simpleMessage("New Version"),
         "version_perfix": MessageLookupByLibrary.simpleMessage("Version:"),
