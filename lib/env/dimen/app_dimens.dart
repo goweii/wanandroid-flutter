@@ -1,4 +1,5 @@
 class AppDimens {
+  static const double marginVeryLarge = 64.0;
   static const double marginLarge = 32.0;
   static const double marginNormal = 16.0;
   static const double marginHalf = 8.0;

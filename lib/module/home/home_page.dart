@@ -113,10 +113,22 @@ class _HomePageState extends State<HomePage>
                           Expanded(
                             child: banners.datas.isEmpty
                                 ? Container()
-                                : BannerView(
-                                    scrollDirection: Axis.vertical,
-                                    banners: banners.datas,
-                                  ),
+                                : LayoutBuilder(
+                                    builder: (context, constraints) {
+                                    double w = constraints.maxWidth;
+                                    double h = constraints.maxHeight;
+                                    double ih;
+                                    if (h / w > 9.0 / 16.0) {
+                                      ih = w * (9.0 / 16.0);
+                                    } else {
+                                      ih = h;
+                                    }
+                                    return BannerView(
+                                      scrollDirection: Axis.vertical,
+                                      banners: banners.datas,
+                                      viewportFraction: ih / h,
+                                    );
+                                  }),
                           ),
                           Expanded(
                             child: CustomScrollView(

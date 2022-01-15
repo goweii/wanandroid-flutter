@@ -43,73 +43,78 @@ class _SignInWidgetState extends State<SignInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: AppDimens.appBarHeight),
-        GestureDetector(
-          onTap: widget.onSignUpPressed,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                Strings.of(context).go_register,
-                style: Theme.of(context).textTheme.button?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-              ),
-              const SizedBox(width: AppDimens.marginHalf),
-              Icon(
-                CupertinoIcons.arrow_right_circle,
-                size: 18,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: AppDimens.marginNormal),
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: AppDimens.marginNormal * 3,
-          ),
-          child: InputEdit(
-            securty: false,
-            prefix: const Icon(
-              CupertinoIcons.person_solid,
-              size: 20,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxWidth: AppDimens.gridMaxCrossAxisExtent,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: widget.onSignUpPressed,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  Strings.of(context).go_register,
+                  style: Theme.of(context).textTheme.button?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+                const SizedBox(width: AppDimens.marginHalf),
+                Icon(
+                  CupertinoIcons.arrow_right_circle,
+                  size: 18,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ],
             ),
-            hintText: Strings.of(context).input_account_hint,
-            onChanged: (value) => setState(() => _account = value),
           ),
-        ),
-        const SizedBox(height: AppDimens.marginSmall),
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: AppDimens.marginNormal * 3,
-          ),
-          child: InputEdit(
-            securty: true,
-            prefix: const Icon(
-              CupertinoIcons.lock_fill,
-              size: 20,
+          const SizedBox(height: AppDimens.marginNormal),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppDimens.marginNormal * 3,
             ),
-            hintText: Strings.of(context).input_password_hint,
-            onChanged: (value) => setState(() => _password = value),
+            child: InputEdit(
+              securty: false,
+              prefix: const Icon(
+                CupertinoIcons.person_solid,
+                size: 20,
+              ),
+              hintText: Strings.of(context).input_account_hint,
+              onChanged: (value) => setState(() => _account = value),
+            ),
           ),
-        ),
-        const SizedBox(height: AppDimens.marginLarge),
-        Container(
-          margin: const EdgeInsets.symmetric(
-            horizontal: AppDimens.marginNormal * 3,
+          const SizedBox(height: AppDimens.marginSmall),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppDimens.marginNormal * 3,
+            ),
+            child: InputEdit(
+              securty: true,
+              prefix: const Icon(
+                CupertinoIcons.lock_fill,
+                size: 20,
+              ),
+              hintText: Strings.of(context).input_password_hint,
+              onChanged: (value) => setState(() => _password = value),
+            ),
           ),
-          child: MainButton(
-            child: Text(Strings.of(context).login),
-            disable: !btnEnable,
-            onPressed: _login,
+          const SizedBox(height: AppDimens.marginLarge),
+          Container(
+            margin: const EdgeInsets.symmetric(
+              horizontal: AppDimens.marginNormal * 3,
+            ),
+            child: MainButton(
+              child: Text(Strings.of(context).login),
+              disable: !btnEnable,
+              onPressed: _login,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

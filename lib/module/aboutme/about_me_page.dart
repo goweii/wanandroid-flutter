@@ -40,21 +40,23 @@ class _AboutMePageState extends State<AboutMePage> {
                       AboutMeInfo(aboutMeBean: statableData.value),
                       const SizedBox(height: AppDimens.marginNormal),
                       Expanded(
-                        child: LayoutBuilder(builder: (context, constraints) {
-                          double w = constraints.maxWidth;
-                          double h = constraints.maxHeight;
-                          double iw;
-                          if (w / h > 3.0 / 4.0) {
-                            iw = h * (3.0 / 4.0);
-                          } else {
-                            iw = w;
-                          }
-                          return QrCodePager(
-                            scrollDirection: Axis.horizontal,
-                            viewportFraction: iw / w,
-                            aboutMeBean: statableData.value,
-                          );
-                        }),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            double w = constraints.maxWidth;
+                            double h = constraints.maxHeight;
+                            double iw;
+                            if (w / h > 3.0 / 4.0) {
+                              iw = h * (3.0 / 4.0);
+                            } else {
+                              iw = w;
+                            }
+                            return QrCodePager(
+                              scrollDirection: Axis.horizontal,
+                              viewportFraction: iw / w,
+                              aboutMeBean: statableData.value,
+                            );
+                          },
+                        ),
                       ),
                       const SizedBox(height: AppDimens.marginNormal),
                     ],

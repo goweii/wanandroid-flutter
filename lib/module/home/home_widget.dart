@@ -12,11 +12,12 @@ class BannerView extends StatefulWidget {
     Key? key,
     required this.banners,
     this.scrollDirection = Axis.horizontal,
+    this.viewportFraction = 1.0,
   }) : super(key: key);
 
-  final Axis scrollDirection;
-
   final List<BannerBean> banners;
+  final Axis scrollDirection;
+  final double viewportFraction;
 
   @override
   _BannerViewState createState() => _BannerViewState();
@@ -27,6 +28,7 @@ class _BannerViewState extends State<BannerView> {
   Widget build(BuildContext context) {
     return Swiper(
       key: UniqueKey(),
+      viewportFraction: widget.viewportFraction,
       scrollDirection: widget.scrollDirection,
       itemBuilder: (BuildContext context, int index) {
         return CachedNetworkImage(

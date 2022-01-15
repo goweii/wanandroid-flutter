@@ -85,10 +85,10 @@ class _MinePageState extends State<MinePage>
                             child: SafeArea(
                               child: Stack(
                                 children: [
+                                  const MineToolbar(),
                                   Center(
                                     child: MineHeader(userBean: userBean.value),
                                   ),
-                                  const MineToolbar(),
                                 ],
                               ),
                             ),

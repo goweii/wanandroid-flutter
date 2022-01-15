@@ -34,6 +34,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       resizeToAvoidBottomInset: false,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Colors.transparent,
@@ -48,69 +49,189 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Image.asset(
-              AppImages.logo,
-              color: Theme.of(context).colorScheme.surface,
-              width: 100,
-              height: 100,
-            ),
-            Text(
-              Strings.of(context).welcome_to_use,
-              style: Theme.of(context).textTheme.headline6?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-            ),
-            const SizedBox(height: AppDimens.marginHalf),
-            Text(
-              Strings.of(context).develop_by_goweii,
-              style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                    color:
-                        Theme.of(context).colorScheme.onPrimary.withAlpha(180),
-                  ),
-            ),
-            const SizedBox(height: AppDimens.marginNormal),
-            Expanded(
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: OverflowBox(
-                      maxWidth: 900,
-                      maxHeight: 900,
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
-                          borderRadius: BorderRadius.circular(900),
-                        ),
+      body: LayoutBuilder(builder: (context, constraints) {
+        return OrientationBuilder(builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return SafeArea(
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Image.asset(
+                      AppImages.logo,
+                      color: Theme.of(context).colorScheme.surface,
+                      width: 100,
+                      height: 100,
+                    ),
+                    Text(
+                      Strings.of(context).welcome_to_use,
+                      style: Theme.of(context).textTheme.headline6?.copyWith(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                          ),
+                    ),
+                    const SizedBox(height: AppDimens.marginHalf),
+                    Text(
+                      Strings.of(context).develop_by_goweii,
+                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimary
+                                .withAlpha(180),
+                          ),
+                    ),
+                    const SizedBox(height: AppDimens.marginNormal),
+                    Expanded(
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: OverflowBox(
+                              maxWidth: constraints.maxWidth * 3,
+                              maxHeight: constraints.maxWidth * 3,
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).colorScheme.surface,
+                                  borderRadius: BorderRadius.circular(
+                                    constraints.maxWidth * 3,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned.fill(
+                            child: PageView(
+                              controller: _pageController,
+                              children: [
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  padding: const EdgeInsets.only(
+                                    top: AppDimens.marginVeryLarge,
+                                  ),
+                                  child: SignInWidget(
+                                    onSignUpPressed: () => _animateToPage(1),
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  padding: const EdgeInsets.only(
+                                    top: AppDimens.marginVeryLarge,
+                                  ),
+                                  child: SignUpWidget(
+                                    onSignInPressed: () => _animateToPage(0),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                  ],
+                ),
+              ),
+            );
+          } else {
+            return SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Image.asset(
+                          AppImages.logo,
+                          color: Theme.of(context).colorScheme.surface,
+                          width: 100,
+                          height: 100,
+                        ),
+                        Text(
+                          Strings.of(context).welcome_to_use,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                        ),
+                        const SizedBox(height: AppDimens.marginHalf),
+                        Text(
+                          Strings.of(context).develop_by_goweii,
+                          style:
+                              Theme.of(context).textTheme.bodyText2?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimary
+                                        .withAlpha(180),
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
-                  PageView(
-                    controller: _pageController,
-                    children: [
-                      SignInWidget(
-                        account: "12",
-                        password: "23123",
-                        onSignUpPressed: () => _animateToPage(1),
-                      ),
-                      SignUpWidget(
-                        onSignInPressed: () => _animateToPage(0),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: OverflowBox(
+                                  maxWidth: constraints.maxHeight * 3,
+                                  maxHeight: constraints.maxHeight * 3,
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      borderRadius: BorderRadius.circular(
+                                        constraints.maxHeight * 3,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned.fill(
+                                child: PageView(
+                                  scrollDirection: Axis.vertical,
+                                  controller: _pageController,
+                                  children: [
+                                    Center(
+                                      child: SignInWidget(
+                                        onSignUpPressed: () =>
+                                            _animateToPage(1),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: SignUpWidget(
+                                        onSignInPressed: () =>
+                                            _animateToPage(0),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-            ),
-          ],
-        ),
-      ),
+            );
+          }
+        });
+      }),
     );
   }
 
