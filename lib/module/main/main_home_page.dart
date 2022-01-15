@@ -63,70 +63,78 @@ class _MainHomePageState extends State<MainHomePage>
             ),
           ),
           Container(
-            height: AppDimens.bottomBarHeight,
             color: Theme.of(context).colorScheme.surface,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: AppDimens.lineThin,
-                  child: Container(
-                    color: Theme.of(context).dividerColor,
-                  ),
+            child: SafeArea(
+              top: false,
+              child: SizedBox(
+                height: AppDimens.bottomBarHeight,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: AppDimens.lineThin,
+                      child: Container(
+                        color: Theme.of(context).dividerColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: TabBar(
+                        padding: EdgeInsets.zero,
+                        unselectedLabelColor: Theme.of(context)
+                            .colorScheme
+                            .onSurface
+                            .withAlpha(100),
+                        labelColor: Theme.of(context).colorScheme.primary,
+                        labelPadding: EdgeInsets.zero,
+                        labelStyle:
+                            Theme.of(context).textTheme.caption?.copyWith(
+                                  fontSize: 12.0,
+                                ),
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicatorColor: Colors.transparent,
+                        indicatorWeight: 0.00001,
+                        controller: _tabController,
+                        tabs: [
+                          Tab(
+                            height: AppDimens.bottomBarHeight,
+                            icon: const Icon(Icons.home_rounded),
+                            iconMargin: const EdgeInsets.only(bottom: 0),
+                            text: Strings.of(context).home_title,
+                          ),
+                          Tab(
+                            icon: const Icon(Icons.question_answer_rounded),
+                            iconMargin: const EdgeInsets.only(bottom: 0),
+                            text: Strings.of(context).question_title,
+                          ),
+                          Tab(
+                            icon: const Icon(Icons.navigation_rounded),
+                            iconMargin: const EdgeInsets.only(bottom: 0),
+                            text: Strings.of(context).navigation_title,
+                          ),
+                          Tab(
+                            icon: UnreadModelConsumer(
+                              builder: (context, unreadModel) {
+                                return Stack(
+                                  children: [
+                                    const Icon(Icons.person_rounded),
+                                    if (unreadModel.unreadMsgCount > 0)
+                                      const Positioned(
+                                        right: 0,
+                                        top: 0,
+                                        child: RedPoint(count: 0),
+                                      ),
+                                  ],
+                                );
+                              },
+                            ),
+                            iconMargin: const EdgeInsets.only(bottom: 0),
+                            text: Strings.of(context).mine_title,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: TabBar(
-                    padding: EdgeInsets.zero,
-                    unselectedLabelColor:
-                        Theme.of(context).colorScheme.onSurface.withAlpha(100),
-                    labelColor: Theme.of(context).colorScheme.primary,
-                    labelPadding: EdgeInsets.zero,
-                    labelStyle: Theme.of(context).textTheme.caption?.copyWith(
-                          fontSize: 12.0,
-                        ),
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorColor: Colors.transparent,
-                    indicatorWeight: 0.00001,
-                    controller: _tabController,
-                    tabs: [
-                      Tab(
-                        height: AppDimens.bottomBarHeight,
-                        icon: const Icon(Icons.home_rounded),
-                        iconMargin: const EdgeInsets.only(bottom: 0),
-                        text: Strings.of(context).home_title,
-                      ),
-                      Tab(
-                        icon: const Icon(Icons.question_answer_rounded),
-                        iconMargin: const EdgeInsets.only(bottom: 0),
-                        text: Strings.of(context).question_title,
-                      ),
-                      Tab(
-                        icon: const Icon(Icons.navigation_rounded),
-                        iconMargin: const EdgeInsets.only(bottom: 0),
-                        text: Strings.of(context).navigation_title,
-                      ),
-                      Tab(
-                        icon: UnreadModelConsumer(
-                          builder: (context, unreadModel) {
-                            return Stack(
-                              children: [
-                                const Icon(Icons.person_rounded),
-                                if (unreadModel.unreadMsgCount > 0)
-                                  const Positioned(
-                                    right: 0,
-                                    top: 0,
-                                    child: RedPoint(count: 0),
-                                  ),
-                              ],
-                            );
-                          },
-                        ),
-                        iconMargin: const EdgeInsets.only(bottom: 0),
-                        text: Strings.of(context).mine_title,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],
