@@ -21,6 +21,23 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystoreFile = localProperties.getProperty('keystore.file')
+if (keystoreFile == null) {
+    throw new GradleException("Keystore file not fount. Define file with keystore.file in the local.properties file.")
+}
+def keystoreFilePassword = localProperties.getProperty('keystore.file.password')
+if (keystoreFilePassword == null) {
+    throw new GradleException("Keystore file password not fount. Define password with keystore.file.password in the local.properties file.")
+}
+def keystoreAlias = localProperties.getProperty('keystore.alias')
+if (keystoreAlias == null) {
+    throw new GradleException("Keystore alias not fount. Define alias with keystore.alias in the local.properties file.")
+}
+def keystoreAliasPassword = localProperties.getProperty('keystore.alias.password')
+if (keystoreAliasPassword == null) {
+    throw new GradleException("Keystore alias password not fount. Define password with keystore.alias.password in the local.properties file.")
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -49,10 +66,36 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            storeFile file(keystoreFile)
+            storePassword keystoreFilePassword
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPassword
+        }
+        debug {
+            storeFile file(keystoreFile)
+            storePassword keystoreFilePassword
+            keyAlias keystoreAlias
+            keyPassword keystoreAliasPassword
+        }
+    }
+
     buildTypes {
         release {
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.release
+        }
+        debug {
             signingConfig signingConfigs.debug
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+            def buildType = variant.buildType.name
+            output.outputFileName = "${applicationId}-${versionName}-${versionCode}-${buildType}.apk"
         }
     }
 }
