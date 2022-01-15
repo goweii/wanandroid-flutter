@@ -102,8 +102,9 @@ class _ArticlePageState extends State<ArticlePage>
                 Fab(
                   icon: const Icon(Icons.power_settings_new_rounded),
                   tip: Strings.of(context).article_fab_tip_close,
-                  onPressed: () {
+                  onPressed: () async {
                     AppRouter.of(context).pop();
+                    return true;
                   },
                 ),
                 Fab(
@@ -136,7 +137,7 @@ class _ArticlePageState extends State<ArticlePage>
     );
   }
 
-  _handleShareToSquare() async {
+  Future<bool> _handleShareToSquare() async {
     String? title = await controller.getTitle();
     Uri? url = await controller.getUrl();
     AppRouter.of(context).pushNamed(
@@ -146,16 +147,17 @@ class _ArticlePageState extends State<ArticlePage>
         link: url?.toString(),
       ),
     );
+    return true;
   }
 
-  _handleShareToQrcode() async {
+  Future<bool> _handleShareToQrcode() async {
     var info = await controller.getShareInfo();
     if (info == null) {
-      return;
+      return false;
     }
     if (info.url.isEmpty || info.title.isEmpty) {
       WanToast.error(context, msg: Strings.of(context).unknown_error);
-      return;
+      return false;
     }
     ShareDialog.show(
       context: context,
@@ -166,14 +168,16 @@ class _ArticlePageState extends State<ArticlePage>
         imgs: info.imgs,
       ),
     );
+    return true;
   }
 
-  _handleBackPress() async {
+  Future<bool> _handleBackPress() async {
     if (await controller.canGoBack()) {
       await controller.goBack();
-      return;
+      return false;
     }
     AppRouter.of(context).pop();
+    return false;
   }
 
   Future<bool> _handleWillPop() async {
@@ -184,18 +188,18 @@ class _ArticlePageState extends State<ArticlePage>
     return true;
   }
 
-  _onCollectPressed() async {
+  Future<bool> _onCollectPressed() async {
     // 检查登录状态
     var isLogin = await WanStore().isLogin;
     if (!isLogin) {
       AppRouter.of(context).pushNamed(RouteMap.loginPage);
-      return;
+      return true;
     }
     // 获取当前页面url
     Uri? uri = await controller.getUrl();
-    if (uri == null) return;
+    if (uri == null) return false;
     String url = uri.toString();
-    if (url.isEmpty) return;
+    if (url.isEmpty) return false;
     // 查找或者创建 CollectInfo 对象
     CollectInfo? collectInfo = collectInfos[url];
     if (collectInfo == null) {
@@ -289,6 +293,7 @@ class _ArticlePageState extends State<ArticlePage>
       setState(() {
         _collected = collectInfo?.collected ?? false;
       });
+      await Future.delayed(const Duration(milliseconds: 300));
     } on String catch (e) {
       WanToast.error(context, msg: e).show();
     } on ApiException catch (e) {
@@ -302,5 +307,6 @@ class _ArticlePageState extends State<ArticlePage>
         msg: Strings.of(context).unknown_error,
       ).show();
     }
+    return true;
   }
 }

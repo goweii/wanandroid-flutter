@@ -34,7 +34,7 @@ class ShareDialog extends StatefulWidget {
 }
 
 class _ShareDialogState extends State<ShareDialog> {
-  int _coverIndex = 1;
+  int _coverIndex = 0;
   final GlobalKey _globalKey = GlobalKey();
 
   @override
@@ -138,9 +138,10 @@ class _ShareDialogState extends State<ShareDialog> {
                         ShareFilesAndScreenshotWidgets().shareScreenshot(
                           _globalKey,
                           720,
-                          Strings.of(context).share_now,
                           widget.shareInfo.title,
-                          "image/jpg",
+                          widget.shareInfo.title + ".png",
+                          "image/png",
+                          //text: widget.shareInfo.desc,
                         );
                       },
                     ),

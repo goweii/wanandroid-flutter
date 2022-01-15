@@ -12,7 +12,7 @@ class Fab {
 
   final Widget icon;
   final String tip;
-  final VoidCallback onPressed;
+  final Future<bool> Function() onPressed;
 }
 
 typedef FabBuilder = Fab Function(BuildContext context, double f);
@@ -264,14 +264,19 @@ class _ExpendableFabState extends State<ExpendableFab>
     for (var i = count - 1; i >= 0; i--) {
       var fab = widget.actionFabs[i];
       widgets.add(
-        _ExpandingActionButton(
+        _ExpandingFabButton(
           maxDistance:
               (AppDimens.iconButtonSize + AppDimens.marginNormal) * (i + 1),
           progress: _animation,
-          child: ActionButton(
+          child: _FabButton(
             key: _actionKeys[i],
             icon: fab.icon,
-            onPressed: fab.onPressed,
+            onPressed: () async {
+              bool needClose = await fab.onPressed();
+              if (needClose) {
+                close();
+              }
+            },
             elevation: _f * widget.elevation,
             duration: _f == 1.0 ? widget.expendDuration : Duration.zero,
           ),
@@ -293,7 +298,7 @@ class _ExpendableFabState extends State<ExpendableFab>
           : _open
               ? 1.0
               : 0.0,
-      child: ActionButton(
+      child: _FabButton(
         key: _mainKey,
         onPressed: () {
           _open ? toggle() : fab?.onPressed();
@@ -343,8 +348,8 @@ class _ExpendableFabState extends State<ExpendableFab>
 }
 
 @immutable
-class _ExpandingActionButton extends StatelessWidget {
-  const _ExpandingActionButton({
+class _ExpandingFabButton extends StatelessWidget {
+  const _ExpandingFabButton({
     Key? key,
     required this.maxDistance,
     required this.progress,
@@ -405,8 +410,8 @@ class _ExpandingActionButton extends StatelessWidget {
 }
 
 @immutable
-class ActionButton extends StatelessWidget {
-  const ActionButton({
+class _FabButton extends StatelessWidget {
+  const _FabButton({
     Key? key,
     this.onPressed,
     this.onLongPressed,

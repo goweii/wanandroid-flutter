@@ -257,7 +257,10 @@ class FabMenu extends StatelessWidget {
                 : Colors.transparent,
           ),
           tip: '',
-          onPressed: onBackPress,
+          onPressed: () async {
+            onBackPress();
+            return true;
+          },
         );
       },
       actionFabs: actions,
