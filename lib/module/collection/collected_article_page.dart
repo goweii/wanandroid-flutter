@@ -95,6 +95,7 @@ class _CollectedArticlePageState extends State<CollectedArticlePage>
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

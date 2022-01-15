@@ -199,6 +199,7 @@ class _HomePageState extends State<HomePage>
           child: PagedListFooter(
             loading: homeArticles.isLoading,
             ended: homeArticles.ended,
+            onLoadMoreTap: () => _viewModel.getNextHomeArticles(),
           ),
         ),
     ];

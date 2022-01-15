@@ -97,6 +97,7 @@ class _MessagePageState extends State<MessagePage> {
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

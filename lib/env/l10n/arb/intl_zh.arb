@@ -11,7 +11,7 @@
     "top_tag": "置顶",
     "new_tag": "新",
     "unknown_username": "佚名",
-    "paged_list_footer_load_more": "上滑加载更多",
+    "paged_list_footer_load_more": "点击加载更多",
     "paged_list_footer_loading": "正在加载数据",
     "paged_list_footer_ended": "没有更多数据",
     "refresh_header_state_pull_to_refresh": "下拉刷新",

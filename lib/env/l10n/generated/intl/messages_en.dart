@@ -91,7 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("No more data"),
         "paged_list_footer_load_more":
-            MessageLookupByLibrary.simpleMessage("Slide up to load more"),
+            MessageLookupByLibrary.simpleMessage("Tap to load more"),
         "paged_list_footer_loading":
             MessageLookupByLibrary.simpleMessage("Loading data"),
         "permission_not_granted":

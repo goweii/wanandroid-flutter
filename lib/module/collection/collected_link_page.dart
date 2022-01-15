@@ -91,10 +91,11 @@ class _CollectedLinkPageState extends State<CollectedLinkPage>
         },
       ),
       if (data.value.isNotEmpty)
-        const SliverToBoxAdapter(
+        SliverToBoxAdapter(
           child: PagedListFooter(
             loading: false,
             ended: true,
+            onLoadMoreTap: () {},
           ),
         ),
     ];

@@ -139,6 +139,7 @@ class _QuestionDetailsPageState extends State<QuestionDetailsPage> {
           child: PagedListFooter(
             loading: _loading,
             ended: _ended,
+            onLoadMoreTap: () => _repo.getNextPageComments(),
           ),
         ),
     ];

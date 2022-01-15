@@ -4,6 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wanandroid/api/wan/bean/article_bean.dart';
 import 'package:wanandroid/bus/bus.dart';
 import 'package:wanandroid/bus/events/collent_event.dart';
+import 'package:wanandroid/env/dimen/app_dimens.dart';
 import 'package:wanandroid/env/http/paging.dart';
 import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/mvvm/data_provider.dart';
@@ -104,7 +105,7 @@ class _SquarePageState extends State<SquarePage>
         },
       ),
       SliverMasonryGrid.extent(
-        maxCrossAxisExtent: 640,
+        maxCrossAxisExtent: AppDimens.gridMaxCrossAxisExtent,
         childCount: pagingData.datas.length,
         itemBuilder: (BuildContext context, int index) {
           return ArticleItem(article: pagingData.datas[index]);
@@ -115,6 +116,7 @@ class _SquarePageState extends State<SquarePage>
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

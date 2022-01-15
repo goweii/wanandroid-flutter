@@ -11,7 +11,7 @@
     "top_tag": "TOP",
     "new_tag": "NEW",
     "unknown_username": "Unknown",
-    "paged_list_footer_load_more": "Slide up to load more",
+    "paged_list_footer_load_more": "Tap to load more",
     "paged_list_footer_loading": "Loading data",
     "paged_list_footer_ended": "No more data",
     "refresh_header_state_pull_to_refresh": "Pull to refresh",

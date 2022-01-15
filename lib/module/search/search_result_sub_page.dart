@@ -105,6 +105,7 @@ class _SearchResultSubPageState extends State<SearchResultSubPage>
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

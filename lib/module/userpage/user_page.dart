@@ -180,8 +180,7 @@ class _UserPageState extends State<UserPage> {
                         child: Center(
                           child: Text(
                             coinInfoStatableData.value?.nameToShow ?? '',
-                            style:
-                                Theme.of(context).appBarTheme.titleTextStyle,
+                            style: Theme.of(context).appBarTheme.titleTextStyle,
                           ),
                         ),
                       )
@@ -232,6 +231,7 @@ class _UserPageState extends State<UserPage> {
           child: PagedListFooter(
             loading: articlesPagingData.isLoading,
             ended: articlesPagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ]);

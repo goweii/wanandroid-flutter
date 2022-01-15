@@ -78,7 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "paged_list_footer_ended":
             MessageLookupByLibrary.simpleMessage("没有更多数据"),
         "paged_list_footer_load_more":
-            MessageLookupByLibrary.simpleMessage("上滑加载更多"),
+            MessageLookupByLibrary.simpleMessage("点击加载更多"),
         "paged_list_footer_loading":
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
         "permission_not_granted":

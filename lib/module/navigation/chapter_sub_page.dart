@@ -103,6 +103,7 @@ class _ChapterSubPageState extends State<ChapterSubPage>
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

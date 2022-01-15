@@ -137,6 +137,7 @@ class _MySharePageState extends State<MySharePage> {
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

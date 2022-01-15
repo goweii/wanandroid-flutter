@@ -118,6 +118,7 @@ class _QuestionPageState extends State<QuestionPage>
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];

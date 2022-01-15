@@ -170,10 +170,10 @@ class Strings {
     );
   }
 
-  /// `Slide up to load more`
+  /// `Tap to load more`
   String get paged_list_footer_load_more {
     return Intl.message(
-      'Slide up to load more',
+      'Tap to load more',
       name: 'paged_list_footer_load_more',
       desc: '',
       args: [],

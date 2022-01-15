@@ -161,6 +161,7 @@ class _CoinPageState extends State<CoinPage> {
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPageUserCoinHistory(),
           ),
         ),
     ];

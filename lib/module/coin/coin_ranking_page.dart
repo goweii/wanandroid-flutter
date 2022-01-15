@@ -85,6 +85,7 @@ class _CoinRankingPageState extends State<CoinRankingPage> {
           child: PagedListFooter(
             loading: pagingData.isLoading,
             ended: pagingData.ended,
+            onLoadMoreTap: () => _viewModel.getNextPage(),
           ),
         ),
     ];
