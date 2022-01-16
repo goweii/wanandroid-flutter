@@ -13,6 +13,8 @@ class MainButton extends StatefulWidget {
     this.transitionDuration = const Duration(milliseconds: 200),
     this.loadingDuration,
     this.errorDuration = const Duration(milliseconds: 2000),
+    this.backgroundColor,
+    this.foregroundColor,
   }) : super(key: key);
 
   /// normal 状态中心显示的组件
@@ -49,7 +51,7 @@ class MainButton extends StatefulWidget {
   final bool disable;
 
   /// 状态由 normal -> loading 或者 loading -> normal/error 的动画时长
-  final Duration transitionDuration;
+  final Duration? transitionDuration;
 
   /// loading 状态最小持续时长
   /// 如果 [onPressed] 执行时间小于这个，将强制保持 loading 状态直到满足这个最小时长
@@ -58,6 +60,10 @@ class MainButton extends StatefulWidget {
 
   /// error 状态持续时长
   final Duration errorDuration;
+
+  final Color? backgroundColor;
+
+  final Color? foregroundColor;
 
   @override
   State<MainButton> createState() => _MainButtonState();
@@ -88,8 +94,12 @@ class _MainButtonState extends State<MainButton> {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraions) {
       return AnimatedContainer(
-        duration: widget.transitionDuration,
-        width: _loading ? AppDimens.buttonHeight : constraions.maxWidth,
+        duration: widget.transitionDuration ?? Duration.zero,
+        width: widget.transitionDuration != null
+            ? _loading
+                ? AppDimens.buttonHeight
+                : constraions.maxWidth
+            : constraions.maxWidth,
         height: AppDimens.buttonHeight,
         child: _loading ? _buildLoading(context) : _buildText(context),
       );
@@ -120,19 +130,24 @@ class _MainButtonState extends State<MainButton> {
         textStyle:
             MaterialStateProperty.all(Theme.of(context).textTheme.button),
         foregroundColor: MaterialStateProperty.resolveWith((states) {
+          Color foregroundColor =
+              widget.foregroundColor ?? Theme.of(context).colorScheme.onPrimary;
           if (states.contains(MaterialState.disabled)) {
-            return Theme.of(context).colorScheme.onPrimary.withAlpha(150);
+            return foregroundColor.withAlpha(150);
           }
-          return Theme.of(context).colorScheme.onPrimary;
+          return foregroundColor;
         }),
         backgroundColor: MaterialStateProperty.resolveWith((states) {
+          Color backgroundColor =
+              widget.backgroundColor ?? Theme.of(context).colorScheme.primary;
           if (states.contains(MaterialState.disabled)) {
-            return Theme.of(context).colorScheme.primary.withAlpha(150);
+            return backgroundColor.withAlpha(150);
           }
-          return Theme.of(context).colorScheme.primary;
+          return backgroundColor;
         }),
         overlayColor: MaterialStateProperty.all(
-            Theme.of(context).colorScheme.surface.withAlpha(50)),
+            (widget.foregroundColor ?? Theme.of(context).colorScheme.onPrimary)
+                .withAlpha(50)),
         padding: MaterialStateProperty.all(const EdgeInsets.symmetric(
           horizontal: AppDimens.marginNormal,
           vertical: AppDimens.marginSmall,
@@ -147,14 +162,16 @@ class _MainButtonState extends State<MainButton> {
     return SizedBox.expand(
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color:
+              widget.backgroundColor ?? Theme.of(context).colorScheme.primary,
           borderRadius: const BorderRadius.all(
               Radius.circular(AppDimens.buttonHeight * 0.5)),
         ),
         child: Center(
           child: CircularProgressIndicator(
             strokeWidth: AppDimens.circularProgressIndicatorStrokeWidth,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: widget.foregroundColor ??
+                Theme.of(context).colorScheme.onPrimary,
           ),
         ),
       ),
@@ -175,7 +192,7 @@ class _MainButtonState extends State<MainButton> {
 
     // 如果不满足 loading 持续最小事件，继续等待
     Duration loadingDuration =
-        widget.loadingDuration ?? widget.transitionDuration;
+        widget.loadingDuration ?? widget.transitionDuration ?? Duration.zero;
     if (pressDuration < loadingDuration) {
       await Future.delayed(loadingDuration - pressDuration);
     }

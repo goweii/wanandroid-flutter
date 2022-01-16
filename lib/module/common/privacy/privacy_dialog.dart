@@ -1,8 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wanandroid/api/com/com_const.dart';
 import 'package:wanandroid/entity/article_info.dart';
@@ -11,7 +11,6 @@ import 'package:wanandroid/env/l10n/generated/l10n.dart';
 import 'package:wanandroid/env/route/route_map.dart';
 import 'package:wanandroid/env/route/router.dart';
 import 'package:wanandroid/widget/main_button.dart';
-import 'package:wanandroid/widget/opacity_button.dart';
 
 class PrivacyDialog extends StatefulWidget {
   static const String spKeyPrivacyDialogShown = 'privacy_dialog_shown';
@@ -86,15 +85,9 @@ class _PrivacyDialogState extends State<PrivacyDialog> {
                   title: Text(
                     Strings.of(context).privacy_policy,
                   ),
-                  leading: IconButton(
-                    onPressed: _onDisagree,
-                    icon: const Icon(Icons.close_rounded),
-                  ),
+                  leading: const SizedBox(),
                   titleTextStyle:
                       themeData.appBarTheme.titleTextStyle?.copyWith(
-                    color: themeData.colorScheme.onSurface,
-                  ),
-                  iconTheme: themeData.appBarTheme.iconTheme?.copyWith(
                     color: themeData.colorScheme.onSurface,
                   ),
                 ),
@@ -139,7 +132,18 @@ class _PrivacyDialogState extends State<PrivacyDialog> {
                         Center(
                           child: MainButton(
                             child: Text(Strings.of(context).agree),
+                            transitionDuration: null,
                             onPressed: _onAgree,
+                          ),
+                        ),
+                        const SizedBox(height: AppDimens.marginHalf),
+                        Center(
+                          child: MainButton(
+                            child: Text(Strings.of(context).disagree),
+                            transitionDuration: null,
+                            backgroundColor: themeData.colorScheme.error,
+                            foregroundColor: themeData.colorScheme.onError,
+                            onPressed: _onDisagree,
                           ),
                         ),
                         const SizedBox(height: AppDimens.marginNormal),
@@ -168,7 +172,7 @@ class _PrivacyDialogState extends State<PrivacyDialog> {
     Navigator.pop(context);
   }
 
-  _onDisagree() {
-    SystemNavigator.pop();
+  Future<void> _onDisagree() async {
+    exit(0);
   }
 }

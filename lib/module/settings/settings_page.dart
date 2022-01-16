@@ -34,91 +34,94 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text(Strings.of(context).settings_title),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: OrientationBuilder(builder: (context, orientaton) {
-          var isPortrait = orientaton == Orientation.portrait;
-          return Container(
-            constraints: BoxConstraints(
-              maxWidth: isPortrait
-                  ? double.infinity
-                  : AppDimens.gridMaxCrossAxisExtent,
-            ),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  ActionItem(
-                    leading:
-                        ThemeModel.listen(context).themeMode.getIcon(context),
-                    title: Text(Strings.of(context).choice_theme_mode),
-                    tip: ThemeModel.listen(context).themeMode.getName(context),
-                    children: ThemeMode.values
-                        .map((e) => ThemeModeChoiceItem(themeMode: e))
-                        .toList(),
-                  ),
-                  DataConsumer<LocaleModel>(builder: (context, localeModel) {
-                    var localeInfo = localeModel.locale?.localeInfo;
-                    var logo = localeInfo?.locales.first.logo;
-                    return ActionItem(
-                      leading: CachedNetworkImage(
-                        imageUrl: logo ?? '',
-                        width: 24,
-                        height: 24,
-                        fit: BoxFit.contain,
-                        placeholder: (context, url) =>
-                            const Icon(Icons.language_rounded),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.language_rounded),
-                      ),
-                      title: Text(Strings.of(context).choice_language),
-                      tip: Text(
-                        localeInfo?.languageName ??
-                            Strings.of(context).language_system,
-                      ),
-                      children: <Locale?>[
-                        null,
-                        ...Localization.supportedLocales,
-                      ].map((e) => LanguageChoiceItem(locale: e)).toList(),
-                    );
-                  }),
-                  ActionItem(
-                    leading: const Icon(Icons.privacy_tip_outlined),
-                    title: Text(Strings.of(context).privacy_policy),
-                    onPressed: () {
-                      AppRouter.of(context).pushNamed(
-                        RouteMap.articlePage,
-                        arguments:
-                            ArticleInfo.fromUrl(ComConst.privacyPolicyUrl),
-                      );
-                    },
-                  ),
-                  ActionItem(
-                    leading: const Icon(Icons.info_outline_rounded),
-                    title: Text(Strings.of(context).about_title),
-                    onPressed: () {
-                      AppRouter.of(context).pushNamed(RouteMap.aboutPage);
-                    },
-                  ),
-                  if (LoginState.listen(context).isLogin) ...[
-                    const SizedBox(height: AppDimens.marginLarge),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: AppDimens.marginNormal * 3,
-                      ),
-                      child: MainButton(
-                        child: Text(Strings.of(context).logout),
-                        onPressed: _logout,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: AppDimens.marginLarge),
-                ],
+      body: SizedBox.expand(
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: OrientationBuilder(builder: (context, orientaton) {
+            var isPortrait = orientaton == Orientation.portrait;
+            return Container(
+              constraints: BoxConstraints(
+                maxWidth: isPortrait
+                    ? double.infinity
+                    : AppDimens.gridMaxCrossAxisExtent,
               ),
-            ),
-          );
-        }),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ActionItem(
+                      leading:
+                          ThemeModel.listen(context).themeMode.getIcon(context),
+                      title: Text(Strings.of(context).choice_theme_mode),
+                      tip:
+                          ThemeModel.listen(context).themeMode.getName(context),
+                      children: ThemeMode.values
+                          .map((e) => ThemeModeChoiceItem(themeMode: e))
+                          .toList(),
+                    ),
+                    DataConsumer<LocaleModel>(builder: (context, localeModel) {
+                      var localeInfo = localeModel.locale?.localeInfo;
+                      var logo = localeInfo?.locales.first.logo;
+                      return ActionItem(
+                        leading: CachedNetworkImage(
+                          imageUrl: logo ?? '',
+                          width: 24,
+                          height: 24,
+                          fit: BoxFit.contain,
+                          placeholder: (context, url) =>
+                              const Icon(Icons.language_rounded),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.language_rounded),
+                        ),
+                        title: Text(Strings.of(context).choice_language),
+                        tip: Text(
+                          localeInfo?.languageName ??
+                              Strings.of(context).language_system,
+                        ),
+                        children: <Locale?>[
+                          null,
+                          ...Localization.supportedLocales,
+                        ].map((e) => LanguageChoiceItem(locale: e)).toList(),
+                      );
+                    }),
+                    ActionItem(
+                      leading: const Icon(Icons.privacy_tip_outlined),
+                      title: Text(Strings.of(context).privacy_policy),
+                      onPressed: () {
+                        AppRouter.of(context).pushNamed(
+                          RouteMap.articlePage,
+                          arguments:
+                              ArticleInfo.fromUrl(ComConst.privacyPolicyUrl),
+                        );
+                      },
+                    ),
+                    ActionItem(
+                      leading: const Icon(Icons.info_outline_rounded),
+                      title: Text(Strings.of(context).about_title),
+                      onPressed: () {
+                        AppRouter.of(context).pushNamed(RouteMap.aboutPage);
+                      },
+                    ),
+                    if (LoginState.listen(context).isLogin) ...[
+                      const SizedBox(height: AppDimens.marginLarge),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: AppDimens.marginNormal * 3,
+                        ),
+                        child: MainButton(
+                          child: Text(Strings.of(context).logout),
+                          onPressed: _logout,
+                        ),
+                      ),
+                    ],
+                    const SizedBox(height: AppDimens.marginLarge),
+                  ],
+                ),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
