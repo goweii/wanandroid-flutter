@@ -50,6 +50,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       body: LayoutBuilder(builder: (context, constraints) {
+        MediaQueryData mediaQueryData = MediaQuery.of(context);
+        double screenHeight = mediaQueryData.size.height;
+        double bottom = mediaQueryData.viewInsets.bottom;
+        double needHeight = mediaQueryData.padding.top + 0;
         return OrientationBuilder(builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
             return SafeArea(
@@ -59,37 +63,51 @@ class _LoginPageState extends State<LoginPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Image.asset(
-                      AppImages.logo,
-                      color: Theme.of(context).colorScheme.surface,
-                      width: 100,
-                      height: 100,
-                    ),
-                    Text(
-                      Strings.of(context).welcome_to_use,
-                      style: Theme.of(context).textTheme.headline6?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                    AnimatedAlign(
+                      duration: const Duration(milliseconds: 300),
+                      alignment: Alignment.topCenter,
+                      heightFactor: screenHeight - bottom > 600 ? 1.0 : 0.0,
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            AppImages.logo,
+                            color: Theme.of(context).colorScheme.surface,
+                            width: 100,
+                            height: 100,
                           ),
-                    ),
-                    const SizedBox(height: AppDimens.marginHalf),
-                    Text(
-                      Strings.of(context).develop_by_goweii,
-                      style: Theme.of(context).textTheme.bodyText2?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onPrimary
-                                .withAlpha(180),
+                          Text(
+                            Strings.of(context).welcome_to_use,
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline6
+                                ?.copyWith(
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                ),
                           ),
+                          const SizedBox(height: AppDimens.marginHalf),
+                          Text(
+                            Strings.of(context).develop_by_goweii,
+                            style:
+                                Theme.of(context).textTheme.bodyText2?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimary
+                                          .withAlpha(180),
+                                    ),
+                          ),
+                          const SizedBox(height: AppDimens.marginNormal),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: AppDimens.marginNormal),
                     Expanded(
                       child: Stack(
                         children: [
                           Align(
                             alignment: Alignment.topCenter,
                             child: OverflowBox(
-                              maxWidth: constraints.maxWidth * 3,
-                              maxHeight: constraints.maxWidth * 3,
+                              maxWidth: constraints.maxWidth * 5,
+                              maxHeight: constraints.maxWidth * 5,
                               alignment: Alignment.topCenter,
                               child: Container(
                                 decoration: BoxDecoration(
@@ -186,8 +204,8 @@ class _LoginPageState extends State<LoginPage> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: OverflowBox(
-                                  maxWidth: constraints.maxHeight * 3,
-                                  maxHeight: constraints.maxHeight * 3,
+                                  maxWidth: constraints.maxHeight * 5,
+                                  maxHeight: constraints.maxHeight * 5,
                                   alignment: Alignment.centerLeft,
                                   child: Container(
                                     decoration: BoxDecoration(
