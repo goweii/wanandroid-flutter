@@ -53,7 +53,6 @@ class _LoginPageState extends State<LoginPage> {
         MediaQueryData mediaQueryData = MediaQuery.of(context);
         double screenHeight = mediaQueryData.size.height;
         double bottom = mediaQueryData.viewInsets.bottom;
-        double needHeight = mediaQueryData.padding.top + 0;
         return OrientationBuilder(builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
             return SafeArea(
