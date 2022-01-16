@@ -54,7 +54,7 @@ class _CollectedLinkPageState extends State<CollectedLinkPage>
           builder: (context, data) {
             if (data.value.isEmpty && data.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             }
             return CustomScrollView(

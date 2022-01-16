@@ -212,7 +212,7 @@ class _UserPageState extends State<UserPage> {
         (articlesPagingData.datas.isEmpty && articlesPagingData.isLoading)) {
       slivers.add(const SliverFillRemaining(
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator.adaptive(),
         ),
       ));
       return slivers;

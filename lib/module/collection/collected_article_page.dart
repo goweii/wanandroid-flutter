@@ -58,7 +58,7 @@ class _CollectedArticlePageState extends State<CollectedArticlePage>
           builder: (context, data) {
             if (data.datas.isEmpty && data.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             }
             return CustomScrollView(

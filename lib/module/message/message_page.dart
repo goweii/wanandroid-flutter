@@ -60,7 +60,7 @@ class _MessagePageState extends State<MessagePage> {
           body: DataConsumer<MsgStatablePagingData>(builder: (context, data) {
             if (data.datas.isEmpty && data.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             }
             return CustomScrollView(

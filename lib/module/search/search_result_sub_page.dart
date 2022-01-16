@@ -66,7 +66,7 @@ class _SearchResultSubPageState extends State<SearchResultSubPage>
               builder: (context, data) {
                 if (data.datas.isEmpty && data.isLoading) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator.adaptive(),
                   );
                 }
                 return CustomScrollView(

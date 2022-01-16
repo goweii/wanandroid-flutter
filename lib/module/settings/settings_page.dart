@@ -107,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       const SizedBox(height: AppDimens.marginLarge),
                       Container(
                         margin: const EdgeInsets.symmetric(
-                          horizontal: AppDimens.marginNormal * 3,
+                          horizontal: AppDimens.marginNormal,
                         ),
                         child: MainButton(
                           child: Text(Strings.of(context).logout),

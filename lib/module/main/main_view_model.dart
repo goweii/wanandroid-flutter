@@ -19,7 +19,7 @@ class MainViewModel extends ViewModel {
     } catch (_) {}
   }
 
-  Future<UpdateInfo> checkUpdate() async {
+  Future<UpdateInfo?> checkUpdate() async {
     try {
       var updateBean = await ComApis.getUpdateInfo();
       var updateInfo = await UpdateUtils.parseUpdateInfo(updateBean);
@@ -28,7 +28,7 @@ class MainViewModel extends ViewModel {
       }
       return updateInfo;
     } catch (e) {
-      rethrow;
+      return null;
     }
   }
 }

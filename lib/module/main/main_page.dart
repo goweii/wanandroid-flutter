@@ -85,8 +85,12 @@ class _MainPageState extends State<MainPage>
   }
 
   Future<void> handleActions() async {
+    // 隐私协议
     await PrivacyDialog.show(context: context);
-    UpdateInfo updateInfo = await _viewModel.checkUpdate();
-    await UpdateDialog.show(context: context, updateInfo: updateInfo);
+    // 版本更新
+    UpdateInfo? updateInfo = await _viewModel.checkUpdate();
+    if (updateInfo != null) {
+      await UpdateDialog.show(context: context, updateInfo: updateInfo);
+    }
   }
 }

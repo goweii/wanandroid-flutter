@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage>
                       topArticles.datas.isEmpty &&
                       homeArticles.datas.isEmpty) {
                     return const Center(
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator.adaptive(),
                     );
                   }
                   if (orientation == Orientation.portrait) {

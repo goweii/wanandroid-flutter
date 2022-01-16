@@ -69,7 +69,7 @@ class _QuestionPageState extends State<QuestionPage>
           builder: (context, data) {
             if (data.datas.isEmpty && data.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator.adaptive(),
               );
             }
             return CustomScrollView(

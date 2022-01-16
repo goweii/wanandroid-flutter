@@ -119,7 +119,7 @@ class _CoinPageState extends State<CoinPage> {
                           builder: (context, data) {
                             if (data.datas.isEmpty) {
                               return const Center(
-                                child: CircularProgressIndicator(),
+                                child: CircularProgressIndicator.adaptive(),
                               );
                             }
                             return CustomScrollView(

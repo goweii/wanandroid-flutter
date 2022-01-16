@@ -78,7 +78,7 @@ class _SquarePageState extends State<SquarePage>
             builder: (context, data) {
               if (data.datas.isEmpty && data.isLoading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               }
               return CustomScrollView(

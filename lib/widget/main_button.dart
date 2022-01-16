@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:wanandroid/env/dimen/app_dimens.dart';
 
@@ -11,8 +12,11 @@ class MainButton extends StatefulWidget {
     required this.onPressed,
     this.disable = false,
     this.transitionDuration = const Duration(milliseconds: 200),
-    this.loadingDuration,
+    this.loadingDuration = const Duration(milliseconds: 500),
     this.errorDuration = const Duration(milliseconds: 2000),
+    this.borderRadius,
+    this.borderWidth,
+    this.borderColor,
     this.backgroundColor,
     this.foregroundColor,
   }) : super(key: key);
@@ -51,6 +55,7 @@ class MainButton extends StatefulWidget {
   final bool disable;
 
   /// 状态由 normal -> loading 或者 loading -> normal/error 的动画时长
+  /// 为 null 时不执行动画
   final Duration? transitionDuration;
 
   /// loading 状态最小持续时长
@@ -60,6 +65,12 @@ class MainButton extends StatefulWidget {
 
   /// error 状态持续时长
   final Duration errorDuration;
+
+  final Color? borderColor;
+
+  final BorderRadius? borderRadius;
+
+  final double? borderWidth;
 
   final Color? backgroundColor;
 
@@ -122,7 +133,15 @@ class _MainButtonState extends State<MainButton> {
               ),
       ),
       style: ButtonStyle(
-        shape: MaterialStateProperty.all(const StadiumBorder()),
+        shape: MaterialStateProperty.all(widget.borderRadius == null
+            ? const StadiumBorder()
+            : RoundedRectangleBorder(
+                borderRadius: widget.borderRadius!,
+              )),
+        side: MaterialStateProperty.all(BorderSide(
+          color: widget.borderColor ?? Colors.transparent,
+          width: widget.borderWidth ?? 0.0,
+        )),
         minimumSize: MaterialStateProperty.all(
             const Size(double.infinity, AppDimens.buttonHeight)),
         maximumSize: MaterialStateProperty.all(
@@ -133,7 +152,7 @@ class _MainButtonState extends State<MainButton> {
           Color foregroundColor =
               widget.foregroundColor ?? Theme.of(context).colorScheme.onPrimary;
           if (states.contains(MaterialState.disabled)) {
-            return foregroundColor.withAlpha(150);
+            return foregroundColor.withOpacity(0.6);
           }
           return foregroundColor;
         }),
@@ -141,7 +160,7 @@ class _MainButtonState extends State<MainButton> {
           Color backgroundColor =
               widget.backgroundColor ?? Theme.of(context).colorScheme.primary;
           if (states.contains(MaterialState.disabled)) {
-            return backgroundColor.withAlpha(150);
+            return backgroundColor.withOpacity(0.6);
           }
           return backgroundColor;
         }),
@@ -152,26 +171,45 @@ class _MainButtonState extends State<MainButton> {
           horizontal: AppDimens.marginNormal,
           vertical: AppDimens.marginSmall,
         )),
-        side: MaterialStateProperty.all(
-            const BorderSide(color: Colors.transparent, width: 0)),
       ),
     );
   }
 
   Widget _buildLoading(BuildContext context) {
+    final Color foregroundColor =
+        widget.foregroundColor ?? Theme.of(context).colorScheme.onPrimary;
+    final Color backgroundColor =
+        widget.backgroundColor ?? Theme.of(context).colorScheme.primary;
     return SizedBox.expand(
       child: Container(
         decoration: BoxDecoration(
-          color:
-              widget.backgroundColor ?? Theme.of(context).colorScheme.primary,
+          color: backgroundColor.withOpacity(0.6),
           borderRadius: const BorderRadius.all(
               Radius.circular(AppDimens.buttonHeight * 0.5)),
         ),
         child: Center(
-          child: CircularProgressIndicator(
-            strokeWidth: AppDimens.circularProgressIndicatorStrokeWidth,
-            color: widget.foregroundColor ??
-                Theme.of(context).colorScheme.onPrimary,
+          child: CupertinoTheme(
+            data: CupertinoThemeData(
+              brightness: Theme.of(context).brightness == Brightness.light
+                  ? Brightness.dark
+                  : Brightness.light,
+            ),
+            child: SizedBox(
+              width: AppDimens.buttonHeight * 0.6,
+              height: AppDimens.buttonHeight * 0.6,
+              child: ShaderMask(
+                shaderCallback: (Rect bounds) {
+                  return LinearGradient(
+                    colors: [foregroundColor, foregroundColor],
+                  ).createShader(bounds);
+                },
+                child: CircularProgressIndicator.adaptive(
+                  backgroundColor: Colors.transparent,
+                  strokeWidth: AppDimens.circularProgressIndicatorStrokeWidth,
+                  valueColor: AlwaysStoppedAnimation(foregroundColor),
+                ),
+              ),
+            ),
           ),
         ),
       ),
@@ -185,16 +223,27 @@ class _MainButtonState extends State<MainButton> {
     // 执行点击事件，拿到错误提示和 onPressed 消耗的时间
     int time1 = DateTime.now().microsecond;
     dynamic reason = await widget.onPressed();
-    int time2 = DateTime.now().microsecond;
-    Duration pressDuration = Duration(microseconds: time2 - time1);
 
     if (_dispose) return;
 
+    Duration costDuration = Duration(
+      microseconds: DateTime.now().microsecond - time1,
+    );
+
+    // 如果不满足 transition 持续最小事件，继续等待
+    Duration transitionDuration = widget.transitionDuration ?? Duration.zero;
+    if (costDuration < transitionDuration) {
+      await Future.delayed(transitionDuration - costDuration);
+    }
+
+    if (_dispose) return;
+
+    costDuration = Duration(microseconds: DateTime.now().microsecond - time1);
+
     // 如果不满足 loading 持续最小事件，继续等待
-    Duration loadingDuration =
-        widget.loadingDuration ?? widget.transitionDuration ?? Duration.zero;
-    if (pressDuration < loadingDuration) {
-      await Future.delayed(loadingDuration - pressDuration);
+    Duration loadingDuration = widget.loadingDuration ?? Duration.zero;
+    if (costDuration < loadingDuration) {
+      await Future.delayed(loadingDuration - costDuration);
     }
 
     if (_dispose) return;
@@ -202,12 +251,16 @@ class _MainButtonState extends State<MainButton> {
     // 结束 loading 状态
     setState(() => _loading = false);
 
+    if (reason == null) return;
+
     // 有错误提示，则切换到 error 暂时错误提示信息
-    if (reason != null) {
-      setState(() => _reason = reason);
-      await Future.delayed(widget.errorDuration);
-      if (_dispose) return;
-      setState(() => _reason = null);
-    }
+    setState(() => _reason = reason);
+
+    // 继续等待错误提示
+    await Future.delayed(widget.errorDuration);
+
+    if (_dispose) return;
+
+    setState(() => _reason = null);
   }
 }

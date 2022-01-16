@@ -48,7 +48,7 @@ class _CoinRankingPageState extends State<CoinRankingPage> {
             builder: (context, pagingData) {
               if (pagingData.datas.isEmpty) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator.adaptive(),
                 );
               }
               return CustomScrollView(
