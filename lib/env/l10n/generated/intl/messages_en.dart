@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_me": MessageLookupByLibrary.simpleMessage("About me"),
         "about_me_title": MessageLookupByLibrary.simpleMessage("About Me"),
         "about_title": MessageLookupByLibrary.simpleMessage("About"),
+        "agree": MessageLookupByLibrary.simpleMessage("Agree"),
         "already_the_latest_version":
             MessageLookupByLibrary.simpleMessage("Already the latest version"),
         "answers": MessageLookupByLibrary.simpleMessage("Answers"),
@@ -54,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("Developed by Goweii"),
+        "disagree": MessageLookupByLibrary.simpleMessage("Disagree"),
         "download_error":
             MessageLookupByLibrary.simpleMessage("Download error"),
         "downloading": MessageLookupByLibrary.simpleMessage("Downloading"),
@@ -96,6 +98,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loading data"),
         "permission_not_granted":
             MessageLookupByLibrary.simpleMessage("Permission not granted"),
+        "privacy_dialog_content": MessageLookupByLibrary.simpleMessage(
+            "Thank you for using WanAndroid!\nWe have updated the %s according to the latest regulatory requirements, and hereby explain to you as follows:\n1. In order to provide you with basic functions related to transactions, we will collect and use necessary information;\n2. Based on your express authorization, we will obtain the storage permission to save the article sharing map, and you have the right to refuse or cancel the authorization;\n3. We will take security measures to protect your information security;\n4. Without your consent, we will not obtain, share or provide your information to third parties."),
+        "privacy_dialog_content_s":
+            MessageLookupByLibrary.simpleMessage("Privacy Policy"),
         "privacy_policy":
             MessageLookupByLibrary.simpleMessage("Privacy policy"),
         "publish_title": MessageLookupByLibrary.simpleMessage("Publish"),

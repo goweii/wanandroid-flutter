@@ -89,5 +89,9 @@
     "version_update": "Version update",
     "already_the_latest_version": "Already the latest version",
     "new_version_found": "New version found",
-    "share_now": "Share now"
+    "share_now": "Share now",
+    "privacy_dialog_content": "Thank you for using WanAndroid!\nWe have updated the %s according to the latest regulatory requirements, and hereby explain to you as follows:\n1. In order to provide you with basic functions related to transactions, we will collect and use necessary information;\n2. Based on your express authorization, we will obtain the storage permission to save the article sharing map, and you have the right to refuse or cancel the authorization;\n3. We will take security measures to protect your information security;\n4. Without your consent, we will not obtain, share or provide your information to third parties.",
+    "privacy_dialog_content_s": "Privacy Policy",
+    "agree": "Agree",
+    "disagree": "Disagree"
 }

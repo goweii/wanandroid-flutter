@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "about_me": MessageLookupByLibrary.simpleMessage("关于我"),
         "about_me_title": MessageLookupByLibrary.simpleMessage("关于我"),
         "about_title": MessageLookupByLibrary.simpleMessage("关于"),
+        "agree": MessageLookupByLibrary.simpleMessage("同意"),
         "already_the_latest_version":
             MessageLookupByLibrary.simpleMessage("已是最新版本"),
         "answers": MessageLookupByLibrary.simpleMessage("回答"),
@@ -47,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("删除"),
         "develop_by_goweii":
             MessageLookupByLibrary.simpleMessage("本App由Goweii独立开发"),
+        "disagree": MessageLookupByLibrary.simpleMessage("不同意"),
         "download_error": MessageLookupByLibrary.simpleMessage("下载出错"),
         "downloading": MessageLookupByLibrary.simpleMessage("下载中"),
         "edit": MessageLookupByLibrary.simpleMessage("编辑"),
@@ -83,6 +85,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("正在加载数据"),
         "permission_not_granted":
             MessageLookupByLibrary.simpleMessage("权限获取失败"),
+        "privacy_dialog_content": MessageLookupByLibrary.simpleMessage(
+            "感谢您使用玩安卓！\n我们依据最新的监管要求更新了《%s》特向您说明如下：\n1. 为向您提供交易相关基本功能，我们会收集、使用必要的信息；\n2. 基于您的明示授权我们会获取存储权限，用于保存文章分享图，您有权拒绝或取消授权；\n3. 我们会采取安全措施保护您的信息安全；\n4. 未经您同意，我们不会从第三方处获取、共享或向其提供您的信息。"),
+        "privacy_dialog_content_s":
+            MessageLookupByLibrary.simpleMessage("隐私政策"),
         "privacy_policy": MessageLookupByLibrary.simpleMessage("隐私政策"),
         "publish_title": MessageLookupByLibrary.simpleMessage("广场"),
         "question_title": MessageLookupByLibrary.simpleMessage("问答"),

@@ -959,6 +959,46 @@ class Strings {
       args: [],
     );
   }
+
+  /// `Thank you for using WanAndroid!\nWe have updated the %s according to the latest regulatory requirements, and hereby explain to you as follows:\n1. In order to provide you with basic functions related to transactions, we will collect and use necessary information;\n2. Based on your express authorization, we will obtain the storage permission to save the article sharing map, and you have the right to refuse or cancel the authorization;\n3. We will take security measures to protect your information security;\n4. Without your consent, we will not obtain, share or provide your information to third parties.`
+  String get privacy_dialog_content {
+    return Intl.message(
+      'Thank you for using WanAndroid!\nWe have updated the %s according to the latest regulatory requirements, and hereby explain to you as follows:\n1. In order to provide you with basic functions related to transactions, we will collect and use necessary information;\n2. Based on your express authorization, we will obtain the storage permission to save the article sharing map, and you have the right to refuse or cancel the authorization;\n3. We will take security measures to protect your information security;\n4. Without your consent, we will not obtain, share or provide your information to third parties.',
+      name: 'privacy_dialog_content',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacy_dialog_content_s {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacy_dialog_content_s',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agree`
+  String get agree {
+    return Intl.message(
+      'Agree',
+      name: 'agree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Disagree`
+  String get disagree {
+    return Intl.message(
+      'Disagree',
+      name: 'disagree',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Strings> {
