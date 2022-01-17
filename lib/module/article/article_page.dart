@@ -15,6 +15,8 @@ import 'package:wanandroid/module/common/share/share_dialog.dart';
 import 'package:wanandroid/module/common/share/share_info.dart';
 import 'package:wanandroid/module/share/share_article_info.dart';
 import 'package:wanandroid/widget/expendable_fab.dart';
+import 'package:wanandroid/widget/web/web.dart';
+import 'package:wanandroid/widget/web/web_controller.dart';
 
 class ArticlePage extends StatefulWidget {
   const ArticlePage({
